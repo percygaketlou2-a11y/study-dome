@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Env files - never commit real secrets
+.env
+.env.test
+.env.local
+
+# SQLite databases (dev/test only - production should use Postgres)
+backend/prisma/*.db
+backend/prisma/*.db-journal
+backend/*.db
+backend/*.db-journal
+
+# Uploaded files (dev-local storage; production needs persistent/object storage)
+backend/uploads/past-papers/*
+!backend/uploads/past-papers/.gitkeep
+
+# Build output
+frontend/dist/
+backend/dist/
+
+# Logs
+npm-debug.log*
+*.log
+
+# Editor/OS
+.DS_Store
+.vscode/
