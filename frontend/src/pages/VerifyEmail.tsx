@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { api, getErrorMessage } from '../api/client'
+import { useAuthStore } from '../store/authStore'
 
 export function VerifyEmail() {
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token') ?? ''
   const [status, setStatus] = useState<'checking' | 'success' | 'error'>('checking')
   const [error, setError] = useState<string | null>(null)
+  const updateUser = useAuthStore((s) => s.updateUser)
 
   useEffect(() => {
     if (!token) {
@@ -16,7 +18,10 @@ export function VerifyEmail() {
     }
     api
       .post('/auth/verify-email', { token })
-      .then(() => setStatus('success'))
+      .then(() => {
+        updateUser({ emailVerified: true })
+        setStatus('success')
+      })
       .catch((err) => {
         setStatus('error')
         setError(getErrorMessage(err))

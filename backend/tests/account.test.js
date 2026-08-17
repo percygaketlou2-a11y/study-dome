@@ -25,7 +25,7 @@ describe('account settings', () => {
       .patch('/api/user/password')
       .set('Authorization', `Bearer ${token}`)
       .send({ currentPassword: 'notright', newPassword: 'newpassword456' });
-    expect(wrong.status).toBe(401);
+    expect(wrong.status).toBe(403);
 
     const right = await request(app)
       .patch('/api/user/password')
@@ -45,7 +45,7 @@ describe('account settings', () => {
       .patch('/api/user/email')
       .set('Authorization', `Bearer ${token}`)
       .send({ newEmail, password: 'wrong-password' });
-    expect(wrongPassword.status).toBe(401);
+    expect(wrongPassword.status).toBe(403);
 
     const res = await request(app)
       .patch('/api/user/email')

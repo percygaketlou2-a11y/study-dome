@@ -93,7 +93,10 @@ router.patch('/email', async (req, res) => {
   const user = await prisma.user.findUnique({ where: { id: req.userId } });
   const valid = await bcrypt.compare(password, user.passwordHash);
   if (!valid) {
-    return res.status(401).json({ error: 'Incorrect password' });
+    // 403, not 401: the caller is already authenticated (valid JWT) - this is
+    // a failed password *confirmation*, not a session/token failure. Using
+    // 401 here would trip the API client's global "log out on 401" handler.
+    return res.status(403).json({ error: 'Incorrect password' });
   }
 
   const existing = await prisma.user.findUnique({ where: { email: newEmail } });
@@ -128,7 +131,8 @@ router.patch('/password', async (req, res) => {
   const user = await prisma.user.findUnique({ where: { id: req.userId } });
   const valid = await bcrypt.compare(currentPassword, user.passwordHash);
   if (!valid) {
-    return res.status(401).json({ error: 'Current password is incorrect' });
+    // See the /email handler above for why this is 403, not 401.
+    return res.status(403).json({ error: 'Current password is incorrect' });
   }
 
   const passwordHash = await bcrypt.hash(newPassword, 10);

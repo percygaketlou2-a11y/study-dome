@@ -31,7 +31,7 @@ npm run dev                # http://localhost:4000
 ```bash
 cd frontend
 npm install
-npm run dev                # http://localhost:5173, proxies /api to localhost:4000
+npm run dev                # http://localhost:5173, proxies /api and /uploads to localhost:4000
 ```
 
 **Tests** (backend only, isolated SQLite test DB, auto-seeded):
@@ -63,3 +63,5 @@ A few things are set up for local development and need attention before this goe
 6. **No email sending yet.** Password reset and email verification currently return the link directly in the API response/UI instead of emailing it (see `backend/src/routes/auth.js`) since no email provider is configured. Wire up a real provider (e.g. Resend, SendGrid, SMTP) before relying on these flows with real users.
 
 7. **Build the frontend for production** with `npm run build` in `frontend/` (outputs to `frontend/dist/`) — either serve it from a static host (Vercel/Netlify) pointed at the deployed backend's URL, or serve the built files from the Express backend itself.
+
+8. **`/uploads` needs the same routing as `/api` in production.** Locally, Vite's dev proxy forwards both `/api/*` and `/uploads/*` to the backend (see `frontend/vite.config.ts`) so uploaded past-paper PDFs render correctly. If the frontend and backend are deployed as separate services, whatever serves the frontend (or a reverse proxy in front of both) needs an equivalent rule for `/uploads/*` — otherwise uploaded files will 404 (or worse, silently serve the frontend's own HTML shell instead of the PDF, which is what happens with Vite's dev-only SPA fallback).
