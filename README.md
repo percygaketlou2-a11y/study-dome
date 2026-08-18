@@ -58,10 +58,28 @@ A few things are set up for local development and need attention before this goe
 
 4. **Restrict CORS.** `backend/src/app.js` currently allows all origins (`cors()` with no options). Once the frontend's production URL is known, lock this down to that origin.
 
-5. **No real payment processing yet.** The Premium unlock (`/upgrade`) is a manual toggle (`POST /api/billing/upgrade`) standing in for a real payment provider — it grants access with no money changing hands. `backend/src/routes/billing.js` is the one place a real provider's webhook would plug in.
+5. **Payment (DPO Pay) is wired up but needs your real credentials.** See "Connecting email and payment" below. Until `DPO_COMPANY_TOKEN`/`DPO_SERVICE_TYPE` are set, `/upgrade` falls back to a manual toggle (`POST /api/billing/upgrade`) that grants Premium with no money changing hands — fine for testing, not for real users. The DPO integration (`backend/src/utils/dpo.js`) is built against DPO's documented API but has not been exercised against a live DPO account — test carefully in DPO's sandbox (`DPO_SANDBOX=true`) before going live.
 
-6. **No email sending yet.** Password reset and email verification currently return the link directly in the API response/UI instead of emailing it (see `backend/src/routes/auth.js`) since no email provider is configured. Wire up a real provider (e.g. Resend, SendGrid, SMTP) before relying on these flows with real users.
+6. **Email (Gmail) is wired up but needs your real credentials.** See "Connecting email and payment" below. Until `EMAIL_USER`/`EMAIL_PASS` are set, password reset and email verification fall back to returning the link directly in the API response/UI instead of emailing it (see `backend/src/routes/auth.js`).
 
 7. **Build the frontend for production** with `npm run build` in `frontend/` (outputs to `frontend/dist/`) — either serve it from a static host (Vercel/Netlify) pointed at the deployed backend's URL, or serve the built files from the Express backend itself.
 
-8. **`/uploads` needs the same routing as `/api` in production.** Locally, Vite's dev proxy forwards both `/api/*` and `/uploads/*` to the backend (see `frontend/vite.config.ts`) so uploaded past-paper PDFs render correctly. If the frontend and backend are deployed as separate services, whatever serves the frontend (or a reverse proxy in front of both) needs an equivalent rule for `/uploads/*` — otherwise uploaded files will 404 (or worse, silently serve the frontend's own HTML shell instead of the PDF, which is what happens with Vite's dev-only SPA fallback).
+8. **Connecting email and payment.** Both integrations exist in the code and fall back gracefully when unconfigured — filling in the env vars below is what switches them on.
+
+   **Email (Gmail):**
+   1. On the Google account you want to send from, turn on 2-Step Verification: `myaccount.google.com/security`
+   2. Create an App Password: `myaccount.google.com/apppasswords` (choose "Mail")
+   3. Set `EMAIL_USER` (the Gmail address) and `EMAIL_PASS` (the 16-character app password, not the normal account password) in `.env`
+   4. Set `FRONTEND_URL` to wherever the frontend is actually reachable, so links in emails resolve correctly
+
+   Once both are set, `/api/auth/register`, `/api/auth/forgot-password`, and `/api/auth/resend-verification` send real emails instead of returning the link in the response. Gmail's free sending limit is ~500/day, fine for early usage — move to a dedicated transactional provider (Resend, SendGrid) if that becomes a bottleneck.
+
+   **Payment (DPO Pay):**
+   1. Register a merchant account at [dpogroup.com](https://www.dpogroup.com) (requires business/ID verification)
+   2. From the DPO merchant portal, get your `CompanyToken` and the `ServiceType` configured for this product/currency (BWP)
+   3. Set `DPO_COMPANY_TOKEN` and `DPO_SERVICE_TYPE` in `.env`, keep `DPO_SANDBOX=true` while testing
+   4. Set `BACKEND_URL` to wherever the backend is actually reachable — DPO redirects the customer's browser to `${BACKEND_URL}/api/billing/dpo/callback` after checkout
+
+   Once both are set, `/upgrade` shows a real "Pay P60 with DPO" button that redirects to DPO's hosted checkout; `backend/src/utils/dpo.js` and `backend/src/routes/billing.js` (`/dpo/initiate`, `/dpo/callback`) handle the rest. **This has not been tested against a live DPO account** (none was available while building it) — run it against DPO's sandbox and confirm a full pay → redirect → verify → unlock cycle before trusting it with real payments. If field names or response shapes don't match what DPO actually sends, `backend/src/utils/dpo.js` is the one file to check against DPO's current API reference.
+
+9. **`/uploads` needs the same routing as `/api` in production.** Locally, Vite's dev proxy forwards both `/api/*` and `/uploads/*` to the backend (see `frontend/vite.config.ts`) so uploaded past-paper PDFs render correctly. If the frontend and backend are deployed as separate services, whatever serves the frontend (or a reverse proxy in front of both) needs an equivalent rule for `/uploads/*` — otherwise uploaded files will 404 (or worse, silently serve the frontend's own HTML shell instead of the PDF, which is what happens with Vite's dev-only SPA fallback).

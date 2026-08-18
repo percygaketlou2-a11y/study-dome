@@ -31,7 +31,21 @@ model User {
   selectedCurriculum   Curriculum?     @relation(fields: [selectedCurriculumId], references: [id])
   quizResults          QuizResult[]
   dailyActivity        DailyActivity[]
+  paymentTransactions  PaymentTransaction[]
   createdAt            DateTime        @default(now())
+}
+
+model PaymentTransaction {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider    String    @default("dpo")
+  transToken  String    @unique // DPO's TransToken for this checkout attempt
+  amount      Int
+  currency    String    @default("BWP")
+  status      String    @default("pending") // "pending" | "paid" | "failed"
+  createdAt   DateTime  @default(now())
+  completedAt DateTime?
 }
 
 model DailyActivity {

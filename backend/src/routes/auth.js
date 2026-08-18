@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const prisma = require('../db');
 const { requireAuth } = require('../middleware/auth');
 const { generateToken, hashToken } = require('../utils/tokens');
+const { isEmailConfigured, sendVerificationEmail, sendPasswordResetEmail } = require('../utils/mailer');
 
 const router = express.Router();
 
@@ -60,14 +61,16 @@ router.post('/register', async (req, res) => {
   });
 
   const token = signToken(user.id);
-  res.status(201).json({
-    token,
-    user: publicUser(user),
-    // No email provider is wired up yet, so the verification link is handed
-    // back directly instead of being emailed. Remove this field once real
-    // email sending replaces it - never return tokens to the client in prod.
-    devVerifyLink: `/verify-email?token=${raw}`,
-  });
+
+  if (isEmailConfigured()) {
+    await sendVerificationEmail(user.email, raw);
+    return res.status(201).json({ token, user: publicUser(user), emailSent: true });
+  }
+
+  // No email provider is configured, so the verification link is handed
+  // back directly instead of being emailed. Never return tokens to the
+  // client once real email sending is active (see the branch above).
+  res.status(201).json({ token, user: publicUser(user), devVerifyLink: `/verify-email?token=${raw}` });
 });
 
 router.post('/login', async (req, res) => {
@@ -111,6 +114,11 @@ router.post('/resend-verification', requireAuth, async (req, res) => {
     where: { id: user.id },
     data: { verifyTokenHash: hash, verifyTokenExpiresAt: new Date(Date.now() + VERIFY_TOKEN_TTL_MS) },
   });
+
+  if (isEmailConfigured()) {
+    await sendVerificationEmail(user.email, raw);
+    return res.json({ emailSent: true });
+  }
 
   res.json({ devVerifyLink: `/verify-email?token=${raw}` });
 });
@@ -156,6 +164,11 @@ router.post('/forgot-password', async (req, res) => {
     where: { id: user.id },
     data: { resetTokenHash: hash, resetTokenExpiresAt: new Date(Date.now() + RESET_TOKEN_TTL_MS) },
   });
+
+  if (isEmailConfigured()) {
+    await sendPasswordResetEmail(user.email, raw);
+    return res.json({ message });
+  }
 
   res.json({ message, devResetLink: `/reset-password?token=${raw}` });
 });
