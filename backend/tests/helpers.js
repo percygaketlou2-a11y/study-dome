@@ -15,4 +15,16 @@ async function registerUser(request, app, overrides = {}) {
   return res.body;
 }
 
-module.exports = { uniqueEmail, registerUser };
+async function getAdminToken(request, app) {
+  const login = await request(app)
+    .post('/api/auth/login')
+    .send({ email: process.env.ADMIN_EMAIL, password: 'password123' });
+  if (login.status === 200) return login.body.token;
+
+  const registered = await request(app)
+    .post('/api/auth/register')
+    .send({ name: 'Admin', email: process.env.ADMIN_EMAIL, password: 'password123' });
+  return registered.body.token;
+}
+
+module.exports = { uniqueEmail, registerUser, getAdminToken };

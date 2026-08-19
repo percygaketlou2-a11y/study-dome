@@ -8,6 +8,10 @@ import { TakeQuiz } from './pages/TakeQuiz'
 import { Leaderboard } from './pages/Leaderboard'
 import { AdminNotes } from './pages/AdminNotes'
 import { AdminAccess } from './pages/AdminAccess'
+import { AdminQuizBuilder } from './pages/AdminQuizBuilder'
+import { AdminCurricula } from './pages/AdminCurricula'
+import { AdminUsers } from './pages/AdminUsers'
+import { AdminPayments } from './pages/AdminPayments'
 import { Upgrade } from './pages/Upgrade'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { ResetPassword } from './pages/ResetPassword'
@@ -85,6 +89,46 @@ function App() {
           <ProtectedRoute>
             <RequireAdmin>
               <AdminAccess />
+            </RequireAdmin>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/quizzes"
+        element={
+          <ProtectedRoute>
+            <RequireAdmin>
+              <AdminQuizBuilder />
+            </RequireAdmin>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/curricula"
+        element={
+          <ProtectedRoute>
+            <RequireAdmin>
+              <AdminCurricula />
+            </RequireAdmin>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/users"
+        element={
+          <ProtectedRoute>
+            <RequireAdmin>
+              <AdminUsers />
+            </RequireAdmin>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/payments"
+        element={
+          <ProtectedRoute>
+            <RequireAdmin>
+              <AdminPayments />
             </RequireAdmin>
           </ProtectedRoute>
         }

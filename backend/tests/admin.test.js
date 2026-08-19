@@ -68,5 +68,24 @@ describe('admin authorization', () => {
       .send({ isPremium: quiz.isPremium });
   });
 
+  test('admin can edit a past paper\'s metadata without replacing its files', async () => {
+    const adminToken = await getAdminToken();
+    const papers = await request(app).get('/api/admin/past-papers').set('Authorization', `Bearer ${adminToken}`);
+    const paper = papers.body[0];
+
+    const edit = await request(app)
+      .patch(`/api/admin/past-papers/${paper.id}`)
+      .set('Authorization', `Bearer ${adminToken}`)
+      .field('subjectId', paper.subjectId)
+      .field('year', String(paper.year))
+      .field('paperNumber', String(paper.paperNumber))
+      .field('variant', String(paper.variant))
+      .field('title', 'Edited title')
+      .field('isPremium', String(paper.isPremium));
+
+    expect(edit.status).toBe(200);
+    expect(edit.body.title).toBe('Edited title');
+  });
+
   void uniqueEmail;
 });

@@ -13,8 +13,13 @@ interface AdminQuiz {
 
 interface AdminPastPaper {
   id: string
+  subjectId: string
   title: string
+  rawTitle: string | null
   year: number
+  season: string | null
+  paperNumber: number
+  variant: number
   isPremium: boolean
   subject: string
   curriculum: string
@@ -34,6 +39,7 @@ function ToggleRow({
   pending,
   onDelete,
   deletePending,
+  onEdit,
 }: {
   label: string
   sublabel: string
@@ -42,6 +48,7 @@ function ToggleRow({
   pending: boolean
   onDelete?: () => void
   deletePending?: boolean
+  onEdit?: () => void
 }) {
   return (
     <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3 last:border-0">
@@ -50,6 +57,11 @@ function ToggleRow({
         <div className="text-xs text-slate-500">{sublabel}</div>
       </div>
       <div className="flex items-center gap-3">
+        {onEdit && (
+          <button onClick={onEdit} className="text-xs font-medium text-indigo-600 hover:text-indigo-800">
+            Edit
+          </button>
+        )}
         {onDelete && (
           <button
             onClick={onDelete}
@@ -218,8 +230,135 @@ function NewPastPaperForm({ subjects }: { subjects: AdminSubject[] }) {
   )
 }
 
+function EditPastPaperForm({ paper, subjects, onClose }: { paper: AdminPastPaper; subjects: AdminSubject[]; onClose: () => void }) {
+  const queryClient = useQueryClient()
+  const [subjectId, setSubjectId] = useState(paper.subjectId)
+  const [year, setYear] = useState(paper.year.toString())
+  const [season, setSeason] = useState(paper.season ?? '')
+  const [paperNumber, setPaperNumber] = useState(paper.paperNumber.toString())
+  const [variant, setVariant] = useState(paper.variant.toString())
+  const [title, setTitle] = useState(paper.rawTitle ?? '')
+  const [isPremium, setIsPremium] = useState(paper.isPremium)
+  const [examFile, setExamFile] = useState<File | null>(null)
+  const [markingSchemeFile, setMarkingSchemeFile] = useState<File | null>(null)
+
+  const updateMutation = useMutation({
+    mutationFn: async () => {
+      const formData = new FormData()
+      formData.append('subjectId', subjectId)
+      formData.append('year', year)
+      formData.append('season', season)
+      formData.append('paperNumber', paperNumber)
+      formData.append('variant', variant)
+      formData.append('title', title)
+      formData.append('isPremium', String(isPremium))
+      if (examFile) formData.append('examFile', examFile)
+      if (markingSchemeFile) formData.append('markingSchemeFile', markingSchemeFile)
+      return (await api.patch(`/admin/past-papers/${paper.id}`, formData)).data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-past-papers'] })
+      onClose()
+    },
+  })
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+        updateMutation.mutate()
+      }}
+      className="space-y-3 border-t border-slate-100 bg-slate-50 p-4"
+    >
+      <div className="grid grid-cols-2 gap-2">
+        <select
+          required
+          value={subjectId}
+          onChange={(e) => setSubjectId(e.target.value)}
+          className="col-span-2 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+        >
+          {subjects.map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.curriculum.name} · {s.name}
+            </option>
+          ))}
+        </select>
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="col-span-2 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+        />
+        <input
+          type="number"
+          required
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+        />
+        <input
+          type="text"
+          placeholder="Season"
+          value={season}
+          onChange={(e) => setSeason(e.target.value)}
+          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+        />
+        <input
+          type="number"
+          required
+          value={paperNumber}
+          onChange={(e) => setPaperNumber(e.target.value)}
+          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+        />
+        <input
+          type="number"
+          value={variant}
+          onChange={(e) => setVariant(e.target.value)}
+          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+        />
+      </div>
+
+      <div>
+        <label className="mb-1 block text-xs font-medium text-slate-600">Replace exam paper (optional)</label>
+        <input type="file" accept="application/pdf" onChange={(e) => setExamFile(e.target.files?.[0] ?? null)} className="w-full text-xs" />
+      </div>
+      <div>
+        <label className="mb-1 block text-xs font-medium text-slate-600">Replace marking scheme (optional)</label>
+        <input
+          type="file"
+          accept="application/pdf"
+          onChange={(e) => setMarkingSchemeFile(e.target.files?.[0] ?? null)}
+          className="w-full text-xs"
+        />
+      </div>
+
+      <label className="flex items-center gap-2 text-xs text-slate-600">
+        <input type="checkbox" checked={isPremium} onChange={(e) => setIsPremium(e.target.checked)} />
+        Premium
+      </label>
+
+      {updateMutation.isError && <p className="text-xs text-red-600">{getErrorMessage(updateMutation.error)}</p>}
+
+      <div className="flex gap-2">
+        <button
+          type="submit"
+          disabled={updateMutation.isPending}
+          className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+        >
+          {updateMutation.isPending ? 'Saving...' : 'Save changes'}
+        </button>
+        <button type="button" onClick={onClose} className="rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100">
+          Cancel
+        </button>
+      </div>
+    </form>
+  )
+}
+
 export function AdminAccess() {
   const queryClient = useQueryClient()
+  const [editingPaperId, setEditingPaperId] = useState<string | null>(null)
 
   const { data: quizzes, isLoading: quizzesLoading } = useQuery({
     queryKey: ['admin-quizzes'],
@@ -301,16 +440,21 @@ export function AdminAccess() {
           <div className="max-h-[420px] overflow-y-auto">
             {papersLoading && <p className="p-4 text-sm text-slate-500">Loading...</p>}
             {papers?.map((p) => (
-              <ToggleRow
-                key={p.id}
-                label={p.title}
-                sublabel={`${p.curriculum} · ${p.subject}`}
-                isPremium={p.isPremium}
-                pending={togglePaper.isPending}
-                onToggle={() => togglePaper.mutate({ id: p.id, isPremium: !p.isPremium })}
-                onDelete={() => deletePaper.mutate(p.id)}
-                deletePending={deletePaper.isPending}
-              />
+              <div key={p.id}>
+                <ToggleRow
+                  label={p.title}
+                  sublabel={`${p.curriculum} · ${p.subject}`}
+                  isPremium={p.isPremium}
+                  pending={togglePaper.isPending}
+                  onToggle={() => togglePaper.mutate({ id: p.id, isPremium: !p.isPremium })}
+                  onDelete={() => deletePaper.mutate(p.id)}
+                  deletePending={deletePaper.isPending}
+                  onEdit={() => setEditingPaperId(editingPaperId === p.id ? null : p.id)}
+                />
+                {editingPaperId === p.id && subjects && (
+                  <EditPastPaperForm paper={p} subjects={subjects} onClose={() => setEditingPaperId(null)} />
+                )}
+              </div>
             ))}
             {papers && papers.length === 0 && (
               <p className="p-4 text-sm text-slate-500">No past papers yet.</p>

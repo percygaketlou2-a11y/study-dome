@@ -77,8 +77,13 @@ router.get('/past-papers', async (req, res) => {
   res.json(
     papers.map((p) => ({
       id: p.id,
+      subjectId: p.subjectId,
       title: p.title ?? `${p.year} Paper ${p.paperNumber}`,
+      rawTitle: p.title,
       year: p.year,
+      season: p.season,
+      paperNumber: p.paperNumber,
+      variant: p.variant,
       isPremium: p.isPremium,
       subject: p.subject.name,
       curriculum: p.subject.curriculum.name,
@@ -127,6 +132,53 @@ router.post('/past-papers', uploadPastPaperFiles, async (req, res) => {
   });
 
   res.status(201).json(paper);
+});
+
+// PATCH /api/admin/past-papers/:id - edit metadata, optionally replacing files
+// (multipart: examFile/markingSchemeFile are optional here - omit to keep the existing file)
+router.patch('/past-papers/:id', uploadPastPaperFiles, async (req, res) => {
+  const existing = await prisma.pastPaper.findUnique({ where: { id: req.params.id } });
+  if (!existing) {
+    return res.status(404).json({ error: 'Past paper not found' });
+  }
+
+  const { subjectId, year, season, paperNumber, variant, title, isPremium } = req.body;
+  const examFile = req.files?.examFile?.[0];
+  const markingSchemeFile = req.files?.markingSchemeFile?.[0];
+
+  if (!subjectId || !year || !paperNumber) {
+    return res.status(400).json({ error: 'subjectId, year and paperNumber are required' });
+  }
+
+  const oldFiles = [];
+  const data = {
+    subjectId,
+    year: Number(year),
+    season: season || null,
+    paperNumber: Number(paperNumber),
+    variant: variant ? Number(variant) : 1,
+    title: title || null,
+    isPremium: isPremium === 'true' || isPremium === true,
+  };
+
+  if (examFile) {
+    data.fileUrl = `/uploads/past-papers/${examFile.filename}`;
+    oldFiles.push(existing.fileUrl);
+  }
+  if (markingSchemeFile) {
+    data.markingSchemeUrl = `/uploads/past-papers/${markingSchemeFile.filename}`;
+    if (existing.markingSchemeUrl) oldFiles.push(existing.markingSchemeUrl);
+  }
+
+  const paper = await prisma.pastPaper.update({ where: { id: req.params.id }, data });
+
+  for (const url of oldFiles) {
+    if (url?.startsWith('/uploads/past-papers/')) {
+      fs.unlink(path.join(UPLOAD_DIR, path.basename(url)), () => {}); // best-effort
+    }
+  }
+
+  res.json(paper);
 });
 
 // DELETE /api/admin/past-papers/:id - remove a past paper and its uploaded files

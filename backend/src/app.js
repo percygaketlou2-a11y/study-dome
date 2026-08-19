@@ -11,6 +11,10 @@ const pastPapersRoutes = require('./routes/pastPapers');
 const leaderboardRoutes = require('./routes/leaderboard');
 const subjectsRoutes = require('./routes/subjects');
 const adminRoutes = require('./routes/admin');
+const adminQuizzesRoutes = require('./routes/adminQuizzes');
+const adminCurriculaRoutes = require('./routes/adminCurricula');
+const adminUsersRoutes = require('./routes/adminUsers');
+const adminPaymentsRoutes = require('./routes/adminPayments');
 const billingRoutes = require('./routes/billing');
 
 const app = express();
@@ -29,6 +33,10 @@ app.use('/api/past-papers', pastPapersRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/subjects', subjectsRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/admin', adminQuizzesRoutes);
+app.use('/api/admin', adminCurriculaRoutes);
+app.use('/api/admin', adminUsersRoutes);
+app.use('/api/admin', adminPaymentsRoutes);
 app.use('/api/billing', billingRoutes);
 
 app.use((err, req, res, next) => {
