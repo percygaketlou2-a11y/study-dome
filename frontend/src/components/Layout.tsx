@@ -20,8 +20,8 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-slate-50">
       <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-6">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 sm:px-6 sm:py-4">
+          <div className="flex items-center gap-3 sm:gap-6">
             <Link to="/" className="text-lg font-semibold text-indigo-600">
               Study Dome
             </Link>
@@ -57,7 +57,7 @@ export function Layout({ children }: { children: ReactNode }) {
             )}
           </div>
           {user && (
-            <div className="flex items-center gap-4 text-sm text-slate-600">
+            <div className="flex items-center gap-2 text-sm text-slate-600 sm:gap-4">
               <Link
                 to="/upgrade"
                 className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
@@ -84,7 +84,7 @@ export function Layout({ children }: { children: ReactNode }) {
           )}
         </div>
       </header>
-      <main className="mx-auto max-w-5xl px-6 py-8">{children}</main>
+      <main className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8">{children}</main>
     </div>
   )
 }
