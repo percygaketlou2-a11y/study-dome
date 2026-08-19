@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
 
@@ -16,6 +16,18 @@ export function Layout({ children }: { children: ReactNode }) {
   const logout = useAuthStore((s) => s.logout)
   const navigate = useNavigate()
   const [adminMenuOpen, setAdminMenuOpen] = useState(false)
+  const adminMenuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!adminMenuOpen) return
+    function handleClickOutside(e: MouseEvent) {
+      if (adminMenuRef.current && !adminMenuRef.current.contains(e.target as Node)) {
+        setAdminMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [adminMenuOpen])
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -31,10 +43,9 @@ export function Layout({ children }: { children: ReactNode }) {
               </Link>
             )}
             {user?.isAdmin && (
-              <div className="relative">
+              <div className="relative" ref={adminMenuRef}>
                 <button
                   onClick={() => setAdminMenuOpen((v) => !v)}
-                  onBlur={() => setTimeout(() => setAdminMenuOpen(false), 150)}
                   className="flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-indigo-600"
                 >
                   Admin
@@ -46,6 +57,7 @@ export function Layout({ children }: { children: ReactNode }) {
                       <Link
                         key={link.to}
                         to={link.to}
+                        onClick={() => setAdminMenuOpen(false)}
                         className="block px-3 py-1.5 text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-700"
                       >
                         {link.label}
