@@ -20,7 +20,7 @@ export function Leaderboard() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-semibold text-slate-900">Leaderboard</h1>
+      <h1 className="page-title">Leaderboard</h1>
       <p className="mt-1 text-sm text-slate-500">
         Ranked by total active days &mdash; complete a quiz each day to climb.
       </p>
@@ -28,7 +28,7 @@ export function Leaderboard() {
       {isLoading && <p className="mt-6 text-sm text-slate-500">Loading leaderboard...</p>}
 
       {data && (
-        <div className="mt-6 overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div className="card mt-6 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500">
@@ -43,8 +43,8 @@ export function Leaderboard() {
               {data.map((row) => (
                 <tr
                   key={row.userId}
-                  className={`border-b border-slate-100 last:border-0 ${
-                    row.isCurrentUser ? 'bg-indigo-50' : ''
+                  className={`border-b border-slate-100 transition last:border-0 ${
+                    row.isCurrentUser ? 'bg-indigo-50/70' : 'hover:bg-slate-50'
                   }`}
                 >
                   <td className="px-4 py-3 font-medium text-slate-900">

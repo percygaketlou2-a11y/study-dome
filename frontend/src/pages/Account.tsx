@@ -48,10 +48,10 @@ export function Account() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-semibold text-slate-900">Account Settings</h1>
+      <h1 className="page-title">Account Settings</h1>
 
       {!user?.emailVerified && (
-        <div className="mt-4 rounded-md border border-amber-200 bg-amber-50 p-4">
+        <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
           <p className="text-sm text-amber-800">Your email address hasn't been verified yet.</p>
           <button
             onClick={() => resendMutation.mutate()}
@@ -72,8 +72,8 @@ export function Account() {
       )}
 
       <div className="mt-6 space-y-6">
-        <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-medium text-slate-900">Name</h2>
+        <section className="card p-5">
+          <h2 className="section-title">Name</h2>
           <form
             onSubmit={(e) => {
               e.preventDefault()
@@ -81,16 +81,8 @@ export function Account() {
             }}
             className="mt-3 flex gap-2"
           >
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
-            />
-            <button
-              type="submit"
-              disabled={nameMutation.isPending}
-              className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
-            >
+            <input value={name} onChange={(e) => setName(e.target.value)} className="field-input flex-1" />
+            <button type="submit" disabled={nameMutation.isPending} className="btn-primary">
               Save
             </button>
           </form>
@@ -100,8 +92,8 @@ export function Account() {
           )}
         </section>
 
-        <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-medium text-slate-900">Email</h2>
+        <section className="card p-5">
+          <h2 className="section-title">Email</h2>
           <p className="mt-1 text-sm text-slate-500">Current: {user?.email}</p>
           <form
             onSubmit={(e) => {
@@ -116,7 +108,7 @@ export function Account() {
               placeholder="New email"
               value={newEmail}
               onChange={(e) => setNewEmail(e.target.value)}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+              className="field-input"
             />
             <input
               type="password"
@@ -124,13 +116,9 @@ export function Account() {
               placeholder="Current password"
               value={emailPassword}
               onChange={(e) => setEmailPassword(e.target.value)}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+              className="field-input"
             />
-            <button
-              type="submit"
-              disabled={emailMutation.isPending}
-              className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
-            >
+            <button type="submit" disabled={emailMutation.isPending} className="btn-primary">
               {emailMutation.isPending ? 'Updating...' : 'Update email'}
             </button>
           </form>
@@ -144,8 +132,8 @@ export function Account() {
           )}
         </section>
 
-        <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-medium text-slate-900">Password</h2>
+        <section className="card p-5">
+          <h2 className="section-title">Password</h2>
           <form
             onSubmit={(e) => {
               e.preventDefault()
@@ -159,7 +147,7 @@ export function Account() {
               placeholder="Current password"
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+              className="field-input"
             />
             <input
               type="password"
@@ -168,13 +156,9 @@ export function Account() {
               placeholder="New password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none"
+              className="field-input"
             />
-            <button
-              type="submit"
-              disabled={passwordMutation.isPending}
-              className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
-            >
+            <button type="submit" disabled={passwordMutation.isPending} className="btn-primary">
               {passwordMutation.isPending ? 'Updating...' : 'Update password'}
             </button>
           </form>

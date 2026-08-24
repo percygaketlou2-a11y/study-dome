@@ -87,11 +87,11 @@ export function AdminCurricula() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-semibold text-slate-900">Curricula & Subjects</h1>
+      <h1 className="page-title">Curricula & Subjects</h1>
       <p className="mt-1 text-sm text-slate-500">Admin only. Deleting a curriculum or subject removes everything under it — quizzes, notes and past papers included.</p>
 
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div className="card">
           <h2 className="border-b border-slate-200 px-4 py-3 text-sm font-semibold text-slate-900">Curricula</h2>
           <form
             onSubmit={(e) => {
@@ -105,18 +105,18 @@ export function AdminCurricula() {
               placeholder="Name (e.g. NSC)"
               value={newCurriculumName}
               onChange={(e) => setNewCurriculumName(e.target.value)}
-              className="w-28 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+              className="w-28 field-input px-2 py-1.5"
             />
             <input
               placeholder="Description"
               value={newCurriculumDesc}
               onChange={(e) => setNewCurriculumDesc(e.target.value)}
-              className="flex-1 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+              className="flex-1 field-input px-2 py-1.5"
             />
             <button
               type="submit"
               disabled={createCurriculum.isPending}
-              className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+              className="btn-primary shrink-0"
             >
               Add
             </button>
@@ -137,7 +137,7 @@ export function AdminCurricula() {
                   onClick={() => {
                     if (confirm(`Delete "${c.name}" and everything under it?`)) deleteCurriculum.mutate(c.id)
                   }}
-                  className="text-xs text-red-500 hover:text-red-700"
+                  className="btn-danger-text"
                 >
                   Delete
                 </button>
@@ -146,7 +146,7 @@ export function AdminCurricula() {
           </div>
         </div>
 
-        <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div className="card">
           <h2 className="border-b border-slate-200 px-4 py-3 text-sm font-semibold text-slate-900">
             Subjects {selectedCurriculum && curricula ? `— ${curricula.find((c) => c.id === selectedCurriculum)?.name}` : ''}
           </h2>
@@ -165,18 +165,18 @@ export function AdminCurricula() {
                   placeholder="Subject name"
                   value={newSubjectName}
                   onChange={(e) => setNewSubjectName(e.target.value)}
-                  className="flex-1 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+                  className="flex-1 field-input px-2 py-1.5"
                 />
                 <input
                   placeholder="Category"
                   value={newSubjectCategory}
                   onChange={(e) => setNewSubjectCategory(e.target.value)}
-                  className="w-28 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+                  className="w-28 field-input px-2 py-1.5"
                 />
                 <button
                   type="submit"
                   disabled={createSubject.isPending}
-                  className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+                  className="btn-primary shrink-0"
                 >
                   Add
                 </button>
@@ -192,7 +192,7 @@ export function AdminCurricula() {
                       onClick={() => {
                         if (confirm(`Delete "${s.name}" and everything under it?`)) deleteSubject.mutate(s.id)
                       }}
-                      className="text-xs text-red-500 hover:text-red-700"
+                      className="btn-danger-text"
                     >
                       Delete
                     </button>

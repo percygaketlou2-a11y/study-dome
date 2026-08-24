@@ -41,18 +41,15 @@ export function Dashboard() {
     <Layout>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900">
-            Welcome back, {data?.user.name ?? authUser?.name}!
-          </h1>
+          <h1 className="page-title">Welcome back, {data?.user.name ?? authUser?.name}!</h1>
           {data?.curriculum && (
-            <p className="mt-1 text-sm text-slate-500">Curriculum: {data.curriculum.name}</p>
+            <p className="mt-1 text-sm text-slate-500">
+              Curriculum: <span className="font-medium text-slate-700">{data.curriculum.name}</span>
+            </p>
           )}
         </div>
         {data && (
-          <Link
-            to="/leaderboard"
-            className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-4 py-2 shadow-sm hover:border-indigo-300"
-          >
+          <Link to="/leaderboard" className="card-interactive flex items-center gap-3 px-4 py-2.5">
             <span className="text-sm text-slate-600">
               {data.currentStreak > 0 ? (
                 <>
@@ -62,7 +59,7 @@ export function Dashboard() {
                 'Start a streak today'
               )}
             </span>
-            <span className="text-xs text-slate-400">&middot;</span>
+            <span className="text-slate-300">·</span>
             <span className="text-sm text-slate-600">
               <span className="font-semibold text-slate-900">{data.totalActiveDays}</span> active days
             </span>
@@ -73,7 +70,7 @@ export function Dashboard() {
       {data && !data.user.emailVerified && (
         <Link
           to="/account"
-          className="mt-4 block rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800 hover:bg-amber-100"
+          className="mt-4 block rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-800 transition hover:bg-amber-100"
         >
           Your email isn't verified yet — visit Account settings to get a verification link.
         </Link>
@@ -83,16 +80,11 @@ export function Dashboard() {
 
       <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <h2 className="mb-3 text-lg font-medium text-slate-900">Your Subjects</h2>
+          <h2 className="section-title mb-3">Your Subjects</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {data?.subjects.map((s) => (
-              <Link
-                key={s.id}
-                to={`/subjects/${s.id}`}
-                state={{ subjectName: s.name }}
-                className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-indigo-300 hover:shadow"
-              >
-                <div className="font-medium text-slate-900">{s.name}</div>
+              <Link key={s.id} to={`/subjects/${s.id}`} state={{ subjectName: s.name }} className="card-interactive p-4">
+                <div className="font-semibold text-slate-900">{s.name}</div>
                 <div className="mt-1 text-xs text-slate-500">{s.category ?? 'Quizzes & past papers'}</div>
               </Link>
             ))}
@@ -103,19 +95,15 @@ export function Dashboard() {
         </div>
 
         <div>
-          <h2 className="mb-3 text-lg font-medium text-slate-900">Recent Quizzes</h2>
+          <h2 className="section-title mb-3">Recent Quizzes</h2>
           <div className="space-y-3">
             {data?.recentQuizzes.map((r) => (
-              <div key={r.id} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+              <div key={r.id} className="card p-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-slate-900">
                     {r.subject} {r.level}
                   </span>
-                  <span
-                    className={`text-sm font-semibold ${
-                      r.score >= 50 ? 'text-emerald-600' : 'text-red-600'
-                    }`}
-                  >
+                  <span className={`text-sm font-semibold ${r.score >= 50 ? 'text-emerald-600' : 'text-red-500'}`}>
                     {r.score}%
                   </span>
                 </div>

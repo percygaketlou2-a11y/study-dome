@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { api, getErrorMessage } from '../api/client'
 import { useAuthStore } from '../store/authStore'
+import { AuthLayout } from '../components/AuthLayout'
 
 export function VerifyEmail() {
   const [searchParams] = useSearchParams()
@@ -29,14 +30,14 @@ export function VerifyEmail() {
   }, [token])
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
-      <div className="w-full max-w-sm rounded-xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+    <AuthLayout>
+      <div className="text-center">
         {status === 'checking' && <p className="text-sm text-slate-500">Verifying your email...</p>}
         {status === 'success' && (
           <>
-            <h1 className="mb-2 text-xl font-semibold text-slate-900">Email verified</h1>
+            <h1 className="mb-2 text-xl font-bold tracking-tight text-slate-900">Email verified</h1>
             <p className="mb-4 text-sm text-slate-500">Your email address has been confirmed.</p>
-            <Link to="/" className="text-sm text-indigo-600 hover:underline">
+            <Link to="/" className="text-sm font-medium text-indigo-600 hover:underline">
               Go to dashboard
             </Link>
           </>
@@ -44,12 +45,12 @@ export function VerifyEmail() {
         {status === 'error' && (
           <>
             <p className="text-sm text-red-600">{error}</p>
-            <Link to="/" className="mt-4 inline-block text-sm text-indigo-600 hover:underline">
+            <Link to="/" className="mt-4 inline-block text-sm font-medium text-indigo-600 hover:underline">
               Go to dashboard
             </Link>
           </>
         )}
       </div>
-    </div>
+    </AuthLayout>
   )
 }

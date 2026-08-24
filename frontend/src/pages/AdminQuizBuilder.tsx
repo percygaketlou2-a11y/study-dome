@@ -158,13 +158,13 @@ export function AdminQuizBuilder() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-semibold text-slate-900">Quiz Builder</h1>
+      <h1 className="page-title">Quiz Builder</h1>
       <p className="mt-1 text-sm text-slate-500">
         Admin only. Create and edit quizzes — including the "why" explanation shown after each question.
       </p>
 
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr]">
-        <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div className="card">
           <button
             onClick={() => setSelectedId('new')}
             className="w-full border-b border-slate-200 px-4 py-3 text-left text-sm font-medium text-indigo-600 hover:bg-indigo-50"
@@ -189,7 +189,7 @@ export function AdminQuizBuilder() {
           </div>
         </div>
 
-        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="card p-5">
           {selectedId === null && <p className="text-sm text-slate-500">Select a quiz to edit, or create a new one.</p>}
 
           {selectedId !== null && (
@@ -205,7 +205,7 @@ export function AdminQuizBuilder() {
                   required
                   value={subjectId}
                   onChange={(e) => setSubjectId(e.target.value)}
-                  className="col-span-2 rounded-md border border-slate-300 px-3 py-2 text-sm sm:col-span-1"
+                  className="field-input col-span-2 sm:col-span-1"
                 >
                   <option value="">Select subject...</option>
                   {subjects?.map((s) => (
@@ -220,7 +220,7 @@ export function AdminQuizBuilder() {
                   placeholder="Time limit (min)"
                   value={timeLimitMinutes}
                   onChange={(e) => setTimeLimitMinutes(e.target.value)}
-                  className="rounded-md border border-slate-300 px-3 py-2 text-sm"
+                  className="field-input"
                 />
                 <input
                   type="text"
@@ -228,7 +228,7 @@ export function AdminQuizBuilder() {
                   placeholder="Quiz title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="col-span-2 rounded-md border border-slate-300 px-3 py-2 text-sm"
+                  className="field-input col-span-2"
                 />
                 <label className="col-span-2 flex items-center gap-2 text-sm text-slate-600">
                   <input type="checkbox" checked={isPremium} onChange={(e) => setIsPremium(e.target.checked)} />
@@ -238,16 +238,14 @@ export function AdminQuizBuilder() {
 
               <div className="space-y-4">
                 {questions.map((q, qIndex) => (
-                  <div key={qIndex} className="rounded-lg border border-slate-200 p-4">
+                  <div key={qIndex} className="rounded-xl border border-slate-200 p-4">
                     <div className="flex items-start justify-between gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                        Question {qIndex + 1}
-                      </span>
+                      <span className="eyebrow">Question {qIndex + 1}</span>
                       {questions.length > 1 && (
                         <button
                           type="button"
                           onClick={() => setQuestions((qs) => qs.filter((_, i) => i !== qIndex))}
-                          className="text-xs text-red-500 hover:text-red-700"
+                          className="btn-danger-text"
                         >
                           Remove
                         </button>
@@ -259,7 +257,7 @@ export function AdminQuizBuilder() {
                       placeholder="Question text"
                       value={q.questionText}
                       onChange={(e) => updateQuestion(qIndex, { questionText: e.target.value })}
-                      className="mt-2 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                      className="field-input mt-2"
                       rows={2}
                     />
 
@@ -267,7 +265,7 @@ export function AdminQuizBuilder() {
                       <select
                         value={q.questionType}
                         onChange={(e) => updateQuestionType(qIndex, e.target.value as QuestionType)}
-                        className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+                        className="field-input px-2 py-1.5"
                       >
                         <option value="multiple_choice">Multiple choice</option>
                         <option value="short_answer">Short answer</option>
@@ -279,7 +277,7 @@ export function AdminQuizBuilder() {
                         value={q.marks}
                         onChange={(e) => updateQuestion(qIndex, { marks: Number(e.target.value) || 1 })}
                         placeholder="Marks"
-                        className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+                        className="field-input px-2 py-1.5"
                       />
                     </div>
 
@@ -291,7 +289,7 @@ export function AdminQuizBuilder() {
                           placeholder="Accepted answer"
                           value={q.options[0]?.optionText ?? ''}
                           onChange={(e) => updateOption(qIndex, 0, { optionText: e.target.value })}
-                          className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                          className="field-input"
                         />
                       ) : (
                         q.options.map((o, oIndex) => (
@@ -301,6 +299,7 @@ export function AdminQuizBuilder() {
                               name={`correct-${qIndex}`}
                               checked={o.isCorrect}
                               onChange={() => setCorrectOption(qIndex, oIndex)}
+                              className="h-4 w-4 accent-indigo-600"
                             />
                             <input
                               required
@@ -309,7 +308,7 @@ export function AdminQuizBuilder() {
                               placeholder={`Option ${oIndex + 1}`}
                               value={o.optionText}
                               onChange={(e) => updateOption(qIndex, oIndex, { optionText: e.target.value })}
-                              className="flex-1 rounded-md border border-slate-300 px-3 py-1.5 text-sm disabled:bg-slate-50"
+                              className="field-input flex-1 py-1.5 disabled:bg-slate-50"
                             />
                             {q.questionType === 'multiple_choice' && q.options.length > 2 && (
                               <button
@@ -317,7 +316,7 @@ export function AdminQuizBuilder() {
                                 onClick={() =>
                                   updateQuestion(qIndex, { options: q.options.filter((_, j) => j !== oIndex) })
                                 }
-                                className="text-xs text-red-500 hover:text-red-700"
+                                className="btn-danger-text"
                               >
                                 Remove
                               </button>
@@ -331,7 +330,7 @@ export function AdminQuizBuilder() {
                           onClick={() =>
                             updateQuestion(qIndex, { options: [...q.options, { optionText: '', isCorrect: false }] })
                           }
-                          className="text-xs text-indigo-600 hover:underline"
+                          className="text-xs font-medium text-indigo-600 hover:underline"
                         >
                           + Add option
                         </button>
@@ -342,7 +341,7 @@ export function AdminQuizBuilder() {
                       placeholder="Explanation shown after the student answers (optional)"
                       value={q.explanation}
                       onChange={(e) => updateQuestion(qIndex, { explanation: e.target.value })}
-                      className="mt-3 w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+                      className="field-input mt-3"
                       rows={2}
                     />
                   </div>
@@ -351,7 +350,7 @@ export function AdminQuizBuilder() {
                 <button
                   type="button"
                   onClick={() => setQuestions((qs) => [...qs, blankQuestion()])}
-                  className="rounded-md border border-dashed border-slate-300 px-4 py-2 text-sm text-slate-600 hover:border-indigo-400 hover:text-indigo-600"
+                  className="w-full rounded-lg border border-dashed border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 transition hover:border-indigo-400 hover:text-indigo-600"
                 >
                   + Add question
                 </button>
@@ -360,11 +359,7 @@ export function AdminQuizBuilder() {
               {formError && <p className="text-sm text-red-600">{formError}</p>}
 
               <div className="flex items-center gap-3">
-                <button
-                  type="submit"
-                  disabled={saveMutation.isPending}
-                  className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
-                >
+                <button type="submit" disabled={saveMutation.isPending} className="btn-primary">
                   {saveMutation.isPending ? 'Saving...' : selectedId === 'new' ? 'Create quiz' : 'Save changes'}
                 </button>
                 {selectedId !== 'new' && (
@@ -372,7 +367,7 @@ export function AdminQuizBuilder() {
                     type="button"
                     onClick={() => selectedId && deleteMutation.mutate(selectedId)}
                     disabled={deleteMutation.isPending}
-                    className="text-sm text-red-500 hover:text-red-700 disabled:opacity-50"
+                    className="btn-danger-text"
                   >
                     {deleteMutation.isPending ? 'Deleting...' : 'Delete quiz'}
                   </button>

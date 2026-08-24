@@ -32,20 +32,20 @@ export function AdminPayments() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-semibold text-slate-900">Payments</h1>
+      <h1 className="page-title">Payments</h1>
       <p className="mt-1 text-sm text-slate-500">Admin only. Every DPO checkout attempt, verified server-side.</p>
 
       {transactions && (
-        <div className="mt-4 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+        <div className="card mt-4 p-4">
           <span className="text-sm text-slate-500">Total received: </span>
-          <span className="text-lg font-semibold text-slate-900">P{totalPaid ?? 0}</span>
+          <span className="text-lg font-bold text-slate-900">P{totalPaid ?? 0}</span>
         </div>
       )}
 
       {isLoading && <p className="mt-6 text-sm text-slate-500">Loading...</p>}
 
       {transactions && (
-        <div className="mt-4 overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div className="card mt-4 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500">
@@ -59,7 +59,7 @@ export function AdminPayments() {
             </thead>
             <tbody>
               {transactions.map((t) => (
-                <tr key={t.id} className="border-b border-slate-100 last:border-0">
+                <tr key={t.id} className="border-b border-slate-100 transition last:border-0 hover:bg-slate-50">
                   <td className="px-4 py-3">
                     <div className="text-slate-900">{t.userName}</div>
                     <div className="text-xs text-slate-400">{t.userEmail}</div>

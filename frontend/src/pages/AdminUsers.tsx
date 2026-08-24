@@ -44,13 +44,13 @@ export function AdminUsers() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-semibold text-slate-900">Users</h1>
+      <h1 className="page-title">Users</h1>
       <p className="mt-1 text-sm text-slate-500">Admin only. Toggle admin access or plan, or remove an account.</p>
 
       {isLoading && <p className="mt-6 text-sm text-slate-500">Loading...</p>}
 
       {users && (
-        <div className="mt-6 overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div className="card mt-6 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-500">
@@ -65,10 +65,10 @@ export function AdminUsers() {
             </thead>
             <tbody>
               {users.map((u) => (
-                <tr key={u.id} className="border-b border-slate-100 last:border-0">
+                <tr key={u.id} className="border-b border-slate-100 transition last:border-0 hover:bg-slate-50">
                   <td className="px-4 py-3 text-slate-900">
                     {u.name}
-                    {u.id === currentUser?.id && <span className="ml-1 text-xs text-indigo-500">(you)</span>}
+                    {u.id === currentUser?.id && <span className="ml-1 badge-indigo">you</span>}
                   </td>
                   <td className="px-4 py-3 text-slate-500">{u.email}</td>
                   <td className="px-4 py-3 text-slate-500">{u.curriculum ?? '—'}</td>
@@ -92,7 +92,7 @@ export function AdminUsers() {
                       onChange={(e) =>
                         updateUser.mutate({ id: u.id, patch: { plan: e.target.value as 'free' | 'premium' } })
                       }
-                      className="rounded-md border border-slate-300 px-2 py-1 text-xs"
+                      className="field-input px-2 py-1 text-xs"
                     >
                       <option value="free">Free</option>
                       <option value="premium">Premium</option>
@@ -106,7 +106,7 @@ export function AdminUsers() {
                             deleteUser.mutate(u.id)
                           }
                         }}
-                        className="text-xs text-red-500 hover:text-red-700"
+                        className="btn-danger-text"
                       >
                         Delete
                       </button>

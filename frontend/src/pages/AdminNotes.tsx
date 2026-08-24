@@ -58,7 +58,7 @@ export function AdminNotes() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-semibold text-slate-900">Study Notes Editor</h1>
+      <h1 className="page-title">Study Notes Editor</h1>
       <p className="mt-1 text-sm text-slate-500">
         Admin only. Notes you save here appear read-only on each subject's page for every student.
       </p>
@@ -67,14 +67,14 @@ export function AdminNotes() {
 
       {subjects && (
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[320px_1fr]">
-          <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
+          <div className="card">
             <div className="border-b border-slate-200 p-3">
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search subjects..."
-                className="w-full rounded-md border border-slate-300 px-3 py-1.5 text-sm focus:border-indigo-500 focus:outline-none"
+                className="field-input py-1.5"
               />
             </div>
             <div className="max-h-[560px] overflow-y-auto">
@@ -103,12 +103,12 @@ export function AdminNotes() {
             </div>
           </div>
 
-          <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="card p-5">
             {selected ? (
               <>
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-lg font-medium text-slate-900">{selected.name}</h2>
+                    <h2 className="section-title">{selected.name}</h2>
                     <p className="text-xs text-slate-500">{selected.curriculum.name}</p>
                   </div>
                 </div>
@@ -117,14 +117,10 @@ export function AdminNotes() {
                   onChange={(e) => setDraft(e.target.value)}
                   rows={16}
                   placeholder="Write study notes for this subject..."
-                  className="mt-4 w-full rounded-md border border-slate-300 p-3 font-mono text-sm focus:border-indigo-500 focus:outline-none"
+                  className="field-input mt-4 font-mono"
                 />
                 <div className="mt-3 flex items-center gap-3">
-                  <button
-                    onClick={() => saveMutation.mutate()}
-                    disabled={saveMutation.isPending}
-                    className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
-                  >
+                  <button onClick={() => saveMutation.mutate()} disabled={saveMutation.isPending} className="btn-primary">
                     {saveMutation.isPending ? 'Saving...' : 'Save notes'}
                   </button>
                   {savedAt && !saveMutation.isPending && (

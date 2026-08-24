@@ -39,14 +39,10 @@ interface PastPaper {
 
 function QuizCard({ q, subjectId }: { q: Quiz; subjectId: string | undefined }) {
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="card p-4">
       <div className="flex items-start justify-between gap-2">
-        <div className="font-medium text-slate-900">{q.title}</div>
-        {q.isPremium && (
-          <span className="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">
-            Premium
-          </span>
-        )}
+        <div className="font-semibold text-slate-900">{q.title}</div>
+        {q.isPremium && <span className="badge-amber shrink-0">Premium</span>}
       </div>
       <div className="mt-1 text-xs text-slate-500">
         {q.questionCount} questions &middot; {q.totalMarks} marks
@@ -56,16 +52,12 @@ function QuizCard({ q, subjectId }: { q: Quiz; subjectId: string | undefined }) 
         <Link
           to="/upgrade"
           state={{ reason: `"${q.title}" is a Premium quiz. Upgrade to unlock it.` }}
-          className="mt-3 block w-fit rounded-md border border-amber-300 bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 hover:bg-amber-100"
+          className="mt-3 inline-flex items-center gap-1 rounded-lg border border-amber-300 bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 transition hover:bg-amber-100"
         >
           🔒 Unlock with Premium
         </Link>
       ) : (
-        <Link
-          to={`/quizzes/${q.id}/take`}
-          state={{ title: q.title, subjectId }}
-          className="mt-3 block w-fit rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700"
-        >
+        <Link to={`/quizzes/${q.id}/take`} state={{ title: q.title, subjectId }} className="btn-primary mt-3">
           Start quiz
         </Link>
       )}
@@ -112,14 +104,14 @@ export function SubjectDetail() {
 
   return (
     <Layout>
-      <Link to="/" className="text-sm text-indigo-600 hover:underline">
+      <Link to="/" className="text-sm font-medium text-indigo-600 hover:underline">
         &larr; Back to dashboard
       </Link>
-      <h1 className="mt-2 text-2xl font-semibold text-slate-900">{subjectName}</h1>
+      <h1 className="page-title mt-2">{subjectName}</h1>
 
       <section className="mt-6">
-        <h2 className="mb-3 text-lg font-medium text-slate-900">Study Notes</h2>
-        <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+        <h2 className="section-title mb-3">Study Notes</h2>
+        <div className="card p-4">
           {subject?.notes ? (
             <p className="whitespace-pre-wrap text-sm text-slate-700">{subject.notes}</p>
           ) : (
@@ -129,16 +121,12 @@ export function SubjectDetail() {
       </section>
 
       <section className="mt-10">
-        <h2 className="mb-3 text-lg font-medium text-slate-900">Interactive Quizzes</h2>
+        <h2 className="section-title mb-3">Interactive Quizzes</h2>
         {quizzesLoading && <p className="text-sm text-slate-500">Loading quizzes...</p>}
         <div className="space-y-6">
           {Array.from(topicGroups.entries()).map(([topic, topicQuizzes]) => (
             <div key={topic}>
-              {topicGroups.size > 1 && (
-                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
-                  {topic}
-                </h3>
-              )}
+              {topicGroups.size > 1 && <h3 className="eyebrow mb-2">{topic}</h3>}
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {topicQuizzes.map((q) => (
                   <QuizCard key={q.id} q={q} subjectId={subjectId} />
@@ -154,7 +142,7 @@ export function SubjectDetail() {
 
       <section className="mt-10">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-lg font-medium text-slate-900">Past Papers</h2>
+          <h2 className="section-title">Past Papers</h2>
           <label className="flex items-center gap-2 text-sm text-slate-600">
             <span>{showAnswers ? 'Show Marking Scheme' : 'Hide Marking Scheme (Exam Mode)'}</span>
             <button
@@ -180,16 +168,12 @@ export function SubjectDetail() {
             const examKey = `${p.id}:exam`
             const schemeKey = `${p.id}:scheme`
             return (
-              <div key={p.id} className="rounded-lg border border-slate-200 bg-white shadow-sm">
+              <div key={p.id} className="card">
                 <div className="flex items-center justify-between p-4">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-slate-900">{label}</span>
-                      {p.isPremium && (
-                        <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">
-                          Premium
-                        </span>
-                      )}
+                      <span className="font-semibold text-slate-900">{label}</span>
+                      {p.isPremium && <span className="badge-amber">Premium</span>}
                     </div>
                     <div className="text-xs text-slate-500">
                       {p.year} {p.season && `· ${p.season}`} &middot; Paper {p.paperNumber} Variant {p.variant}
@@ -201,7 +185,7 @@ export function SubjectDetail() {
                     <Link
                       to="/upgrade"
                       state={{ reason: `"${label}" is a Premium past paper. Upgrade to unlock it.` }}
-                      className="rounded-md border border-amber-300 bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 hover:bg-amber-100"
+                      className="inline-flex items-center gap-1 rounded-lg border border-amber-300 bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 transition hover:bg-amber-100"
                     >
                       🔒 Unlock with Premium
                     </Link>
@@ -209,7 +193,7 @@ export function SubjectDetail() {
                     p.hasMarkingScheme ? (
                       <button
                         onClick={() => toggleViewer(schemeKey, p.markingSchemeUrl!, `${label} — Marking scheme`)}
-                        className="rounded-md border border-indigo-600 px-3 py-1.5 text-sm font-medium text-indigo-600 hover:bg-indigo-50"
+                        className="rounded-lg border border-indigo-600 px-3 py-1.5 text-sm font-medium text-indigo-600 transition hover:bg-indigo-50"
                       >
                         {viewer?.key === schemeKey ? 'Hide' : 'View'} marking scheme
                       </button>
@@ -217,10 +201,7 @@ export function SubjectDetail() {
                       <span className="text-xs text-slate-400">Not available</span>
                     )
                   ) : (
-                    <button
-                      onClick={() => toggleViewer(examKey, p.fileUrl!, `${label} — Exam paper`)}
-                      className="rounded-md border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-100"
-                    >
+                    <button onClick={() => toggleViewer(examKey, p.fileUrl!, `${label} — Exam paper`)} className="btn-secondary">
                       {viewer?.key === examKey ? 'Hide' : 'View'} exam paper
                     </button>
                   )}
@@ -233,7 +214,7 @@ export function SubjectDetail() {
                         href={viewer.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-xs text-indigo-600 hover:underline"
+                        className="text-xs font-medium text-indigo-600 hover:underline"
                       >
                         Open in new tab
                       </a>
@@ -241,7 +222,7 @@ export function SubjectDetail() {
                     <iframe
                       src={viewer.url}
                       title={viewer.label}
-                      className="h-[600px] w-full rounded-md border border-slate-200"
+                      className="h-[600px] w-full rounded-lg border border-slate-200"
                     />
                   </div>
                 )}

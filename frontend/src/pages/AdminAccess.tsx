@@ -142,7 +142,7 @@ function NewPastPaperForm({ subjects }: { subjects: AdminSubject[] }) {
           required
           value={subjectId}
           onChange={(e) => setSubjectId(e.target.value)}
-          className="col-span-2 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input col-span-2 px-2 py-1.5"
         >
           <option value="">Select subject...</option>
           {subjects.map((s) => (
@@ -156,7 +156,7 @@ function NewPastPaperForm({ subjects }: { subjects: AdminSubject[] }) {
           placeholder="Title (optional)"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="col-span-2 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input col-span-2 px-2 py-1.5"
         />
         <input
           type="number"
@@ -164,14 +164,14 @@ function NewPastPaperForm({ subjects }: { subjects: AdminSubject[] }) {
           placeholder="Year"
           value={year}
           onChange={(e) => setYear(e.target.value)}
-          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input px-2 py-1.5"
         />
         <input
           type="text"
           placeholder="Season (e.g. Oct/Nov)"
           value={season}
           onChange={(e) => setSeason(e.target.value)}
-          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input px-2 py-1.5"
         />
         <input
           type="number"
@@ -179,14 +179,14 @@ function NewPastPaperForm({ subjects }: { subjects: AdminSubject[] }) {
           placeholder="Paper #"
           value={paperNumber}
           onChange={(e) => setPaperNumber(e.target.value)}
-          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input px-2 py-1.5"
         />
         <input
           type="number"
           placeholder="Variant"
           value={variant}
           onChange={(e) => setVariant(e.target.value)}
-          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input px-2 py-1.5"
         />
       </div>
 
@@ -219,11 +219,7 @@ function NewPastPaperForm({ subjects }: { subjects: AdminSubject[] }) {
         <p className="text-xs text-red-600">{getErrorMessage(uploadMutation.error)}</p>
       )}
 
-      <button
-        type="submit"
-        disabled={uploadMutation.isPending || !subjectId}
-        className="w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
-      >
+      <button type="submit" disabled={uploadMutation.isPending || !subjectId} className="btn-primary w-full">
         {uploadMutation.isPending ? 'Uploading...' : 'Upload past paper'}
       </button>
     </form>
@@ -275,7 +271,7 @@ function EditPastPaperForm({ paper, subjects, onClose }: { paper: AdminPastPaper
           required
           value={subjectId}
           onChange={(e) => setSubjectId(e.target.value)}
-          className="col-span-2 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input col-span-2 px-2 py-1.5"
         >
           {subjects.map((s) => (
             <option key={s.id} value={s.id}>
@@ -288,34 +284,34 @@ function EditPastPaperForm({ paper, subjects, onClose }: { paper: AdminPastPaper
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="col-span-2 rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input col-span-2 px-2 py-1.5"
         />
         <input
           type="number"
           required
           value={year}
           onChange={(e) => setYear(e.target.value)}
-          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input px-2 py-1.5"
         />
         <input
           type="text"
           placeholder="Season"
           value={season}
           onChange={(e) => setSeason(e.target.value)}
-          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input px-2 py-1.5"
         />
         <input
           type="number"
           required
           value={paperNumber}
           onChange={(e) => setPaperNumber(e.target.value)}
-          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input px-2 py-1.5"
         />
         <input
           type="number"
           value={variant}
           onChange={(e) => setVariant(e.target.value)}
-          className="rounded-md border border-slate-300 px-2 py-1.5 text-sm"
+          className="field-input px-2 py-1.5"
         />
       </div>
 
@@ -341,14 +337,10 @@ function EditPastPaperForm({ paper, subjects, onClose }: { paper: AdminPastPaper
       {updateMutation.isError && <p className="text-xs text-red-600">{getErrorMessage(updateMutation.error)}</p>}
 
       <div className="flex gap-2">
-        <button
-          type="submit"
-          disabled={updateMutation.isPending}
-          className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
-        >
+        <button type="submit" disabled={updateMutation.isPending} className="btn-primary">
           {updateMutation.isPending ? 'Saving...' : 'Save changes'}
         </button>
-        <button type="button" onClick={onClose} className="rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100">
+        <button type="button" onClick={onClose} className="btn-secondary">
           Cancel
         </button>
       </div>
@@ -406,13 +398,13 @@ export function AdminAccess() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-semibold text-slate-900">Premium Access</h1>
+      <h1 className="page-title">Premium Access</h1>
       <p className="mt-1 text-sm text-slate-500">
         Admin only. Upload past papers and toggle which quizzes and papers require Premium.
       </p>
 
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div className="card">
           <h2 className="border-b border-slate-200 px-4 py-3 text-sm font-semibold text-slate-900">
             Quizzes
           </h2>
@@ -432,7 +424,7 @@ export function AdminAccess() {
           )}
         </div>
 
-        <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div className="card">
           <h2 className="border-b border-slate-200 px-4 py-3 text-sm font-semibold text-slate-900">
             Past Papers
           </h2>

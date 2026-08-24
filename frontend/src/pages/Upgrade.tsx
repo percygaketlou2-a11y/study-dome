@@ -55,28 +55,28 @@ export function Upgrade() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-semibold text-slate-900">Unlock Everything</h1>
+      <h1 className="page-title">Unlock Everything</h1>
       <p className="mt-1 text-sm text-slate-500">One payment, made once. No subscription, nothing to renew.</p>
       {reason && (
-        <p className="mt-3 rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-800">{reason}</p>
+        <p className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">{reason}</p>
       )}
       {paymentResult === 'success' && (
-        <p className="mt-3 rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+        <p className="mt-3 rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
           Payment received — Premium is unlocked.
         </p>
       )}
       {(paymentResult === 'failed' || paymentResult === 'error') && (
-        <p className="mt-3 rounded-md bg-red-50 px-3 py-2 text-sm text-red-800">
+        <p className="mt-3 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-800">
           {paymentResult === 'failed' ? 'Payment was not completed.' : 'Something went wrong starting payment.'}{' '}
           Please try again.
         </p>
       )}
 
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-medium text-slate-900">Free</h2>
+        <div className="card p-6">
+          <h2 className="section-title">Free</h2>
           <p className="mt-1 text-sm text-slate-500">Core quizzes and subject notes.</p>
-          <p className="mt-4 text-2xl font-semibold text-slate-900">P0</p>
+          <p className="mt-4 text-3xl font-bold tracking-tight text-slate-900">P0</p>
           {!isPremium && (
             <p className="mt-4 inline-block rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
               Current plan
@@ -84,11 +84,11 @@ export function Upgrade() {
           )}
         </div>
 
-        <div className="rounded-lg border border-indigo-300 bg-indigo-50 p-5 shadow-sm">
-          <h2 className="text-lg font-medium text-indigo-900">Premium</h2>
+        <div className="rounded-xl border-2 border-indigo-500 bg-indigo-50 p-6 shadow-sm">
+          <h2 className="section-title text-indigo-900">Premium</h2>
           <p className="mt-1 text-sm text-indigo-700">Every past paper and every quiz, unlocked for good.</p>
-          <p className="mt-4 text-2xl font-semibold text-indigo-900">
-            P{price} <span className="text-sm font-normal text-indigo-700">once-off</span>
+          <p className="mt-4 text-3xl font-bold tracking-tight text-indigo-900">
+            P{price} <span className="text-sm font-medium text-indigo-700">once-off</span>
           </p>
           {isPremium ? (
             <>
@@ -98,7 +98,7 @@ export function Upgrade() {
               <button
                 onClick={() => downgradeMutation.mutate()}
                 disabled={downgradeMutation.isPending}
-                className="mt-4 block rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-500 hover:bg-slate-100 disabled:opacity-50"
+                className="btn-secondary mt-4 block w-fit text-slate-500"
               >
                 {downgradeMutation.isPending ? 'Resetting...' : 'Reset to Free (testing only)'}
               </button>
@@ -111,7 +111,7 @@ export function Upgrade() {
                   dpoMutation.mutate()
                 }}
                 disabled={dpoMutation.isPending}
-                className="mt-4 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+                className="btn-primary mt-4"
               >
                 {dpoMutation.isPending ? 'Starting checkout...' : `Pay P${price} with DPO`}
               </button>
@@ -124,11 +124,7 @@ export function Upgrade() {
               </button>
             </>
           ) : (
-            <button
-              onClick={() => upgradeMutation.mutate()}
-              disabled={upgradeMutation.isPending}
-              className="mt-4 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
-            >
+            <button onClick={() => upgradeMutation.mutate()} disabled={upgradeMutation.isPending} className="btn-primary mt-4">
               {upgradeMutation.isPending ? 'Unlocking...' : `Pay P${price} once, unlock everything`}
             </button>
           )}
