@@ -87,6 +87,7 @@ model Subject {
   quizzes      Quiz[]
   pastPapers   PastPaper[]
   videos       Video[]
+  tutorials    Tutorial[]
 
   @@unique([curriculumId, name])
 }
@@ -169,4 +170,23 @@ model Video {
   url       String   // admin-pasted YouTube/Vimeo link; embed URL is derived from this at read time
   isPremium Boolean  @default(false)
   createdAt DateTime @default(now())
+}
+
+model Tutorial {
+  id        String         @id @default(cuid())
+  subjectId String
+  subject   Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  title     String
+  isPremium Boolean        @default(false)
+  createdAt DateTime       @default(now())
+  steps     TutorialStep[]
+}
+
+model TutorialStep {
+  id         String   @id @default(cuid())
+  tutorialId String
+  tutorial   Tutorial @relation(fields: [tutorialId], references: [id], onDelete: Cascade)
+  order      Int      @default(0)
+  text       String
+  imageUrl   String?
 }

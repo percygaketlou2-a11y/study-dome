@@ -31,6 +31,21 @@ interface Video {
   embedUrl: string | null
 }
 
+interface TutorialStep {
+  id: string
+  order: number
+  text: string
+  imageUrl: string | null
+}
+
+interface Tutorial {
+  id: string
+  title: string
+  isPremium: boolean
+  locked: boolean
+  steps: TutorialStep[]
+}
+
 interface PastPaper {
   id: string
   year: number
@@ -105,6 +120,14 @@ export function SubjectDetail() {
     queryFn: async () => (await api.get<Video[]>(`/videos/${subjectId}`)).data,
     enabled: Boolean(subjectId),
   })
+
+  const { data: tutorials, isLoading: tutorialsLoading } = useQuery({
+    queryKey: ['tutorials', subjectId],
+    queryFn: async () => (await api.get<Tutorial[]>(`/tutorials/${subjectId}`)).data,
+    enabled: Boolean(subjectId),
+  })
+
+  const [openTutorialId, setOpenTutorialId] = useState<string | null>(null)
 
   const topicGroups = new Map<string, Quiz[]>()
   for (const q of quizzes ?? []) {
@@ -189,6 +212,67 @@ export function SubjectDetail() {
           ))}
           {videos && videos.length === 0 && (
             <p className="text-sm text-slate-500">No video lessons available yet.</p>
+          )}
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="section-title mb-3">Tutorials</h2>
+        {tutorialsLoading && <p className="text-sm text-slate-500">Loading tutorials...</p>}
+        <div className="space-y-3">
+          {tutorials?.map((t) => {
+            const open = openTutorialId === t.id
+            return (
+              <div key={t.id} className="card">
+                <div className="flex items-center justify-between p-4">
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-slate-900">{t.title}</span>
+                    {t.isPremium && <span className="badge-amber">Premium</span>}
+                  </div>
+                  {t.locked ? (
+                    <Link
+                      to="/upgrade"
+                      state={{ reason: `"${t.title}" is a Premium tutorial. Upgrade to unlock it.` }}
+                      className="inline-flex items-center gap-1 rounded-lg border border-amber-300 bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 transition hover:bg-amber-100"
+                    >
+                      🔒 Unlock with Premium
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => setOpenTutorialId(open ? null : t.id)}
+                      className="btn-secondary"
+                    >
+                      {open ? 'Hide steps' : 'View steps'}
+                    </button>
+                  )}
+                </div>
+                {open && !t.locked && (
+                  <div className="space-y-4 border-t border-slate-200 p-4">
+                    {t.steps.map((s) => (
+                      <div key={s.id} className="flex gap-3">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xs font-semibold text-indigo-700">
+                          {s.order}
+                        </span>
+                        <div className="space-y-2">
+                          <p className="whitespace-pre-wrap text-sm text-slate-700">{s.text}</p>
+                          {s.imageUrl && (
+                            <img
+                              src={s.imageUrl}
+                              alt={`Step ${s.order}`}
+                              className="max-w-full rounded-lg border border-slate-200 sm:max-w-md"
+                            />
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                    {t.steps.length === 0 && <p className="text-sm text-slate-500">No steps yet.</p>}
+                  </div>
+                )}
+              </div>
+            )
+          })}
+          {tutorials && tutorials.length === 0 && (
+            <p className="text-sm text-slate-500">No tutorials available yet.</p>
           )}
         </div>
       </section>

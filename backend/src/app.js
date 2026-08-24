@@ -17,6 +17,8 @@ const adminUsersRoutes = require('./routes/adminUsers');
 const adminPaymentsRoutes = require('./routes/adminPayments');
 const adminVideosRoutes = require('./routes/adminVideos');
 const videosRoutes = require('./routes/videos');
+const adminTutorialsRoutes = require('./routes/adminTutorials');
+const tutorialsRoutes = require('./routes/tutorials');
 const billingRoutes = require('./routes/billing');
 
 const app = express();
@@ -41,10 +43,12 @@ app.use('/api/admin', adminUsersRoutes);
 app.use('/api/admin', adminPaymentsRoutes);
 app.use('/api/admin', adminVideosRoutes);
 app.use('/api/videos', videosRoutes);
+app.use('/api/admin', adminTutorialsRoutes);
+app.use('/api/tutorials', tutorialsRoutes);
 app.use('/api/billing', billingRoutes);
 
 app.use((err, req, res, next) => {
-  if (err instanceof multer.MulterError || /pdf/i.test(err?.message ?? '')) {
+  if (err instanceof multer.MulterError || /pdf|image/i.test(err?.message ?? '')) {
     return res.status(400).json({ error: err.message });
   }
   console.error(err);
