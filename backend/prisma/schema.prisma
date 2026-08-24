@@ -86,6 +86,7 @@ model Subject {
   topics       Topic[]
   quizzes      Quiz[]
   pastPapers   PastPaper[]
+  videos       Video[]
 
   @@unique([curriculumId, name])
 }
@@ -158,4 +159,14 @@ model PastPaper {
   markingSchemeUrl  String?
   isPremium         Boolean  @default(false)
   createdAt         DateTime @default(now())
+}
+
+model Video {
+  id        String   @id @default(cuid())
+  subjectId String
+  subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  title     String
+  url       String   // admin-pasted YouTube/Vimeo link; embed URL is derived from this at read time
+  isPremium Boolean  @default(false)
+  createdAt DateTime @default(now())
 }

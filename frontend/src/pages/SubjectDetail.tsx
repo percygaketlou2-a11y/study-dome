@@ -23,6 +23,14 @@ interface SubjectData {
   curriculum: { id: string; name: string }
 }
 
+interface Video {
+  id: string
+  title: string
+  isPremium: boolean
+  locked: boolean
+  embedUrl: string | null
+}
+
 interface PastPaper {
   id: string
   year: number
@@ -92,6 +100,12 @@ export function SubjectDetail() {
     enabled: Boolean(subjectId),
   })
 
+  const { data: videos, isLoading: videosLoading } = useQuery({
+    queryKey: ['videos', subjectId],
+    queryFn: async () => (await api.get<Video[]>(`/videos/${subjectId}`)).data,
+    enabled: Boolean(subjectId),
+  })
+
   const topicGroups = new Map<string, Quiz[]>()
   for (const q of quizzes ?? []) {
     const key = q.topic ?? 'General'
@@ -136,6 +150,45 @@ export function SubjectDetail() {
           ))}
           {quizzes && quizzes.length === 0 && (
             <p className="text-sm text-slate-500">No quizzes available yet.</p>
+          )}
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="section-title mb-3">Video Lessons</h2>
+        {videosLoading && <p className="text-sm text-slate-500">Loading videos...</p>}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {videos?.map((v) => (
+            <div key={v.id} className="card overflow-hidden">
+              {v.locked ? (
+                <div className="flex aspect-video flex-col items-center justify-center gap-2 bg-slate-50 p-4 text-center">
+                  <Link
+                    to="/upgrade"
+                    state={{ reason: `"${v.title}" is a Premium video. Upgrade to unlock it.` }}
+                    className="inline-flex items-center gap-1 rounded-lg border border-amber-300 bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 transition hover:bg-amber-100"
+                  >
+                    🔒 Unlock with Premium
+                  </Link>
+                </div>
+              ) : (
+                v.embedUrl && (
+                  <iframe
+                    src={v.embedUrl}
+                    title={v.title}
+                    className="aspect-video w-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                )
+              )}
+              <div className="flex items-center justify-between p-3">
+                <span className="text-sm font-medium text-slate-900">{v.title}</span>
+                {v.isPremium && <span className="badge-amber shrink-0">Premium</span>}
+              </div>
+            </div>
+          ))}
+          {videos && videos.length === 0 && (
+            <p className="text-sm text-slate-500">No video lessons available yet.</p>
           )}
         </div>
       </section>

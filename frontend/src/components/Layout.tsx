@@ -6,6 +6,7 @@ const ADMIN_LINKS = [
   { to: '/admin/quizzes', label: 'Quizzes' },
   { to: '/admin/curricula', label: 'Curricula' },
   { to: '/admin/notes', label: 'Notes' },
+  { to: '/admin/videos', label: 'Videos' },
   { to: '/admin/access', label: 'Access' },
   { to: '/admin/users', label: 'Users' },
   { to: '/admin/payments', label: 'Payments' },

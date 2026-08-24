@@ -15,6 +15,8 @@ const adminQuizzesRoutes = require('./routes/adminQuizzes');
 const adminCurriculaRoutes = require('./routes/adminCurricula');
 const adminUsersRoutes = require('./routes/adminUsers');
 const adminPaymentsRoutes = require('./routes/adminPayments');
+const adminVideosRoutes = require('./routes/adminVideos');
+const videosRoutes = require('./routes/videos');
 const billingRoutes = require('./routes/billing');
 
 const app = express();
@@ -37,6 +39,8 @@ app.use('/api/admin', adminQuizzesRoutes);
 app.use('/api/admin', adminCurriculaRoutes);
 app.use('/api/admin', adminUsersRoutes);
 app.use('/api/admin', adminPaymentsRoutes);
+app.use('/api/admin', adminVideosRoutes);
+app.use('/api/videos', videosRoutes);
 app.use('/api/billing', billingRoutes);
 
 app.use((err, req, res, next) => {

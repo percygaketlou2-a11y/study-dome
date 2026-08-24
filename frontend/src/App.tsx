@@ -10,6 +10,7 @@ import { AdminNotes } from './pages/AdminNotes'
 import { AdminAccess } from './pages/AdminAccess'
 import { AdminQuizBuilder } from './pages/AdminQuizBuilder'
 import { AdminCurricula } from './pages/AdminCurricula'
+import { AdminVideos } from './pages/AdminVideos'
 import { AdminUsers } from './pages/AdminUsers'
 import { AdminPayments } from './pages/AdminPayments'
 import { Upgrade } from './pages/Upgrade'
@@ -109,6 +110,16 @@ function App() {
           <ProtectedRoute>
             <RequireAdmin>
               <AdminCurricula />
+            </RequireAdmin>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/videos"
+        element={
+          <ProtectedRoute>
+            <RequireAdmin>
+              <AdminVideos />
             </RequireAdmin>
           </ProtectedRoute>
         }
