@@ -29,21 +29,28 @@ router.patch('/curriculum', async (req, res) => {
   res.json({ id: user.id, name: user.name, email: user.email, selectedCurriculumId: user.selectedCurriculumId });
 });
 
-// GET /api/user/dashboard - user info, curriculum, subjects, last 5 quiz results
+// GET /api/user/dashboard - user info, curriculum, subjects with progress, a
+// "continue learning" suggestion, and quiz history. One roundtrip so the
+// dashboard can render its primary CTA with no follow-up request.
 router.get('/dashboard', async (req, res) => {
   const user = await prisma.user.findUnique({
     where: { id: req.userId },
-    include: { selectedCurriculum: { include: { subjects: true } } },
+    include: {
+      selectedCurriculum: {
+        include: { subjects: { include: { _count: { select: { quizzes: true } } } } },
+      },
+    },
   });
 
   if (!user) {
     return res.status(404).json({ error: 'User not found' });
   }
 
-  const recentResults = await prisma.quizResult.findMany({
+  const subjects = user.selectedCurriculum ? user.selectedCurriculum.subjects : [];
+
+  const results = await prisma.quizResult.findMany({
     where: { userId: req.userId },
     orderBy: { completedAt: 'desc' },
-    take: 5,
     include: { quiz: { include: { subject: { include: { curriculum: true } } } } },
   });
 
@@ -52,18 +59,48 @@ router.get('/dashboard', async (req, res) => {
     select: { date: true },
   });
 
+  // Distinct completed quizzes per subject, used for each subject's progress bar.
+  const completedQuizIdsBySubject = new Map();
+  for (const r of results) {
+    const subjectId = r.quiz.subjectId;
+    if (!completedQuizIdsBySubject.has(subjectId)) completedQuizIdsBySubject.set(subjectId, new Set());
+    completedQuizIdsBySubject.get(subjectId).add(r.quizId);
+  }
+
+  const subjectsWithProgress = subjects.map((s) => ({
+    id: s.id,
+    name: s.name,
+    category: s.category,
+    quizzesCompleted: completedQuizIdsBySubject.get(s.id)?.size ?? 0,
+    quizzesTotal: s._count.quizzes,
+  }));
+
+  // "Continue learning": prefer the subject of the last quiz taken if it still
+  // has quizzes left, then any subject with quizzes remaining, then the first subject.
+  const mostRecentSubjectId = results[0]?.quiz.subjectId ?? null;
+  const continueSubject =
+    subjectsWithProgress.find((s) => s.id === mostRecentSubjectId && s.quizzesCompleted < s.quizzesTotal) ??
+    subjectsWithProgress.find((s) => s.quizzesTotal > 0 && s.quizzesCompleted < s.quizzesTotal) ??
+    subjectsWithProgress[0] ??
+    null;
+
+  const today = new Date().toISOString().slice(0, 10);
+
   res.json({
     user: { id: user.id, name: user.name, email: user.email, emailVerified: user.emailVerified },
     currentStreak: computeCurrentStreak(activity.map((a) => a.date)),
     totalActiveDays: activity.length,
+    studiedToday: activity.some((a) => a.date === today),
     curriculum: user.selectedCurriculum
       ? { id: user.selectedCurriculum.id, name: user.selectedCurriculum.name }
       : null,
-    subjects: user.selectedCurriculum ? user.selectedCurriculum.subjects : [],
-    recentQuizzes: recentResults.map((r) => ({
+    subjects: subjectsWithProgress,
+    continueSubject: continueSubject ? { id: continueSubject.id, name: continueSubject.name } : null,
+    recentQuizzes: results.slice(0, 5).map((r) => ({
       id: r.id,
       quizId: r.quizId,
       quizTitle: r.quiz.title,
+      subjectId: r.quiz.subjectId,
       subject: r.quiz.subject.name,
       level: r.quiz.subject.curriculum.name,
       score: r.score,

@@ -3,6 +3,7 @@ import { Link, useLocation, useParams } from 'react-router-dom'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { api, getErrorMessage } from '../api/client'
 import { Layout } from '../components/Layout'
+import { AnimatedNumber } from '../components/AnimatedNumber'
 
 type QuestionType = 'multiple_choice' | 'short_answer' | 'true_false'
 
@@ -176,15 +177,22 @@ export function TakeQuiz() {
 
       {result && (
         <div className="mt-6 space-y-6">
-          <div className="card flex items-center gap-5 border-indigo-200 bg-indigo-50 p-6">
+          <div className="animate-pop-in card flex items-center gap-5 border-indigo-200 bg-indigo-50 p-6">
             <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-lg font-bold text-white">
-              {result.score}%
+              <AnimatedNumber value={result.score} />%
             </div>
             <div>
               <p className="font-semibold text-indigo-900">
                 {result.marksAwarded}/{result.totalMarks} marks
               </p>
               <p className="text-sm text-indigo-700">{result.correctCount}/{result.totalQuestions} correct</p>
+              <p className="mt-1 text-sm font-medium text-indigo-600">
+                {result.score >= 80
+                  ? "Excellent work! That's a strong result."
+                  : result.score >= 50
+                    ? 'Nice work — review what you missed below.'
+                    : "Marked instantly, so you can see exactly what to revise next."}
+              </p>
             </div>
           </div>
 
@@ -192,7 +200,8 @@ export function TakeQuiz() {
             {result.feedback.map((f, idx) => (
               <div
                 key={f.questionId}
-                className={`rounded-xl border p-4 ${
+                style={{ animationDelay: `${idx * 60}ms` }}
+                className={`animate-fade-up rounded-xl border p-4 ${
                   f.isCorrect ? 'border-emerald-200 bg-emerald-50' : 'border-red-200 bg-red-50'
                 }`}
               >

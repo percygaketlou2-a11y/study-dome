@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '../api/client'
@@ -128,6 +128,14 @@ export function SubjectDetail() {
   })
 
   const [openTutorialId, setOpenTutorialId] = useState<string | null>(null)
+
+  // A dashboard "Past papers" shortcut links here with #past-papers — SPA
+  // navigation doesn't auto-scroll to hashes the way a full page load does.
+  useEffect(() => {
+    if (!location.hash) return
+    const el = document.querySelector(location.hash)
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [location.hash, papers])
 
   const topicGroups = new Map<string, Quiz[]>()
   for (const q of quizzes ?? []) {
@@ -277,7 +285,7 @@ export function SubjectDetail() {
         </div>
       </section>
 
-      <section className="mt-10">
+      <section id="past-papers" className="mt-10">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="section-title">Past Papers</h2>
           <label className="flex items-center gap-2 text-sm text-slate-600">
