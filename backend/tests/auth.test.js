@@ -7,7 +7,7 @@ describe('auth', () => {
     const email = uniqueEmail('register');
     const res = await request(app)
       .post('/api/auth/register')
-      .send({ name: 'New User', email, password: 'password123' });
+      .send({ name: 'New User', email, password: 'password123', acceptedTerms: true });
 
     expect(res.status).toBe(201);
     expect(res.body.token).toBeTruthy();
@@ -18,10 +18,19 @@ describe('auth', () => {
     expect(res.body.devVerifyLink).toMatch(/token=/);
   });
 
+  test('register rejects a signup that has not accepted Terms & Privacy Policy', async () => {
+    const email = uniqueEmail('noconsent');
+    const res = await request(app)
+      .post('/api/auth/register')
+      .send({ name: 'No Consent', email, password: 'password123' });
+
+    expect(res.status).toBe(400);
+  });
+
   test('register with the ADMIN_EMAIL is auto-promoted to admin', async () => {
     const res = await request(app)
       .post('/api/auth/register')
-      .send({ name: 'Admin', email: process.env.ADMIN_EMAIL, password: 'password123' });
+      .send({ name: 'Admin', email: process.env.ADMIN_EMAIL, password: 'password123', acceptedTerms: true });
 
     // May already exist from a prior test run against the same seeded DB.
     if (res.status === 409) {
@@ -38,15 +47,19 @@ describe('auth', () => {
 
   test('register rejects a duplicate email', async () => {
     const email = uniqueEmail('dup');
-    await request(app).post('/api/auth/register').send({ name: 'A', email, password: 'password123' });
-    const res = await request(app).post('/api/auth/register').send({ name: 'B', email, password: 'password123' });
+    await request(app).post('/api/auth/register').send({ name: 'A', email, password: 'password123', acceptedTerms: true });
+    const res = await request(app)
+      .post('/api/auth/register')
+      .send({ name: 'B', email, password: 'password123', acceptedTerms: true });
 
     expect(res.status).toBe(409);
   });
 
   test('login succeeds with correct credentials', async () => {
     const email = uniqueEmail('login');
-    await request(app).post('/api/auth/register').send({ name: 'Login', email, password: 'password123' });
+    await request(app)
+      .post('/api/auth/register')
+      .send({ name: 'Login', email, password: 'password123', acceptedTerms: true });
 
     const res = await request(app).post('/api/auth/login').send({ email, password: 'password123' });
 
@@ -56,7 +69,9 @@ describe('auth', () => {
 
   test('login rejects wrong password', async () => {
     const email = uniqueEmail('wrongpw');
-    await request(app).post('/api/auth/register').send({ name: 'X', email, password: 'password123' });
+    await request(app)
+      .post('/api/auth/register')
+      .send({ name: 'X', email, password: 'password123', acceptedTerms: true });
 
     const res = await request(app).post('/api/auth/login').send({ email, password: 'nope123456' });
 

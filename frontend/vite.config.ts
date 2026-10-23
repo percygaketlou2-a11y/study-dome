@@ -4,8 +4,10 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  build: {
+    sourcemap: false, // never publish readable source alongside the production bundle
+  },
   server: {
-    host: true, // listen on the LAN, not just localhost - lets a phone on the same WiFi reach it
     proxy: {
       '/api': {
         target: 'http://localhost:4000',

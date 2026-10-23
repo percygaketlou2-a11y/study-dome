@@ -131,7 +131,7 @@ export function AdminCurricula() {
               >
                 <button onClick={() => setSelectedCurriculum(c.id)} className="flex-1 text-left">
                   <span className="font-medium text-slate-900">{c.name}</span>
-                  <span className="ml-2 text-xs text-slate-400">{c.subjectCount} subjects</span>
+                  <span className="ml-2 text-xs text-slate-500">{c.subjectCount} subjects</span>
                 </button>
                 <button
                   onClick={() => {
@@ -186,7 +186,7 @@ export function AdminCurricula() {
                   <div key={s.id} className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-50">
                     <div>
                       <span className="font-medium text-slate-900">{s.name}</span>
-                      {s.category && <span className="ml-2 text-xs text-slate-400">{s.category}</span>}
+                      {s.category && <span className="ml-2 text-xs text-slate-500">{s.category}</span>}
                     </div>
                     <button
                       onClick={() => {

@@ -46,6 +46,59 @@ Whichever account registers with the email set as `ADMIN_EMAIL` (in `.env`) is a
 - Write study notes per subject (`/admin/notes`)
 - Upload past-paper PDFs and toggle which quizzes/papers require Premium (`/admin/access`)
 
+## Content packs and teacher review
+
+Syllabus content (subjects, topics, specific objectives, study notes, multiple-choice questions and exam-style structured questions) is loaded from JSON content packs. The BGCSE pack lives in `backend/prisma/content/bgcse/`.
+
+```bash
+cd backend
+npm run import:content            # imports the BGCSE pack
+npm run import:content -- <dir>   # imports another pack directory
+```
+
+- Items attach to the existing subjects (matched by code, then by name, treating "&" and "and" alike). Notes become topic notes, multiple-choice questions become one practice quiz per topic, and structured questions are shown as self-marked exam-style questions.
+- The import is idempotent: items that already exist are skipped, so re-running it never overwrites review progress or edits. Run it once against the production database after deploying.
+- Everything imports as **not reviewed and hidden from students**. Open **Admin -> Content Review** (`/admin/content`) to check each item, record corrections, edit it, and set it to **Approved** to publish it. A structured question goes live only when every one of its parts is approved.
+- Quizzes that come from a content pack are edited in Content Review, not the Quiz Builder (the builder replaces all of a quiz's questions, which would reset their review status).
+- Reviewers need an admin account to use the review screen.
+
+## Security
+
+What the backend enforces:
+- **Authentication on every route** except an explicit public list (register, login, verify/reset email, the contact form, the payment callback, health). `backend/tests/security.test.js` walks every registered route to prove it, and proves every `/api/admin/*` route refuses a normal student.
+- **Sessions are checked against the database on each request**, so deleting an account, demoting an admin or changing a password takes effect immediately. Changing or resetting a password signs out every older session. Tokens are HS256-only and last 7 days.
+- **Passwords** are bcrypt (cost 12), 8 to 72 characters. Login does the same hashing work whether or not the email exists.
+- **Emails are stored lowercase**, so a case variant of `ADMIN_EMAIL` can't become a second admin account. Once email sending is configured, an admin must also have a verified email.
+- **Rate limiting** on login (failures only, per IP and per account), registration, password reset and the contact form, plus a high general limit. Whole schools share one public IP, so the limits are generous and don't count successful logins.
+- **Security headers** (helmet): strict CSP and `nosniff` on the API, `Cache-Control: no-store` on API responses, and CORS limited to your frontend origin.
+- **Errors**: clients only ever receive generic messages, never stack traces or database errors. A malformed request can't crash the server.
+- **Uploads**: type is checked, the stored extension comes from the verified content type (not the filename), and files are served with `nosniff`.
+
+Checklist before going live:
+1. Set `NODE_ENV=production`. The manual Premium test-unlock endpoints are disabled and the startup checks below become fatal.
+2. Set a strong `JWT_SECRET` (32+ random characters). The server refuses to start in production without one.
+3. Set `FRONTEND_URL` (and `CORS_ORIGINS` if you have more than one frontend) to your real https address.
+4. Set `TRUST_PROXY=1` if the API sits behind a host's reverse proxy, or rate limiting will treat every visitor as the same IP.
+5. Configure email (`EMAIL_USER`/`EMAIL_PASS`) so the admin email can be verified and password-reset links are emailed instead of returned in the API response.
+6. Run `npm run normalize:emails` once on any database that has accounts from before email normalization.
+7. Use Postgres, with a database user that only has access to this app's database.
+8. Add security headers to the frontend host. `frontend/public/_headers` covers Netlify and Cloudflare Pages. A Content-Security-Policy depends on your backend domain, so it is not shipped; this is a starting point:
+
+```
+default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com;
+style-src-attr 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:;
+frame-src 'self' https://www.youtube.com https://www.google.com https://player.vimeo.com;
+connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+```
+This assumes the host proxies `/api` and `/uploads` to the backend (as the Vite dev server does); if the API is on another domain, add it to `connect-src`, `img-src` and `frame-src`.
+
+This policy was tested against the production build in a Chromium browser: the app, Google Fonts, API calls, Vimeo and YouTube embeds, the PDF viewer iframe and inline progress-bar styles all work, while injected scripts, inline `<style>`, `eval`, external images/frames/requests, a rewritten `<base>` and cross-site form posts are blocked. Testing found one thing to know about: a visitor's first YouTube view bounces the embed through `www.google.com`, so that origin has to be in `frame-src`. Without it the first video fails and then works after a refresh. Re-test with `Content-Security-Policy-Report-Only` if you change hosts, and again if you add a new kind of embed or third-party script.
+
+Known trade-offs:
+- The login token is kept in browser local storage (simple, and immune to CSRF), so an XSS bug would expose it. The app has no `dangerouslySetInnerHTML` and renders note text as plain React elements. Moving to httpOnly cookies would need CSRF protection too.
+- Uploaded past-paper PDFs are served by URL without a login check. Filenames are random and only released to students allowed to see them, but anyone who is given a link can open it.
+- `npm audit` still reports a few issues in dev-only tooling (`nodemon`, `jest`). They never run in production; fixing them needs major-version upgrades of those tools.
+
 ## Before deploying to production
 
 A few things are set up for local development and need attention before this goes live:

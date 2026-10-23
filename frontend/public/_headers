@@ -1,0 +1,10 @@
+# Security headers for the built frontend. Netlify and Cloudflare Pages read this
+# file automatically; on another host, set the same headers in its config.
+# A Content-Security-Policy is deliberately not set here because it depends on
+# your backend's domain - see "Security" in the README for a ready-made one.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000

@@ -54,22 +54,28 @@ export function ResetPassword() {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="field-label">New password</label>
+          <label htmlFor="reset-new-password" className="field-label">
+            New password
+          </label>
           <input
+            id="reset-new-password"
             type="password"
             required
-            minLength={6}
+            minLength={8}
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             className="field-input"
           />
         </div>
         <div>
-          <label className="field-label">Confirm password</label>
+          <label htmlFor="reset-confirm-password" className="field-label">
+            Confirm password
+          </label>
           <input
+            id="reset-confirm-password"
             type="password"
             required
-            minLength={6}
+            minLength={8}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="field-input"

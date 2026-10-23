@@ -33,8 +33,11 @@ export function Login() {
       <p className="mb-6 text-sm text-slate-500">Log in to continue studying.</p>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="field-label">Email</label>
+          <label htmlFor="login-email" className="field-label">
+            Email
+          </label>
           <input
+            id="login-email"
             type="email"
             required
             value={email}
@@ -44,12 +47,15 @@ export function Login() {
         </div>
         <div>
           <div className="mb-1 flex items-center justify-between">
-            <label className="field-label mb-0">Password</label>
+            <label htmlFor="login-password" className="field-label mb-0">
+              Password
+            </label>
             <Link to="/forgot-password" className="text-xs font-medium text-indigo-600 hover:underline">
               Forgot password?
             </Link>
           </div>
           <input
+            id="login-password"
             type="password"
             required
             value={password}

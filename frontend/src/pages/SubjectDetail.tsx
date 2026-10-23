@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
-import { api } from '../api/client'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { api, getErrorMessage } from '../api/client'
 import { Layout } from '../components/Layout'
+import { Markdown } from '../components/Markdown'
 
 interface Quiz {
   id: string
@@ -36,6 +37,7 @@ interface TutorialStep {
   order: number
   text: string
   imageUrl: string | null
+  imageAlt: string | null
 }
 
 interface Tutorial {
@@ -58,6 +60,116 @@ interface PastPaper {
   fileUrl: string | null
   hasMarkingScheme: boolean
   markingSchemeUrl: string | null
+}
+
+interface TopicNoteGroup {
+  topic: { id: string; title: string; code: string | null }
+  notes: { id: string; heading: string; bodyMarkdown: string }[]
+}
+
+interface StructuredQuestionData {
+  id: string
+  topic: string
+  paperStyle: string | null
+  totalMarks: number
+  stem: string
+  parts: { id: string; label: string | null; prompt: string; marks: number }[]
+}
+
+interface RevealedPart {
+  id: string
+  label: string | null
+  marks: number
+  answer: string
+  markScheme: string
+}
+
+// Exam-style, multi-part question. Students answer every part first; only then
+// is the mark scheme released so they can mark themselves honestly.
+function StructuredQuestionCard({ q }: { q: StructuredQuestionData }) {
+  const queryClient = useQueryClient()
+  const [answers, setAnswers] = useState<Record<string, string>>({})
+  const [revealed, setRevealed] = useState<RevealedPart[] | null>(null)
+
+  const reveal = useMutation({
+    mutationFn: async () => (await api.post<{ parts: RevealedPart[] }>(`/structured/${q.id}/reveal`, { answers })).data,
+    onSuccess: (data) => {
+      setRevealed(data.parts)
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] })
+    },
+  })
+
+  const allAnswered = q.parts.every((p) => (answers[p.id] ?? '').trim().length > 0)
+  const schemeFor = (partId: string) => revealed?.find((r) => r.id === partId)
+
+  return (
+    <div className="card p-5">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <span className="eyebrow">
+          {q.topic}
+          {q.paperStyle ? ` · ${q.paperStyle}` : ''}
+        </span>
+        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-600">{q.totalMarks} marks</span>
+      </div>
+      <p className="mt-3 whitespace-pre-wrap text-sm font-medium text-slate-900">{q.stem}</p>
+
+      <div className="mt-4 space-y-5">
+        {q.parts.map((p) => {
+          const scheme = schemeFor(p.id)
+          return (
+            <div key={p.id}>
+              <label htmlFor={`part-${p.id}`} className="block text-sm text-slate-800">
+                {p.label && <span className="font-semibold">({p.label}) </span>}
+                {p.prompt}{' '}
+                <span className="text-xs text-slate-500">
+                  [{p.marks} {p.marks === 1 ? 'mark' : 'marks'}]
+                </span>
+              </label>
+              <textarea
+                id={`part-${p.id}`}
+                rows={2}
+                value={answers[p.id] ?? ''}
+                disabled={Boolean(revealed)}
+                onChange={(e) => setAnswers((a) => ({ ...a, [p.id]: e.target.value }))}
+                className="field-input mt-2 disabled:bg-slate-50"
+              />
+              {scheme && (
+                <div className="mt-2 rounded-lg border border-emerald-200 bg-emerald-50 p-3">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-emerald-800">Mark scheme</p>
+                  <p className="mt-1 whitespace-pre-wrap text-sm text-emerald-900">{scheme.markScheme}</p>
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+
+      {reveal.isError && <p className="mt-3 text-sm text-red-600">{getErrorMessage(reveal.error)}</p>}
+
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        {revealed ? (
+          <>
+            <p className="text-sm text-slate-600">Compare your answers with the mark scheme and give yourself marks for each part.</p>
+            <button
+              type="button"
+              onClick={() => {
+                setRevealed(null)
+                setAnswers({})
+              }}
+              className="btn-secondary"
+            >
+              Try again
+            </button>
+          </>
+        ) : (
+          <button type="button" onClick={() => reveal.mutate()} disabled={!allAnswered || reveal.isPending} className="btn-primary">
+            {reveal.isPending ? 'Checking...' : 'Show mark scheme'}
+          </button>
+        )}
+        {!revealed && !allAnswered && <span className="text-xs text-slate-500">Answer every part to see the mark scheme.</span>}
+      </div>
+    </div>
+  )
 }
 
 function QuizCard({ q, subjectId }: { q: Quiz; subjectId: string | undefined }) {
@@ -127,6 +239,18 @@ export function SubjectDetail() {
     enabled: Boolean(subjectId),
   })
 
+  const { data: topicNotes } = useQuery({
+    queryKey: ['topic-notes', subjectId],
+    queryFn: async () => (await api.get<TopicNoteGroup[]>(`/subjects/${subjectId}/topic-notes`)).data,
+    enabled: Boolean(subjectId),
+  })
+
+  const { data: structuredQuestions } = useQuery({
+    queryKey: ['structured', subjectId],
+    queryFn: async () => (await api.get<StructuredQuestionData[]>(`/structured/${subjectId}`)).data,
+    enabled: Boolean(subjectId),
+  })
+
   const [openTutorialId, setOpenTutorialId] = useState<string | null>(null)
 
   // A dashboard "Past papers" shortcut links here with #past-papers — SPA
@@ -156,13 +280,35 @@ export function SubjectDetail() {
 
       <section className="mt-6">
         <h2 className="section-title mb-3">Study Notes</h2>
-        <div className="card p-4">
-          {subject?.notes ? (
-            <p className="whitespace-pre-wrap text-sm text-slate-700">{subject.notes}</p>
-          ) : (
-            <p className="text-sm text-slate-400">No study notes for this subject yet.</p>
-          )}
-        </div>
+        {(subject?.notes || (topicNotes && topicNotes.length === 0)) && (
+          <div className="card p-4">
+            {subject?.notes ? (
+              <p className="whitespace-pre-wrap text-sm text-slate-700">{subject.notes}</p>
+            ) : (
+              <p className="text-sm text-slate-500">No study notes for this subject yet.</p>
+            )}
+          </div>
+        )}
+        {topicNotes && topicNotes.length > 0 && (
+          <div className={`space-y-6 ${subject?.notes ? 'mt-6' : ''}`}>
+            {topicNotes.map((group) => (
+              <div key={group.topic.id}>
+                <h3 className="eyebrow mb-2">
+                  {group.topic.code ? `${group.topic.code} · ` : ''}
+                  {group.topic.title}
+                </h3>
+                <div className="space-y-3">
+                  {group.notes.map((n) => (
+                    <article key={n.id} className="card p-4">
+                      <h4 className="mb-2 font-semibold text-slate-900">{n.heading}</h4>
+                      <Markdown source={n.bodyMarkdown} />
+                    </article>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="mt-10">
@@ -184,6 +330,17 @@ export function SubjectDetail() {
           )}
         </div>
       </section>
+
+      {structuredQuestions && structuredQuestions.length > 0 && (
+        <section className="mt-10">
+          <h2 className="section-title mb-3">Exam-style Questions</h2>
+          <div className="space-y-4">
+            {structuredQuestions.map((q) => (
+              <StructuredQuestionCard key={q.id} q={q} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mt-10">
         <h2 className="section-title mb-3">Video Lessons</h2>
@@ -266,7 +423,7 @@ export function SubjectDetail() {
                           {s.imageUrl && (
                             <img
                               src={s.imageUrl}
-                              alt={`Step ${s.order}`}
+                              alt={s.imageAlt ?? `Step ${s.order} diagram`}
                               className="max-w-full rounded-lg border border-slate-200 sm:max-w-md"
                             />
                           )}
@@ -343,7 +500,7 @@ export function SubjectDetail() {
                         {viewer?.key === schemeKey ? 'Hide' : 'View'} marking scheme
                       </button>
                     ) : (
-                      <span className="text-xs text-slate-400">Not available</span>
+                      <span className="text-xs text-slate-500">Not available</span>
                     )
                   ) : (
                     <button onClick={() => toggleViewer(examKey, p.fileUrl!, `${label} — Exam paper`)} className="btn-secondary">

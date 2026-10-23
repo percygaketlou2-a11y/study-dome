@@ -26,7 +26,7 @@ router.get('/:subjectId', async (req, res) => {
         locked,
         steps: locked
           ? []
-          : t.steps.map((s) => ({ id: s.id, order: s.order, text: s.text, imageUrl: s.imageUrl })),
+          : t.steps.map((s) => ({ id: s.id, order: s.order, text: s.text, imageUrl: s.imageUrl, imageAlt: s.imageAlt })),
       };
     })
   );

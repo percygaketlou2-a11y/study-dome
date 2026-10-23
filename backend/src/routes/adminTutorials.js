@@ -109,9 +109,12 @@ router.post('/tutorials/:id/steps', uploadTutorialImage, async (req, res) => {
     return res.status(404).json({ error: 'Tutorial not found' });
   }
 
-  const { text, order } = req.body;
+  const { text, order, imageAlt } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'text is required' });
+  }
+  if (req.file && !imageAlt?.trim()) {
+    return res.status(400).json({ error: 'A short description of the image is required for screen readers' });
   }
 
   const step = await prisma.tutorialStep.create({
@@ -120,6 +123,7 @@ router.post('/tutorials/:id/steps', uploadTutorialImage, async (req, res) => {
       text,
       order: order ? Number(order) : 0,
       imageUrl: req.file ? `/uploads/tutorial-images/${req.file.filename}` : null,
+      imageAlt: req.file ? imageAlt.trim() : null,
     },
   });
 
@@ -133,14 +137,21 @@ router.put('/tutorial-steps/:id', uploadTutorialImage, async (req, res) => {
     return res.status(404).json({ error: 'Step not found' });
   }
 
-  const { text, order } = req.body;
+  const { text, order, imageAlt } = req.body;
   if (!text) {
     return res.status(400).json({ error: 'text is required' });
+  }
+  const willHaveImage = req.file || existing.imageUrl;
+  if (willHaveImage && !(imageAlt?.trim() || existing.imageAlt)) {
+    return res.status(400).json({ error: 'A short description of the image is required for screen readers' });
   }
 
   const data = { text, order: order ? Number(order) : existing.order };
   if (req.file) {
     data.imageUrl = `/uploads/tutorial-images/${req.file.filename}`;
+  }
+  if (willHaveImage) {
+    data.imageAlt = imageAlt?.trim() || existing.imageAlt;
   }
 
   const step = await prisma.tutorialStep.update({ where: { id: req.params.id }, data });

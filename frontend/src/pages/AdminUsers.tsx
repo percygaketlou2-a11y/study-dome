@@ -76,7 +76,7 @@ export function AdminUsers() {
                     {u.emailVerified ? (
                       <span className="text-emerald-600">Yes</span>
                     ) : (
-                      <span className="text-slate-400">No</span>
+                      <span className="text-slate-500">No</span>
                     )}
                   </td>
                   <td className="px-4 py-3">

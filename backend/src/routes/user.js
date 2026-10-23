@@ -1,9 +1,10 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
 const prisma = require('../db');
-const { requireAuth } = require('../middleware/auth');
+const { requireAuth, signToken } = require('../middleware/auth');
 const { computeCurrentStreak } = require('../utils/streak');
 const { generateToken } = require('../utils/tokens');
+const { hashPassword, verifyPassword } = require('../utils/passwords');
+const { isString, normalizeEmail, isValidEmail, passwordProblem, cleanText } = require('../utils/validate');
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.use(requireAuth);
 // PATCH /api/user/curriculum - onboarding: set the user's selected curriculum
 router.patch('/curriculum', async (req, res) => {
   const { curriculumId } = req.body;
-  if (!curriculumId) {
+  if (!isString(curriculumId) || !curriculumId) {
     return res.status(400).json({ error: 'curriculumId is required' });
   }
 
@@ -37,7 +38,14 @@ router.get('/dashboard', async (req, res) => {
     where: { id: req.userId },
     include: {
       selectedCurriculum: {
-        include: { subjects: { include: { _count: { select: { quizzes: true } } } } },
+        include: {
+          subjects: {
+            include: {
+              // Quizzes with no approved questions are invisible to students, so they must not count toward progress.
+              _count: { select: { quizzes: { where: { questions: { some: { reviewStatus: 'approved' } } } } } },
+            },
+          },
+        },
       },
     },
   });
@@ -111,24 +119,25 @@ router.get('/dashboard', async (req, res) => {
 
 // PATCH /api/user/profile - change display name
 router.patch('/profile', async (req, res) => {
-  const { name } = req.body;
-  if (!name || !name.trim()) {
-    return res.status(400).json({ error: 'name is required' });
+  const name = cleanText(req.body.name, 100);
+  if (!name) {
+    return res.status(400).json({ error: 'name is required (100 characters at most)' });
   }
 
-  const user = await prisma.user.update({ where: { id: req.userId }, data: { name: name.trim() } });
+  const user = await prisma.user.update({ where: { id: req.userId }, data: { name } });
   res.json({ id: user.id, name: user.name });
 });
 
 // PATCH /api/user/email - change email, requires current password, resets verification
 router.patch('/email', async (req, res) => {
-  const { newEmail, password } = req.body;
-  if (!newEmail || !password) {
-    return res.status(400).json({ error: 'newEmail and password are required' });
+  const newEmail = normalizeEmail(req.body.newEmail);
+  const { password } = req.body;
+  if (!isValidEmail(newEmail) || !isString(password) || !password) {
+    return res.status(400).json({ error: 'A valid newEmail and your password are required' });
   }
 
   const user = await prisma.user.findUnique({ where: { id: req.userId } });
-  const valid = await bcrypt.compare(password, user.passwordHash);
+  const valid = await verifyPassword(password, user.passwordHash);
   if (!valid) {
     // 403, not 401: the caller is already authenticated (valid JWT) - this is
     // a failed password *confirmation*, not a session/token failure. Using
@@ -158,24 +167,29 @@ router.patch('/email', async (req, res) => {
 // PATCH /api/user/password - change password, requires current password
 router.patch('/password', async (req, res) => {
   const { currentPassword, newPassword } = req.body;
-  if (!currentPassword || !newPassword) {
+  if (!isString(currentPassword) || !currentPassword || !isString(newPassword)) {
     return res.status(400).json({ error: 'currentPassword and newPassword are required' });
   }
-  if (newPassword.length < 6) {
-    return res.status(400).json({ error: 'Password must be at least 6 characters' });
+  const problem = passwordProblem(newPassword);
+  if (problem) {
+    return res.status(400).json({ error: problem });
   }
 
   const user = await prisma.user.findUnique({ where: { id: req.userId } });
-  const valid = await bcrypt.compare(currentPassword, user.passwordHash);
+  const valid = await verifyPassword(currentPassword, user.passwordHash);
   if (!valid) {
     // See the /email handler above for why this is 403, not 401.
     return res.status(403).json({ error: 'Current password is incorrect' });
   }
 
-  const passwordHash = await bcrypt.hash(newPassword, 10);
-  await prisma.user.update({ where: { id: user.id }, data: { passwordHash } });
+  // Every session issued before now (including a thief's) stops working; this
+  // device gets a fresh token so the person changing their password stays signed in.
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { passwordHash: await hashPassword(newPassword), passwordChangedAt: new Date() },
+  });
 
-  res.json({ updated: true });
+  res.json({ updated: true, token: signToken(user.id) });
 });
 
 module.exports = router;

@@ -18,6 +18,7 @@ interface TutorialStep {
   order: number
   text: string
   imageUrl: string | null
+  imageAlt: string | null
 }
 
 interface TutorialDetail {
@@ -57,7 +58,16 @@ function NewTutorialForm({ subjects }: { subjects: AdminSubject[] }) {
       }}
       className="space-y-3 border-b border-slate-100 p-4"
     >
-      <select required value={subjectId} onChange={(e) => setSubjectId(e.target.value)} className="field-input px-2 py-1.5">
+      <label htmlFor="new-tutorial-subject" className="sr-only">
+        Subject
+      </label>
+      <select
+        id="new-tutorial-subject"
+        required
+        value={subjectId}
+        onChange={(e) => setSubjectId(e.target.value)}
+        className="field-input px-2 py-1.5"
+      >
         <option value="">Select subject...</option>
         {subjects.map((s) => (
           <option key={s.id} value={s.id}>
@@ -65,7 +75,11 @@ function NewTutorialForm({ subjects }: { subjects: AdminSubject[] }) {
           </option>
         ))}
       </select>
+      <label htmlFor="new-tutorial-title" className="sr-only">
+        Tutorial title
+      </label>
       <input
+        id="new-tutorial-title"
         required
         type="text"
         placeholder="Tutorial title (e.g. Solving simultaneous equations)"
@@ -90,6 +104,7 @@ function AddStepForm({ tutorialId }: { tutorialId: string }) {
   const [text, setText] = useState('')
   const [order, setOrder] = useState('')
   const [image, setImage] = useState<File | null>(null)
+  const [imageAlt, setImageAlt] = useState('')
   const [formKey, setFormKey] = useState(0)
 
   const addStep = useMutation({
@@ -97,7 +112,10 @@ function AddStepForm({ tutorialId }: { tutorialId: string }) {
       const formData = new FormData()
       formData.append('text', text)
       formData.append('order', order || '0')
-      if (image) formData.append('image', image)
+      if (image) {
+        formData.append('image', image)
+        formData.append('imageAlt', imageAlt)
+      }
       return (await api.post(`/admin/tutorials/${tutorialId}/steps`, formData)).data
     },
     onSuccess: () => {
@@ -106,6 +124,7 @@ function AddStepForm({ tutorialId }: { tutorialId: string }) {
       setText('')
       setOrder('')
       setImage(null)
+      setImageAlt('')
       setFormKey((k) => k + 1)
     },
   })
@@ -120,7 +139,11 @@ function AddStepForm({ tutorialId }: { tutorialId: string }) {
       className="space-y-2 border-b border-slate-100 p-4"
     >
       <div className="grid grid-cols-4 gap-2">
+        <label htmlFor={`step-text-${formKey}`} className="sr-only">
+          Step text
+        </label>
         <textarea
+          id={`step-text-${formKey}`}
           required
           placeholder="Step text"
           value={text}
@@ -128,7 +151,11 @@ function AddStepForm({ tutorialId }: { tutorialId: string }) {
           rows={2}
           className="field-input col-span-3 px-2 py-1.5"
         />
+        <label htmlFor={`step-order-${formKey}`} className="sr-only">
+          Step order
+        </label>
         <input
+          id={`step-order-${formKey}`}
           type="number"
           placeholder="Order"
           value={order}
@@ -137,9 +164,33 @@ function AddStepForm({ tutorialId }: { tutorialId: string }) {
         />
       </div>
       <div>
-        <label className="mb-1 block text-xs font-medium text-slate-600">Image (optional)</label>
-        <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files?.[0] ?? null)} className="w-full text-xs" />
+        <label htmlFor={`step-image-${formKey}`} className="mb-1 block text-xs font-medium text-slate-600">
+          Image (optional)
+        </label>
+        <input
+          id={`step-image-${formKey}`}
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files?.[0] ?? null)}
+          className="w-full text-xs"
+        />
       </div>
+      {image && (
+        <div>
+          <label htmlFor={`step-image-alt-${formKey}`} className="mb-1 block text-xs font-medium text-slate-600">
+            Describe the image, for screen readers
+          </label>
+          <input
+            id={`step-image-alt-${formKey}`}
+            required
+            type="text"
+            placeholder="e.g. Diagram showing the equation rearranged with x isolated"
+            value={imageAlt}
+            onChange={(e) => setImageAlt(e.target.value)}
+            className="field-input px-2 py-1.5"
+          />
+        </div>
+      )}
       {addStep.isError && <p className="text-xs text-red-600">{getErrorMessage(addStep.error)}</p>}
       <button type="submit" disabled={addStep.isPending} className="btn-primary">
         {addStep.isPending ? 'Adding...' : 'Add step'}
@@ -154,6 +205,7 @@ function StepRow({ step, tutorialId }: { step: TutorialStep; tutorialId: string 
   const [text, setText] = useState(step.text)
   const [order, setOrder] = useState(String(step.order))
   const [image, setImage] = useState<File | null>(null)
+  const [imageAlt, setImageAlt] = useState(step.imageAlt ?? '')
 
   const updateStep = useMutation({
     mutationFn: async () => {
@@ -161,6 +213,7 @@ function StepRow({ step, tutorialId }: { step: TutorialStep; tutorialId: string 
       formData.append('text', text)
       formData.append('order', order)
       if (image) formData.append('image', image)
+      formData.append('imageAlt', imageAlt)
       return (await api.put(`/admin/tutorial-steps/${step.id}`, formData)).data
     },
     onSuccess: () => {
@@ -196,7 +249,31 @@ function StepRow({ step, tutorialId }: { step: TutorialStep; tutorialId: string 
           />
           <input type="number" value={order} onChange={(e) => setOrder(e.target.value)} className="field-input px-2 py-1.5" />
         </div>
-        <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files?.[0] ?? null)} className="w-full text-xs" />
+        <label htmlFor={`edit-step-image-${step.id}`} className="sr-only">
+          Replace image
+        </label>
+        <input
+          id={`edit-step-image-${step.id}`}
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files?.[0] ?? null)}
+          className="w-full text-xs"
+        />
+        {(step.imageUrl || image) && (
+          <div>
+            <label htmlFor={`edit-step-image-alt-${step.id}`} className="mb-1 block text-xs font-medium text-slate-600">
+              Describe the image, for screen readers
+            </label>
+            <input
+              id={`edit-step-image-alt-${step.id}`}
+              required
+              type="text"
+              value={imageAlt}
+              onChange={(e) => setImageAlt(e.target.value)}
+              className="field-input px-2 py-1.5"
+            />
+          </div>
+        )}
         {updateStep.isError && <p className="text-xs text-red-600">{getErrorMessage(updateStep.error)}</p>}
         <div className="flex gap-2">
           <button type="submit" disabled={updateStep.isPending} className="btn-primary">
@@ -214,10 +291,14 @@ function StepRow({ step, tutorialId }: { step: TutorialStep; tutorialId: string 
     <div className="flex items-start justify-between gap-3 border-b border-slate-100 p-3 last:border-0">
       <div className="flex gap-3">
         {step.imageUrl && (
-          <img src={step.imageUrl} alt="" className="h-14 w-14 shrink-0 rounded-lg border border-slate-200 object-cover" />
+          <img
+            src={step.imageUrl}
+            alt={step.imageAlt ?? ''}
+            className="h-14 w-14 shrink-0 rounded-lg border border-slate-200 object-cover"
+          />
         )}
         <div>
-          <div className="text-xs font-medium text-slate-400">Step {step.order}</div>
+          <div className="text-xs font-medium text-slate-500">Step {step.order}</div>
           <div className="text-sm text-slate-800">{step.text}</div>
         </div>
       </div>

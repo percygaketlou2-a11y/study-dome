@@ -1,7 +1,10 @@
 const express = require('express');
 const prisma = require('../db');
+const { requireAuth } = require('../middleware/auth');
 
 const router = express.Router();
+
+router.use(requireAuth);
 
 // GET /api/curricula - list all curricula (used during onboarding)
 router.get('/', async (req, res) => {

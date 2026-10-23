@@ -1,0 +1,441 @@
+[
+  {
+    "key": "CHEM-3.2-N01",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-01"
+    ],
+    "order": 1,
+    "heading": "What is a mole?",
+    "bodyMarkdown": "A **mole** is an amount of substance. One mole of any substance contains **6.02 × 10²³ particles**. This number is called **Avogadro's number (Nᴀ)**.\n\nThe particles depend on the substance:\n- 1 mol of **atoms** for elements like Na, Mg, C\n- 1 mol of **molecules** for substances like H₂O, CO₂, O₂\n- 1 mol of **formula units** (ions) for ionic compounds like NaCl\n\n**Exam tip:** read the question carefully. 1 mol of O₂ contains 6.02 × 10²³ *molecules* but 2 × 6.02 × 10²³ = 1.204 × 10²⁴ *atoms*.\n\n**Key formula:** number of particles = moles × 6.02 × 10²³",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "CHEM-3.2-N02",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-02"
+    ],
+    "order": 2,
+    "heading": "Relative atomic mass (Ar) and relative molecular mass (Mr)",
+    "bodyMarkdown": "**Relative atomic mass (Ar):** the average mass of the atoms of an element compared with 1/12 of the mass of one atom of carbon-12.\n\n- It is an *average* because most elements have isotopes. Chlorine is 35.5 because it is a mixture of ³⁵Cl (about 75%) and ³⁷Cl (about 25%).\n- It has **no units**, because it is a comparison.\n\n**Relative molecular mass (Mr):** the sum of the relative atomic masses of all the atoms in one molecule (or formula unit) of a substance. Also no units.\n\n**Do not confuse** Ar with mass number. Mass number counts protons + neutrons in *one particular* atom; Ar is an average across isotopes.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "CHEM-3.2-N03",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-03"
+    ],
+    "order": 3,
+    "heading": "Calculating Mr",
+    "bodyMarkdown": "Add up the Ar of every atom in the formula. Multiply when there is a subscript, and multiply *everything inside a bracket* by the number outside it.\n\nUseful Ar values: H = 1, C = 12, N = 14, O = 16, Na = 23, Mg = 24, Al = 27, S = 32, Cl = 35.5, Ca = 40, Fe = 56, Cu = 64\n\n**Worked examples**\n- CO₂ = 12 + (2 × 16) = **44**\n- H₂SO₄ = (2 × 1) + 32 + (4 × 16) = **98**\n- Ca(OH)₂ = 40 + 2 × (16 + 1) = **74**\n- Al₂(SO₄)₃ = (2 × 27) + 3 × (32 + 4 × 16) = 54 + 288 = **342**\n\n**Common mistake:** for Ca(OH)₂, students often write 40 + 16 + 1 = 57. The bracket means there are *two* OH groups.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "CHEM-3.2-N04",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "order": 4,
+    "heading": "Converting between moles, mass, gas volume and particles",
+    "bodyMarkdown": "The **molar mass** of a substance is its Ar or Mr in grams. One mole of CO₂ has a mass of 44 g.\n\n| To find | Formula |\n|---|---|\n| moles from mass | moles = mass (g) ÷ molar mass (g/mol) |\n| mass from moles | mass = moles × molar mass |\n| moles of a gas from volume | moles = volume (dm³) ÷ 24 |\n| gas volume from moles | volume (dm³) = moles × 24 |\n| particles from moles | particles = moles × 6.02 × 10²³ |\n\n**Molar gas volume:** at room temperature and pressure (r.t.p.), one mole of *any* gas occupies **24 dm³ = 24 000 cm³**. A mole of hydrogen and a mole of carbon dioxide take up the same volume even though their masses are very different.\n\n**Units trap:** if the volume is in cm³, divide by **24 000**, not 24. (1 dm³ = 1000 cm³.)\n\n**Worked example:** How many moles are in 8.0 g of methane, CH₄?\nMr = 12 + 4 = 16, so moles = 8.0 ÷ 16 = **0.5 mol**.\n\n**Worked example:** What volume does 0.25 mol of oxygen occupy at r.t.p.?\nVolume = 0.25 × 24 = **6 dm³** (6000 cm³).\n\n**Chaining steps:** to go from a mass of gas to its volume, convert mass → moles → volume. 64 g of O₂ = 64 ÷ 32 = 2 mol = 2 × 24 = 48 dm³.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "PHYS-1.2-N01",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-01",
+      "PHYS-1.2-02"
+    ],
+    "order": 1,
+    "heading": "Key definitions and simple equations",
+    "bodyMarkdown": "| Quantity | Definition | Unit | Scalar or vector? |\n|---|---|---|---|\n| Distance | total length of path travelled | m | scalar |\n| Displacement | distance moved in a stated direction from the starting point | m | vector |\n| Speed | distance travelled per unit time | m/s | scalar |\n| Velocity | speed in a stated direction (rate of change of displacement) | m/s | vector |\n| Acceleration | rate of change of velocity | m/s² | vector |\n\n**Equations**\n- average speed = total distance ÷ total time\n- acceleration a = (v − u) ÷ t, where u = initial velocity and v = final velocity\n\nA **negative acceleration** (deceleration) means the object is slowing down.\n\n**Worked example:** a car speeds up from 5 m/s to 25 m/s in 4 s.\na = (25 − 5) ÷ 4 = **5 m/s²**\n\n**Distance vs displacement:** an athlete who runs one full lap of a 400 m track has travelled 400 m, but their displacement is 0 m because they finish where they started.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "PHYS-1.2-N02",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-03",
+      "PHYS-1.2-04"
+    ],
+    "order": 2,
+    "heading": "Uniform and non-uniform motion",
+    "bodyMarkdown": "- **Uniform velocity:** equal displacements in equal times, so speed and direction both stay constant.\n- **Non-uniform velocity:** speed or direction changes. A car going round a roundabout at a steady 30 km/h has non-uniform velocity because its direction changes.\n- **Uniform acceleration:** velocity changes by equal amounts in equal times, for example a stone in free fall.\n- **Non-uniform acceleration:** the rate of change of velocity itself changes, for example a skydiver whose acceleration decreases as air resistance grows.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "PHYS-1.2-N03",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-05",
+      "PHYS-1.2-06"
+    ],
+    "order": 3,
+    "heading": "Distance–time and speed–time graphs",
+    "bodyMarkdown": "**Distance–time graphs**\n- gradient = **speed**\n- horizontal line = object is stationary\n- straight sloping line = constant speed\n- curve getting steeper = speeding up; curve getting flatter = slowing down\n\n**Speed–time graphs**\n- gradient = **acceleration**\n- area under the graph = **distance travelled**\n- horizontal line = constant speed (zero acceleration)\n- straight line sloping up = uniform acceleration; sloping down = uniform deceleration\n- curve = non-uniform acceleration\n\n**Worked example:** an object accelerates uniformly from rest to 12 m/s in 6 s.\nDistance = area of triangle = ½ × 6 × 12 = **36 m**\n\n**Exam tip:** split the area into rectangles and triangles, and calculate each separately before adding.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "PHYS-1.2-N04",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-07"
+    ],
+    "order": 4,
+    "heading": "Equations of motion (uniform acceleration only)",
+    "bodyMarkdown": "- v = u + at\n- s = ut + ½at²\n- v² = u² + 2as\n- s = ½(u + v)t\n\nwhere s = displacement, u = initial velocity, v = final velocity, a = acceleration, t = time.\n\n**Method:** list what you know (s, u, v, a, t), mark the unknown, then pick the equation that contains only those quantities.\n\n**Worked example:** a car starts from rest and accelerates at 2 m/s² for 5 s. How far does it travel?\nu = 0, a = 2, t = 5; s = ut + ½at² = 0 + ½ × 2 × 25 = **25 m**",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "PHYS-1.2-N05",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-08",
+      "PHYS-1.2-09",
+      "PHYS-1.2-10",
+      "PHYS-1.2-11"
+    ],
+    "order": 5,
+    "heading": "Free fall and g",
+    "bodyMarkdown": "**g** is the **acceleration due to gravity** (acceleration of free fall). Near the Earth's surface it is **constant, about 10 m/s²** (more precisely 9.8 m/s²). Use the value the question gives you.\n\n- Without air resistance, all objects fall with the same acceleration, whatever their mass. A hammer and a feather dropped together in a vacuum land together.\n- In air, a falling object speeds up, but air resistance increases with speed, so its acceleration gradually decreases.\n\n**Worked example:** a stone is dropped from rest. What is its speed after 3 s? (g = 10 m/s²)\nv = u + gt = 0 + 10 × 3 = **30 m/s**",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "PHYS-1.2-N06",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-11",
+      "PHYS-1.2-12",
+      "PHYS-1.2-13"
+    ],
+    "order": 6,
+    "heading": "Terminal velocity",
+    "bodyMarkdown": "**Terminal velocity** is the constant (maximum) velocity reached by a falling object when the upward resistive force (air resistance or drag) **equals** its weight, so the resultant force is zero and the acceleration is zero.\n\n**A skydiver's fall**\n1. Just after jumping: weight > air resistance, so they accelerate at close to g.\n2. As speed increases, air resistance increases, so acceleration decreases.\n3. Air resistance = weight: resultant force is zero, so they fall at terminal velocity.\n4. Parachute opens: air resistance increases suddenly and is now greater than weight, so they decelerate.\n5. Air resistance falls as they slow down until it equals the weight again, giving a new, **lower** terminal velocity for a safe landing.\n\n**Falling in a liquid:** liquids give much more resistance than air. A ball bearing dropped into oil reaches terminal velocity very quickly and then falls at a steady speed.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "BIO-1.3-N01",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-01",
+      "BIO-1.3-02",
+      "BIO-1.3-03"
+    ],
+    "order": 1,
+    "heading": "Diffusion",
+    "bodyMarkdown": "**Diffusion** is the net movement of molecules or ions from a region of **higher concentration** to a region of **lower concentration**, down a **concentration gradient**, as a result of their random movement.\n\n- It is **passive**: no energy from respiration is needed.\n- It happens in gases and liquids. Examples include the smell of food spreading through a room, oxygen moving from the alveoli into the blood, and carbon dioxide entering a leaf.\n\n**Factors that increase the rate of diffusion**\n| Factor | Effect | Why |\n|---|---|---|\n| Steeper concentration gradient | faster | bigger difference, so more net movement |\n| Higher temperature | faster | particles have more kinetic energy and move faster |\n| Smaller particles | faster | small particles move faster |\n| Larger surface area | faster | more space for particles to cross |\n| Shorter distance | faster | particles have less far to travel |\n\n**Demonstrations:** a crystal of potassium manganate(VII) in still water spreads its purple colour slowly. Cotton wool soaked in ammonia at one end of a tube and hydrochloric acid at the other forms a white ring of ammonium chloride nearer the acid end, because the smaller ammonia molecules diffuse faster.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "BIO-1.3-N02",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-04",
+      "BIO-1.3-05",
+      "BIO-1.3-06"
+    ],
+    "order": 2,
+    "heading": "Osmosis",
+    "bodyMarkdown": "**Osmosis** is the net movement of **water molecules** from a region of **higher water concentration** (a dilute solution) to a region of **lower water concentration** (a concentrated solution) through a **partially permeable membrane**.\n\n- Osmosis is a **special form of diffusion**: it involves only water, and it needs a partially permeable membrane.\n- A **partially permeable membrane** lets small molecules like water through but stops larger solute molecules like sucrose. The cell surface membrane and Visking tubing are examples.\n- **Plants:** root hair cell sap is more concentrated than the soil water, so water moves into the root hair by osmosis, down the water concentration gradient.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "BIO-1.3-N03",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-07",
+      "BIO-1.3-08"
+    ],
+    "order": 3,
+    "heading": "Effects of osmosis on plant and animal cells",
+    "bodyMarkdown": "**Plant cells**\n| Placed in | Water moves | Result |\n|---|---|---|\n| Pure water or a dilute solution | **into** the cell | vacuole swells, cell pushes against the wall and becomes **turgid**. The cell wall stops it bursting. |\n| A solution of equal concentration | no net movement | no change |\n| A concentrated solution | **out of** the cell | cell becomes **flaccid**; if more water is lost, the membrane pulls away from the cell wall (**plasmolysis**) |\n\n**Wilting** happens when plant cells lose turgor: they are flaccid and no longer support the leaves and stem.\n\n**Animal cells (e.g. red blood cells)** have **no cell wall**:\n- In pure water, water enters, the cell swells and **bursts**.\n- In a concentrated solution, water leaves and the cell **shrinks** (becomes crenated).\n\nThis is why fluids given to patients through a drip must have the same concentration as blood plasma.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "BIO-1.3-N04",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-09"
+    ],
+    "order": 4,
+    "heading": "Investigating osmosis: the potato strip experiment",
+    "bodyMarkdown": "1. Cut equal-sized potato strips and weigh each one (record the initial mass).\n2. Place each strip in a different concentration of sucrose solution (e.g. 0.0, 0.2, 0.4, 0.6 mol/dm³) for about 30 minutes.\n3. Blot each strip dry and reweigh it. Calculate the **percentage change in mass** = (change in mass ÷ initial mass) × 100.\n4. Plot % change in mass against concentration. Where the line crosses zero, the solution has the **same concentration as the potato cell sap**.\n\n**Interpreting results:** a gain in mass means water entered by osmosis (the solution was more dilute than the cell sap). A loss in mass means water left (the solution was more concentrated).\n\n**Controls:** use the same potato, the same strip size, the same time and the same temperature. Blot each strip in the same way.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "BIO-1.3-N05",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-10",
+      "BIO-1.3-11",
+      "BIO-1.3-12"
+    ],
+    "order": 5,
+    "heading": "Active and passive transport",
+    "bodyMarkdown": "**Active transport** is the movement of substances **against** their concentration gradient (from low to high concentration), across a membrane, using **energy from respiration** and carrier proteins.\n- Example: root hair cells absorb mineral ions (e.g. nitrate) from soil, where ions are *less* concentrated than inside the cell.\n- Example: glucose absorption from the small intestine.\n- Cells that carry out lots of active transport have many **mitochondria**. A respiratory poison (e.g. cyanide) stops active transport.\n\n**Passive transport** moves substances **down** their concentration gradient without using energy from respiration. Diffusion and osmosis are passive.\n\n| | Diffusion | Osmosis | Active transport |\n|---|---|---|---|\n| Energy from respiration? | no | no | **yes** |\n| Direction | down the gradient | down the water gradient | **against** the gradient |\n| Membrane needed? | no | partially permeable | yes (carrier proteins) |\n| What moves | any particles | water only | ions and molecules (e.g. minerals, glucose) |",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DEV-1.1-N01",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-01"
+    ],
+    "order": 1,
+    "heading": "The concept of development",
+    "bodyMarkdown": "**Development** is a process of positive change that improves people's quality of life. It has several dimensions:\n- **Economic:** rising incomes and output, more jobs, less poverty.\n- **Social:** better health, education, housing, water and sanitation.\n- **Political:** freedom, democracy, human rights, good governance, participation in decisions.\n- **Sustainable:** improvements that last and do not destroy the environment for future generations.\n\n**Economic growth is not the same as development.** Growth is an increase in output (GDP). Development asks whether that growth improves people's lives *and* is shared fairly. A country can grow quickly while many people stay poor.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DEV-1.1-N02",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-02"
+    ],
+    "order": 2,
+    "heading": "Ways of dividing the world",
+    "bodyMarkdown": "| Term | Meaning |\n|---|---|\n| **First World** | industrialised capitalist countries during the Cold War (e.g. USA, Western Europe, Japan) |\n| **Second World** | the former communist bloc (USSR and Eastern Europe) |\n| **Third World** | developing countries of Africa, Asia and Latin America, many of them non-aligned |\n| **North / South** | the Brandt Line (Brandt Report, 1980) divided the richer \"North\" from the poorer \"South\". It is economic, not purely geographic: Australia and New Zealand are counted in the North |\n| **Newly Industrialised Countries (NICs)** | countries that have industrialised rapidly since the 1960s, e.g. South Korea, Singapore, Taiwan, Hong Kong (the \"Asian Tigers\"), also Brazil and Mexico |\n| **Least Developed Countries (LDCs)** | a UN category of countries with very low income, weak health and education, and economies vulnerable to shocks (e.g. Malawi, Mozambique). **Botswana graduated from LDC status in 1994.** |\n| **Developed / developing countries** | general terms for high-income vs lower-income countries |\n\n**Exam tip:** \"First/Second/Third World\" is now considered dated, but you must still be able to explain it.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DEV-1.1-N03",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-03"
+    ],
+    "order": 3,
+    "heading": "Why development levels differ",
+    "bodyMarkdown": "- **Colonial history:** colonies were often set up to export raw materials, with little industry or education provided.\n- **Natural resources:** minerals can fund development (diamonds in Botswana), but can also cause conflict or overdependence.\n- **Physical factors:** climate, drought, soils, disease, and being landlocked (higher transport costs).\n- **Governance:** stable, accountable government and low corruption attract investment.\n- **Human capital:** education and health levels affect productivity.\n- **Trade and debt:** dependence on a few primary exports with falling prices; debt repayments take money away from services.\n- **Conflict:** war destroys infrastructure and drives away investment.\n- **Population growth:** rapid growth can outpace provision of services.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DEV-1.1-N04",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-04",
+      "DEV-1.1-05"
+    ],
+    "order": 4,
+    "heading": "Measuring development: indicators",
+    "bodyMarkdown": "**Economic indicators**\n- **Gross Domestic Product (GDP):** total value of goods and services produced *within a country's borders* in a year.\n- **Gross National Product (GNP), or GNI:** GDP plus net income from abroad, i.e. the value produced by a country's citizens and companies *wherever they are*.\n- **Per capita** figures divide by the population, which allows fairer comparisons between countries.\n\n**Social indicators:** life expectancy, infant mortality rate, adult literacy rate, school enrolment, doctors per 1000 people, access to clean water, energy consumption per person.\n\n**Composite indicator:** the **Human Development Index (HDI)**, published by the UNDP, combines life expectancy, education and income per person into a score from 0 to 1.\n\n**Limitations of GDP/GNP per capita**\n- It is an average, so it hides **inequality**: a few very rich people raise the average.\n- It ignores the **informal sector** and subsistence production.\n- It says nothing about health, education or freedom.\n- Exchange rates and differences in cost of living distort comparisons.\n\n**Why political development is hard to measure**\n- Freedom, democracy and human rights are **qualitative** and partly subjective.\n- Holding elections does not guarantee they are free and fair.\n- Governments may hide or distort information, and people may fear speaking openly.\n- Measures depend on the values of whoever designs them.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DEV-1.1-N05",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-06"
+    ],
+    "order": 5,
+    "heading": "Characteristics of developed and developing countries",
+    "bodyMarkdown": "| Developed countries | Developing countries |\n|---|---|\n| high income per capita | low or middle income per capita |\n| high life expectancy, low infant mortality | lower life expectancy, higher infant mortality |\n| high literacy | lower literacy |\n| most workers in the secondary and tertiary sectors | many workers in the primary sector (farming) |\n| low birth rate, slow population growth | high birth rate, fast population growth |\n| good infrastructure and services | gaps in infrastructure, water, sanitation and electricity |\n| varied exports, mostly manufactured goods and services | dependence on a few primary exports |",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DEV-1.1-N06",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-07"
+    ],
+    "order": 6,
+    "heading": "Theories of development",
+    "bodyMarkdown": "**Modernisation theory (W.W. Rostow, 1960)**\n- Countries develop by passing through 5 stages: traditional society → preconditions for take-off → take-off → drive to maturity → age of high mass consumption.\n- It emphasises investment, industrialisation, urbanisation and adopting \"modern\" (Western) values and technology.\n- *Criticisms:* it is Eurocentric, assumes one path suits every country, ignores the effects of colonialism and unfair trade, and can increase inequality.\n\n**Dependency theory (e.g. Andre Gunder Frank)**\n- The world is divided into a rich **core** and a poor **periphery**. The periphery supplies cheap raw materials and labour; the core profits from manufacturing.\n- Underdevelopment is *caused* by this exploitation, through colonialism and continuing through trade, debt and multinational companies.\n- *Solution suggested:* reduce dependence, e.g. import substitution and regional co-operation.\n- *Criticisms:* some former peripheral countries (the Asian Tigers) developed by joining world trade.\n\n**Sustainable development (Brundtland Report, 1987)**\n- \"Development that meets the needs of the present without compromising the ability of future generations to meet their own needs.\"\n- It balances economic, social and environmental goals, e.g. managing water, rangelands and wildlife carefully, and diversifying away from diamonds before they run out.\n\n**Alternative strategies (bottom-up, people-centred)**\n- Basic needs (food, water, shelter, health, education), community participation, small-scale projects, appropriate technology, empowerment of women and the poor.\n- *Strength:* local people own and maintain the projects. *Weakness:* small scale and slow to make national impact.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DEV-1.1-N07",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-08"
+    ],
+    "order": 7,
+    "heading": "Evaluating development projects in your community",
+    "bodyMarkdown": "When you evaluate a project (e.g. a borehole, a backyard garden, a government scheme such as Ipelegeng, ISPAAD or LIMID), use this structure:\n1. **Aim:** what problem was the project meant to solve?\n2. **Who benefits?** Who is left out?\n3. **Successes:** use evidence such as jobs created, income, food produced, services provided.\n4. **Challenges:** e.g. poor maintenance, lack of skills, corruption, drought, dependence on government funds.\n5. **Sustainability:** will it continue when funding stops? Does it harm the environment?\n6. **Judgement and recommendations:** has it brought development? How could it be improved?\n\n**Exam tip:** \"evaluate\" means giving *both* strengths and weaknesses *and* a reasoned judgement.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "RE-4.1-N01",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-01"
+    ],
+    "order": 1,
+    "heading": "Christian teachings about love",
+    "bodyMarkdown": "**Key teachings (with references)**\n- **God is love** (1 John 4:8). Christians believe love comes from God, and they love because God first loved them (1 John 4:19).\n- **God's love for the world:** God gave his only Son so that whoever believes in him should not perish but have eternal life (John 3:16).\n- **The Great Commandment** (Matthew 22:37–39): love God with all your heart, soul and mind, and love your neighbour as yourself.\n- **The New Commandment** (John 13:34–35): Jesus told his disciples to love one another *as he had loved them*. This love would show the world they were his followers.\n- **Love your enemies** (Matthew 5:43–44): love your enemies and pray for those who persecute you.\n- **The qualities of love** (1 Corinthians 13:4–7): love is patient and kind. It is not jealous, boastful, proud or rude. It does not keep a record of wrongs. It always protects, trusts, hopes and perseveres. Of faith, hope and love, **the greatest is love** (1 Corinthians 13:13).\n- **Who is my neighbour?** The Parable of the Good Samaritan (Luke 10:25–37) teaches that your neighbour is *anyone* in need, even someone from a group you dislike.\n\n**Types of love often used in Christian teaching (Greek words)**\n| Word | Meaning |\n|---|---|\n| **Agape** | unconditional, self-giving love, like God's love. This is the love Christians are called to show everyone. |\n| **Philia** | friendship and brotherly love |\n| **Storge** | natural affection within the family |\n| **Eros** | romantic love between partners |",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "RE-4.1-N02",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-02"
+    ],
+    "order": 2,
+    "heading": "How Jesus demonstrated love through his teachings and life",
+    "bodyMarkdown": "**Through his teachings**\n- The Good Samaritan (Luke 10:25–37): love crosses social and ethnic boundaries.\n- The Prodigal (Lost) Son (Luke 15:11–32): the father's forgiving love shows God's love for sinners who repent.\n- The Sermon on the Mount (Matthew 5): love your enemies and turn the other cheek.\n\n**Through his actions**\n- **Compassion for the sick:** he touched and healed a man with leprosy, whom society rejected (Mark 1:40–42).\n- **Feeding the hungry:** he had compassion on the crowd and fed the five thousand (Matthew 14:13–21).\n- **Accepting outcasts:** he ate with Zacchaeus the tax collector (Luke 19:1–10) and forgave the woman caught in adultery instead of condemning her (John 8:1–11).\n- **Welcoming children:** \"Let the children come to me\" (Mark 10:13–16).\n- **Humble service:** he washed his disciples' feet (John 13:1–17).\n- **Forgiveness:** on the cross he prayed, \"Father, forgive them, for they do not know what they are doing\" (Luke 23:34).\n- **Self-sacrifice:** \"Greater love has no one than this: to lay down one's life for one's friends\" (John 15:13). Christians see Jesus' death on the cross as the greatest act of love (Romans 5:8).",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "RE-4.1-N03",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-03"
+    ],
+    "order": 3,
+    "heading": "How love is expressed in modern society (with Botswana examples)",
+    "bodyMarkdown": "- **Caring for the sick and vulnerable:** church home-based care for people living with HIV/AIDS, visiting hospitals, supporting orphans and the elderly.\n- **Charity and feeding programmes:** soup kitchens, donating food and clothes, helping after floods or drought.\n- **Forgiveness and reconciliation:** settling family disputes, church mediation, refusing revenge.\n- **Family and marriage:** faithful, respectful marriages, and parents caring for children.\n- **Botho:** respect, kindness and humanity towards others, which overlaps strongly with Christian love.\n- **Standing against injustice:** churches speaking out against gender-based violence, abuse and corruption.\n- **Everyday acts:** sharing, volunteering, donating blood, helping neighbours.\n\n**Challenges to love today:** selfishness and materialism, violence and gender-based violence, tribalism and xenophobia, broken families, and the busyness of modern life.\n\n**Exam tip:** in \"discuss\" or \"assess\" questions, give examples of love being practised *and* examples of where society falls short, then reach a conclusion.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DT-5.3-N01",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-01",
+      "DT-5.3-02",
+      "DT-5.3-11"
+    ],
+    "order": 1,
+    "heading": "What a mechanism does: input, output and types of motion",
+    "bodyMarkdown": "A **mechanism** changes one kind of **input motion and force** into a different **output motion and force**. Every mechanism can be described as **input → process → output**.\n\n**Four types of motion**\n| Motion | Description | Example |\n|---|---|---|\n| **Rotary** | turning in a circle | wheel, drill chuck |\n| **Linear** | moving in a straight line, one direction | rack on a rack-and-pinion |\n| **Reciprocating** | moving backwards and forwards in a straight line | sewing-machine needle, piston |\n| **Oscillating** | swinging backwards and forwards in an arc | pendulum, windscreen wiper |\n\n**Common components:** levers, linkages, gears, pulleys and belts, chains and sprockets, cams and followers, cranks, sliders, shafts, couplings and bearings.\n\n**Cams, cranks and followers**\n- A **cam** rotates, and the **follower** resting on it rises and falls: **rotary → reciprocating**. Cam shapes include the pear-shaped cam, the circular eccentric cam and the snail (drop) cam. Followers can be knife-edge, roller or flat.\n- A **crank and slider** converts **rotary ↔ reciprocating**, as in an engine piston or a pump.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DT-5.3-N02",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-03",
+      "DT-5.3-04"
+    ],
+    "order": 2,
+    "heading": "Levers",
+    "bodyMarkdown": "Every lever has a **fulcrum** (pivot), a **load** (the force to be overcome) and an **effort** (the force applied).\n\n| Class | Arrangement | Examples |\n|---|---|---|\n| **1st class** | fulcrum **between** effort and load | seesaw, crowbar, scissors, pliers |\n| **2nd class** | load **between** fulcrum and effort | wheelbarrow, nutcracker, bottle opener |\n| **3rd class** | effort **between** fulcrum and load | tweezers, fishing rod, broom, human forearm |\n\n**Memory aid (FLE):** the item in the middle tells you the class: **F**ulcrum = 1st, **L**oad = 2nd, **E**ffort = 3rd.\n\n**Principle of moments (lever in balance)**\neffort × distance of effort from fulcrum = load × distance of load from fulcrum\n\n**Worked example:** a crowbar has a 300 N load 0.2 m from the fulcrum. The effort is applied 1.2 m from the fulcrum.\nEffort × 1.2 = 300 × 0.2, so effort = 60 ÷ 1.2 = **50 N**",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DT-5.3-N03",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-08",
+      "DT-5.3-09"
+    ],
+    "order": 3,
+    "heading": "Mechanical advantage, velocity ratio and efficiency",
+    "bodyMarkdown": "- **Mechanical advantage (MA)** = load ÷ effort (no units). An MA greater than 1 means the mechanism is a **force multiplier**.\n- **Velocity ratio (VR)** = distance moved by effort ÷ distance moved by load (no units).\n- **Efficiency** = (MA ÷ VR) × 100%\n\n**Worked example:** a pulley system lifts a 400 N load with an effort of 125 N. The effort moves 4 m while the load rises 1 m.\nMA = 400 ÷ 125 = **3.2**; VR = 4 ÷ 1 = **4**; efficiency = 3.2 ÷ 4 × 100 = **80%**\n\n**Friction** wastes energy as heat and noise, so real efficiency is always **less than 100%**. It also causes wear. Reduce it with lubrication, bearings and smooth surfaces. Friction is sometimes useful, for example in brakes and belt grip.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DT-5.3-N04",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-05",
+      "DT-5.3-10",
+      "DT-5.3-12"
+    ],
+    "order": 4,
+    "heading": "Gears, pulleys and speed calculations",
+    "bodyMarkdown": "**Types of gear**\n| Gear | Use |\n|---|---|\n| **Spur gears** | transmit rotation between parallel shafts. Meshing spur gears turn in **opposite** directions. |\n| **Idler gear** | placed between driver and driven so they turn in the **same** direction. It does **not** change the gear ratio. |\n| **Bevel gears** | change the direction of rotation through **90°**, e.g. a hand drill |\n| **Helical gears** | angled teeth, quieter and smoother than spur gears, e.g. car gearboxes |\n| **Worm and wheel** | very large speed reduction and a right-angle drive. The wheel cannot drive the worm, so it locks in place (e.g. guitar tuning pegs, gate openers). |\n| **Rack and pinion** | rotary ↔ linear motion, e.g. pillar-drill feed, car steering |\n\n**Gear ratio** = number of teeth on the driven gear ÷ number of teeth on the driver gear\n\n**Output speed** = input speed × (driver teeth ÷ driven teeth) = input speed ÷ gear ratio\n\n**Worked example:** a 20-tooth driver turning at 300 rpm meshes with a 60-tooth driven gear.\nGear ratio = 60 ÷ 20 = **3:1**; output speed = 300 ÷ 3 = **100 rpm**\n\n**Worm and wheel:** for a single-start worm, the ratio = number of teeth on the wheel. A 40-tooth wheel gives 40:1, so a worm at 800 rpm turns the wheel at **20 rpm**.\n\n**Pulleys:** speed ratio = driven pulley diameter ÷ driver pulley diameter.\nA 50 mm driver at 1200 rpm with a 150 mm driven pulley gives 1200 × 50 ÷ 150 = **400 rpm**.\n\n**Rule:** a small driver turning a large driven gear or pulley makes the output **slower but with more turning force (torque)**.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DT-5.3-N05",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-13"
+    ],
+    "order": 5,
+    "heading": "Belts and pulleys vs chain and sprocket",
+    "bodyMarkdown": "| | Belt and pulley | Chain and sprocket |\n|---|---|---|\n| Slip | can slip, which protects the machine if it jams | **no slip**, a positive drive |\n| Power | lower | can transmit greater forces |\n| Noise | quiet | noisier |\n| Maintenance | little; adjust belt tension | needs **lubrication** and cleaning; chain stretches |\n| Cost | cheaper | more expensive |\n| Example | pillar drill, washing machine | bicycle, motorbike |",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DT-5.3-N06",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-06",
+      "DT-5.3-07"
+    ],
+    "order": 6,
+    "heading": "Linkages and couplings",
+    "bodyMarkdown": "**Linkages** are levers joined together to change the direction, size or type of motion.\n- **Reverse-motion linkage:** the output moves in the opposite direction to the input. It uses a fixed pivot in the middle.\n- **Push–pull (parallel-motion) linkage:** the output moves in the same direction as the input, as in a toolbox tray.\n- **Bell crank:** changes the direction of motion through 90°, e.g. a bicycle brake.\n- **Crank and slider:** rotary ↔ reciprocating.\n- **Treadle:** reciprocating or oscillating foot motion → rotary, e.g. an old sewing machine.\n- **Toggle clamp:** locks firmly in position, e.g. workholding clamps.\n\n**Couplings** join two shafts so that power passes from one to the other. **Rigid couplings** are used when the shafts are exactly in line; **flexible couplings** allow slight misalignment and absorb vibration.",
+    "status": "draft",
+    "reviewedBy": null
+  },
+  {
+    "key": "DT-5.3-N07",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-14"
+    ],
+    "order": 7,
+    "heading": "Choosing a mechanism for a design problem",
+    "bodyMarkdown": "Ask four questions:\n1. What is the **input motion**? (e.g. a rotating motor)\n2. What **output motion** do I need? (e.g. up-and-down)\n3. Do I need to change **speed, force or direction**?\n4. What are the limits on **cost, size, noise, maintenance and safety**?\n\n**Example:** a model gate opened by a small motor needs a large speed reduction and must stay shut when the power is off, so a **worm and wheel** is a good choice.\n\n**Exam tip:** in Section C, justify your choice in terms of motion *and* at least one practical factor (cost, safety, maintenance).",
+    "status": "draft",
+    "reviewedBy": null
+  }
+]

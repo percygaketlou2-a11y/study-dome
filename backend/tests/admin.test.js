@@ -10,7 +10,7 @@ async function getAdminToken() {
 
   const registered = await request(app)
     .post('/api/auth/register')
-    .send({ name: 'Admin', email: process.env.ADMIN_EMAIL, password: 'password123' });
+    .send({ name: 'Admin', email: process.env.ADMIN_EMAIL, password: 'password123', acceptedTerms: true });
   return registered.body.token;
 }
 

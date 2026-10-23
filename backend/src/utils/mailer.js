@@ -54,4 +54,21 @@ async function sendPasswordResetEmail(to, token) {
   });
 }
 
-module.exports = { isEmailConfigured, sendVerificationEmail, sendPasswordResetEmail };
+// Escapes user-supplied text before it goes into an HTML email body, so a
+// message can't inject markup or break the layout in the admin's inbox.
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+async function sendContactNotification({ name, email, message }) {
+  if (!process.env.ADMIN_EMAIL) return;
+  await sendMail({
+    to: process.env.ADMIN_EMAIL,
+    subject: `Study Dome contact form: ${escapeHtml(name)}`,
+    html: `<p>New contact message from Study Dome.</p>
+<p><strong>Name:</strong> ${escapeHtml(name)}<br><strong>Email:</strong> ${escapeHtml(email)}</p>
+<p>${escapeHtml(message)}</p>`,
+  });
+}
+
+module.exports = { isEmailConfigured, sendVerificationEmail, sendPasswordResetEmail, sendContactNotification };

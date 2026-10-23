@@ -33,8 +33,11 @@ export function ForgotPassword() {
       {!message ? (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="field-label">Email</label>
+            <label htmlFor="forgot-email" className="field-label">
+              Email
+            </label>
             <input
+              id="forgot-email"
               type="email"
               required
               value={email}

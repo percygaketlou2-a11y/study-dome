@@ -1,0 +1,4413 @@
+[
+  {
+    "key": "CHEM-3.2-Q01",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-01"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "How many particles are there in one mole of a substance?",
+    "options": [
+      {
+        "key": "A",
+        "text": "6.02 × 10⁻²³"
+      },
+      {
+        "key": "B",
+        "text": "6.02 × 10²³"
+      },
+      {
+        "key": "C",
+        "text": "3.01 × 10²³"
+      },
+      {
+        "key": "D",
+        "text": "12"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "One mole contains Avogadro's number of particles, 6.02 × 10²³. The value 12 comes from carbon-12, which defines the scale but is not the number of particles.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q02",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "What is the volume of one mole of any gas at room temperature and pressure?",
+    "options": [
+      {
+        "key": "A",
+        "text": "24 cm³"
+      },
+      {
+        "key": "B",
+        "text": "2.4 dm³"
+      },
+      {
+        "key": "C",
+        "text": "22.4 cm³"
+      },
+      {
+        "key": "D",
+        "text": "24 dm³"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "One mole of any gas occupies 24 dm³ (24 000 cm³) at r.t.p. Note the unit: 24 cm³ is a thousand times too small.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q03",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-02"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which statement defines the relative atomic mass of an element?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The average mass of its atoms compared with 1/12 of the mass of a carbon-12 atom"
+      },
+      {
+        "key": "B",
+        "text": "The number of protons in one atom of the element"
+      },
+      {
+        "key": "C",
+        "text": "The total number of protons and neutrons in one atom"
+      },
+      {
+        "key": "D",
+        "text": "The mass in grams of one atom of the element"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Ar is an average mass relative to 1/12 of a carbon-12 atom. Protons + neutrons is the mass number of a single atom, not Ar.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q04",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-02"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "The relative atomic mass of chlorine is 35.5. Why is it not a whole number?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Chlorine atoms can gain an electron"
+      },
+      {
+        "key": "B",
+        "text": "Chlorine exists as diatomic molecules"
+      },
+      {
+        "key": "C",
+        "text": "Chlorine is a mixture of isotopes with different masses"
+      },
+      {
+        "key": "D",
+        "text": "Neutrons have a mass of 0.5"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Ar is an average over the isotopes ³⁵Cl and ³⁷Cl, weighted by how common each is, which gives 35.5.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q05",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-03"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "What is the relative molecular mass (Mr) of sulphuric acid, H₂SO₄? (H = 1, O = 16, S = 32)",
+    "options": [
+      {
+        "key": "A",
+        "text": "98"
+      },
+      {
+        "key": "B",
+        "text": "49"
+      },
+      {
+        "key": "C",
+        "text": "97"
+      },
+      {
+        "key": "D",
+        "text": "194"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "(2 × 1) + 32 + (4 × 16) = 2 + 32 + 64 = 98.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q06",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-03"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "What is the Mr of calcium carbonate, CaCO₃? (C = 12, O = 16, Ca = 40)",
+    "options": [
+      {
+        "key": "A",
+        "text": "68"
+      },
+      {
+        "key": "B",
+        "text": "84"
+      },
+      {
+        "key": "C",
+        "text": "56"
+      },
+      {
+        "key": "D",
+        "text": "100"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "40 + 12 + (3 × 16) = 100. The answer 68 comes from forgetting to multiply oxygen by 3.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q07",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-03"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "What is the Mr of calcium hydroxide, Ca(OH)₂? (H = 1, O = 16, Ca = 40)",
+    "options": [
+      {
+        "key": "A",
+        "text": "57"
+      },
+      {
+        "key": "B",
+        "text": "58"
+      },
+      {
+        "key": "C",
+        "text": "114"
+      },
+      {
+        "key": "D",
+        "text": "74"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "40 + 2 × (16 + 1) = 40 + 34 = 74. Everything inside the bracket is multiplied by 2; 57 comes from ignoring the bracket.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q08",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "How many moles are in 8.0 g of methane, CH₄? (H = 1, C = 12)",
+    "options": [
+      {
+        "key": "A",
+        "text": "2.0"
+      },
+      {
+        "key": "B",
+        "text": "0.25"
+      },
+      {
+        "key": "C",
+        "text": "128"
+      },
+      {
+        "key": "D",
+        "text": "0.5"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Mr of CH₄ = 12 + 4 = 16, so moles = 8.0 ÷ 16 = 0.5 mol.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q09",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "What is the mass of 0.25 mol of sodium hydroxide, NaOH? (H = 1, O = 16, Na = 23)",
+    "options": [
+      {
+        "key": "A",
+        "text": "160 g"
+      },
+      {
+        "key": "B",
+        "text": "40 g"
+      },
+      {
+        "key": "C",
+        "text": "10 g"
+      },
+      {
+        "key": "D",
+        "text": "0.00625 g"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Mr of NaOH = 23 + 16 + 1 = 40, so mass = 0.25 × 40 = 10 g.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q10",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "What volume does 0.5 mol of carbon dioxide occupy at r.t.p.?",
+    "options": [
+      {
+        "key": "A",
+        "text": "48 dm³"
+      },
+      {
+        "key": "B",
+        "text": "22 dm³"
+      },
+      {
+        "key": "C",
+        "text": "12 dm³"
+      },
+      {
+        "key": "D",
+        "text": "0.5 dm³"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Volume = moles × 24 = 0.5 × 24 = 12 dm³. The identity of the gas does not matter.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q11",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "How many moles of gas are in 600 cm³ at r.t.p.?",
+    "options": [
+      {
+        "key": "A",
+        "text": "25 mol"
+      },
+      {
+        "key": "B",
+        "text": "0.025 mol"
+      },
+      {
+        "key": "C",
+        "text": "0.25 mol"
+      },
+      {
+        "key": "D",
+        "text": "14 400 mol"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "The volume is in cm³, so divide by 24 000: 600 ÷ 24 000 = 0.025 mol. Dividing by 24 gives the wrong answer of 25.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q12",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-01"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "How many water molecules are in 2 mol of water?",
+    "options": [
+      {
+        "key": "A",
+        "text": "3.01 × 10²³"
+      },
+      {
+        "key": "B",
+        "text": "1.204 × 10²⁴"
+      },
+      {
+        "key": "C",
+        "text": "6.02 × 10²³"
+      },
+      {
+        "key": "D",
+        "text": "1.806 × 10²⁴"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "Number of molecules = 2 × 6.02 × 10²³ = 1.204 × 10²⁴.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q13",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-01"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Which sample contains the same number of molecules as 2 g of hydrogen, H₂? (H = 1, N = 14, O = 16)",
+    "options": [
+      {
+        "key": "A",
+        "text": "16 g of oxygen, O₂"
+      },
+      {
+        "key": "B",
+        "text": "32 g of oxygen, O₂"
+      },
+      {
+        "key": "C",
+        "text": "2 g of oxygen, O₂"
+      },
+      {
+        "key": "D",
+        "text": "14 g of nitrogen, N₂"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "2 g of H₂ is 1 mol. 32 g of O₂ is also 1 mol (Mr = 32), so it contains the same number of molecules. 16 g of O₂ and 14 g of N₂ are each 0.5 mol.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q14",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-01"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "One mole of which substance contains the greatest number of atoms?",
+    "options": [
+      {
+        "key": "A",
+        "text": "CO₂"
+      },
+      {
+        "key": "B",
+        "text": "NH₃"
+      },
+      {
+        "key": "C",
+        "text": "CH₄"
+      },
+      {
+        "key": "D",
+        "text": "H₂O"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Each CH₄ molecule has 5 atoms; NH₃ has 4; CO₂ and H₂O have 3. The same number of molecules means CH₄ has the most atoms.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q15",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "What is the mass of 48 dm³ of oxygen gas, O₂, at r.t.p.? (O = 16)",
+    "options": [
+      {
+        "key": "A",
+        "text": "64 g"
+      },
+      {
+        "key": "B",
+        "text": "32 g"
+      },
+      {
+        "key": "C",
+        "text": "2 g"
+      },
+      {
+        "key": "D",
+        "text": "1536 g"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Moles = 48 ÷ 24 = 2 mol. Mass = 2 × 32 = 64 g.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q16",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "At r.t.p., 1 mol of hydrogen and 1 mol of carbon dioxide are compared. Which statement is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They have different masses but the same volume"
+      },
+      {
+        "key": "B",
+        "text": "They have the same mass and the same volume"
+      },
+      {
+        "key": "C",
+        "text": "They have different masses and different volumes"
+      },
+      {
+        "key": "D",
+        "text": "They have the same mass but different volumes"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "One mole of any gas occupies 24 dm³ at r.t.p., but their molar masses differ (H₂ = 2 g, CO₂ = 44 g).",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q17",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "How many moles of atoms are in 4.6 g of sodium? (Na = 23)",
+    "options": [
+      {
+        "key": "A",
+        "text": "5"
+      },
+      {
+        "key": "B",
+        "text": "2"
+      },
+      {
+        "key": "C",
+        "text": "106"
+      },
+      {
+        "key": "D",
+        "text": "0.2"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Moles = 4.6 ÷ 23 = 0.2 mol.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q18",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-03"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "What is the Mr of aluminium sulphate, Al₂(SO₄)₃? (O = 16, Al = 27, S = 32)",
+    "options": [
+      {
+        "key": "A",
+        "text": "342"
+      },
+      {
+        "key": "B",
+        "text": "150"
+      },
+      {
+        "key": "C",
+        "text": "123"
+      },
+      {
+        "key": "D",
+        "text": "278"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "(2 × 27) + 3 × (32 + 64) = 54 + 288 = 342.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q19",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "A sample of a gas has a mass of 11 g and a volume of 6 dm³ at r.t.p. Which gas could it be? (C = 12, N = 14, O = 16, S = 32)",
+    "options": [
+      {
+        "key": "A",
+        "text": "Oxygen, O₂"
+      },
+      {
+        "key": "B",
+        "text": "Nitrogen, N₂"
+      },
+      {
+        "key": "C",
+        "text": "Carbon dioxide, CO₂"
+      },
+      {
+        "key": "D",
+        "text": "Sulphur dioxide, SO₂"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Moles = 6 ÷ 24 = 0.25 mol. Molar mass = 11 ÷ 0.25 = 44 g/mol, which matches CO₂ (12 + 32 = 44).",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-Q20",
+    "type": "mcq",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Which of the following has a mass of 16 g? (C = 12, H = 1, O = 16)",
+    "options": [
+      {
+        "key": "A",
+        "text": "1 mol of oxygen molecules, O₂"
+      },
+      {
+        "key": "B",
+        "text": "0.5 mol of oxygen molecules, O₂"
+      },
+      {
+        "key": "C",
+        "text": "0.5 mol of oxygen atoms, O"
+      },
+      {
+        "key": "D",
+        "text": "2 mol of methane, CH₄"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "0.5 mol × 32 g/mol = 16 g. 1 mol of O₂ = 32 g; 0.5 mol of O atoms = 8 g; 2 mol of CH₄ = 32 g.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-S01",
+    "type": "structured",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-01",
+      "CHEM-3.2-03",
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO1/AO2",
+    "paperStyle": "Paper 2 (theory)",
+    "totalMarks": 7,
+    "stem": "Magnesium nitrate has the formula Mg(NO₃)₂. (N = 14, O = 16, Mg = 24)",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "Define one mole of a substance.",
+        "marks": 1,
+        "markScheme": "The amount of substance containing 6.02 × 10²³ particles (atoms, molecules or ions) [1]. Accept 'Avogadro's number of particles'."
+      },
+      {
+        "label": "b",
+        "prompt": "Calculate the relative formula mass (Mr) of magnesium nitrate.",
+        "marks": 2,
+        "markScheme": "24 + 2 × (14 + 3 × 16) [1] = 24 + 124 = 148 [1]."
+      },
+      {
+        "label": "c",
+        "prompt": "Calculate the number of moles in 37 g of magnesium nitrate.",
+        "marks": 2,
+        "markScheme": "moles = 37 ÷ 148 [1] = 0.25 mol [1]. Allow error carried forward from (b)."
+      },
+      {
+        "label": "d",
+        "prompt": "Calculate the number of nitrate ions in this 37 g sample.",
+        "marks": 2,
+        "markScheme": "Moles of NO₃⁻ = 0.25 × 2 = 0.5 mol [1]; number = 0.5 × 6.02 × 10²³ = 3.01 × 10²³ [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-S02",
+    "type": "structured",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-04"
+    ],
+    "assessmentObjective": "AO2",
+    "paperStyle": "Paper 2 (theory)",
+    "totalMarks": 5,
+    "stem": "A gas syringe collects 360 cm³ of ammonia gas, NH₃, at room temperature and pressure. (H = 1, N = 14; one mole of gas occupies 24 dm³ at r.t.p.)",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "Calculate the number of moles of ammonia collected.",
+        "marks": 2,
+        "markScheme": "360 ÷ 24 000 (or 0.360 ÷ 24) [1] = 0.015 mol [1]."
+      },
+      {
+        "label": "b",
+        "prompt": "Calculate the mass of ammonia collected.",
+        "marks": 2,
+        "markScheme": "Mr = 14 + 3 = 17 [1]; mass = 0.015 × 17 = 0.255 g [1]. Allow ecf from (a)."
+      },
+      {
+        "label": "c",
+        "prompt": "A second syringe contains 360 cm³ of hydrogen at r.t.p. Compare the number of molecules in the two syringes.",
+        "marks": 1,
+        "markScheme": "Same number of molecules, because equal volumes of gases at the same temperature and pressure contain the same number of moles (molecules) [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "CHEM-3.2-S03",
+    "type": "structured",
+    "subjectKey": "CHEM",
+    "topicKey": "CHEM-3.2",
+    "objectiveKeys": [
+      "CHEM-3.2-02"
+    ],
+    "assessmentObjective": "AO1/AO2",
+    "paperStyle": "Paper 2 (theory)",
+    "totalMarks": 4,
+    "stem": "Chlorine has two isotopes: chlorine-35 (75% of atoms) and chlorine-37 (25% of atoms).",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "Explain why the relative atomic mass of chlorine is not a whole number.",
+        "marks": 1,
+        "markScheme": "Ar is the (weighted) average mass of the isotopes present [1]."
+      },
+      {
+        "label": "b",
+        "prompt": "Calculate the relative atomic mass of chlorine. Show your working.",
+        "marks": 3,
+        "markScheme": "(35 × 75) + (37 × 25) [1] = 2625 + 925 = 3550 [1]; ÷ 100 = 35.5 [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q01",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-01"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which of these quantities is a vector?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Displacement"
+      },
+      {
+        "key": "B",
+        "text": "Speed"
+      },
+      {
+        "key": "C",
+        "text": "Distance"
+      },
+      {
+        "key": "D",
+        "text": "Time"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Displacement has both size and direction. Speed, distance and time have size only.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q02",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-01"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Acceleration is defined as",
+    "options": [
+      {
+        "key": "A",
+        "text": "the rate of change of distance"
+      },
+      {
+        "key": "B",
+        "text": "distance travelled per unit time"
+      },
+      {
+        "key": "C",
+        "text": "speed in a given direction"
+      },
+      {
+        "key": "D",
+        "text": "the rate of change of velocity"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Acceleration = change in velocity ÷ time taken. 'Speed in a given direction' is the definition of velocity.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q03",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-01"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "What is the SI unit of acceleration?",
+    "options": [
+      {
+        "key": "A",
+        "text": "m/s"
+      },
+      {
+        "key": "B",
+        "text": "m²/s"
+      },
+      {
+        "key": "C",
+        "text": "m s"
+      },
+      {
+        "key": "D",
+        "text": "m/s²"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Acceleration is velocity (m/s) per second, which gives m/s².",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q04",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-02"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "A car travels 150 m in 6 s. What is its average speed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "25 m/s"
+      },
+      {
+        "key": "B",
+        "text": "900 m/s"
+      },
+      {
+        "key": "C",
+        "text": "0.04 m/s"
+      },
+      {
+        "key": "D",
+        "text": "156 m/s"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Average speed = distance ÷ time = 150 ÷ 6 = 25 m/s.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q05",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-02"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "A car speeds up from 5 m/s to 25 m/s in 4 s. What is its acceleration?",
+    "options": [
+      {
+        "key": "A",
+        "text": "6.25 m/s²"
+      },
+      {
+        "key": "B",
+        "text": "5 m/s²"
+      },
+      {
+        "key": "C",
+        "text": "7.5 m/s²"
+      },
+      {
+        "key": "D",
+        "text": "80 m/s²"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "a = (v − u) ÷ t = (25 − 5) ÷ 4 = 5 m/s².",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q06",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-05"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "On a distance–time graph, a horizontal straight line shows that the object is",
+    "options": [
+      {
+        "key": "A",
+        "text": "moving at constant speed"
+      },
+      {
+        "key": "B",
+        "text": "stationary"
+      },
+      {
+        "key": "C",
+        "text": "accelerating"
+      },
+      {
+        "key": "D",
+        "text": "decelerating"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "Distance is not changing, so the object is not moving. The gradient (speed) is zero.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q07",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-05"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "What does the gradient of a distance–time graph represent?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Speed"
+      },
+      {
+        "key": "B",
+        "text": "Acceleration"
+      },
+      {
+        "key": "C",
+        "text": "Distance travelled"
+      },
+      {
+        "key": "D",
+        "text": "Force"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Gradient = change in distance ÷ change in time = speed.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q08",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-04"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A speed–time graph is a straight line starting at the origin and sloping upwards. What does this show?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Constant speed"
+      },
+      {
+        "key": "B",
+        "text": "Increasing acceleration"
+      },
+      {
+        "key": "C",
+        "text": "Uniform acceleration from rest"
+      },
+      {
+        "key": "D",
+        "text": "Uniform deceleration"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "A straight line means constant gradient, so acceleration is constant (uniform). Starting at the origin means the object starts from rest.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q09",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-06"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "An object accelerates uniformly from rest to 12 m/s in 6 s. How far does it travel in this time?",
+    "options": [
+      {
+        "key": "A",
+        "text": "72 m"
+      },
+      {
+        "key": "B",
+        "text": "2 m"
+      },
+      {
+        "key": "C",
+        "text": "36 m"
+      },
+      {
+        "key": "D",
+        "text": "18 m"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Distance = area under the speed–time graph = ½ × 6 × 12 = 36 m.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q10",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-08"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "What is the approximate acceleration of free fall near the Earth's surface?",
+    "options": [
+      {
+        "key": "A",
+        "text": "1 m/s²"
+      },
+      {
+        "key": "B",
+        "text": "10 m/s²"
+      },
+      {
+        "key": "C",
+        "text": "100 m/s²"
+      },
+      {
+        "key": "D",
+        "text": "0 m/s²"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "g is about 9.8 m/s², usually taken as 10 m/s² in calculations.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q11",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-09"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "A stone is dropped from rest. Ignoring air resistance, what is its speed after 3 s? (g = 10 m/s²)",
+    "options": [
+      {
+        "key": "A",
+        "text": "3.3 m/s"
+      },
+      {
+        "key": "B",
+        "text": "13 m/s"
+      },
+      {
+        "key": "C",
+        "text": "30 m/s"
+      },
+      {
+        "key": "D",
+        "text": "45 m/s"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "v = u + gt = 0 + 10 × 3 = 30 m/s. 45 m is the distance fallen, not the speed.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q12",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-07"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A car moving at 20 m/s brakes with a uniform deceleration of 4 m/s². How long does it take to stop?",
+    "options": [
+      {
+        "key": "A",
+        "text": "80 s"
+      },
+      {
+        "key": "B",
+        "text": "5 s"
+      },
+      {
+        "key": "C",
+        "text": "16 s"
+      },
+      {
+        "key": "D",
+        "text": "0.2 s"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "v = u + at gives 0 = 20 − 4t, so t = 5 s.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q13",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-13"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A falling object reaches terminal velocity when",
+    "options": [
+      {
+        "key": "A",
+        "text": "its weight becomes zero"
+      },
+      {
+        "key": "B",
+        "text": "air resistance is greater than its weight"
+      },
+      {
+        "key": "C",
+        "text": "its acceleration equals g"
+      },
+      {
+        "key": "D",
+        "text": "air resistance equals its weight"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "When the forces balance, the resultant force is zero, so the acceleration is zero and the velocity is constant.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q14",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-11"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "A skydiver is falling at terminal velocity and then opens her parachute. What happens next?",
+    "options": [
+      {
+        "key": "A",
+        "text": "She speeds up, then falls at a higher terminal velocity"
+      },
+      {
+        "key": "B",
+        "text": "She stops moving for a moment, then falls again"
+      },
+      {
+        "key": "C",
+        "text": "She keeps falling at the same velocity"
+      },
+      {
+        "key": "D",
+        "text": "She slows down, then falls at a lower terminal velocity"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Opening the parachute increases air resistance above her weight, so she decelerates. As she slows, air resistance falls until it equals her weight again, giving a lower terminal velocity.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q15",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-10"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A hammer and a feather are dropped together from the same height in a vacuum. Which statement is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The hammer lands first because it is heavier"
+      },
+      {
+        "key": "B",
+        "text": "The feather lands first because it is lighter"
+      },
+      {
+        "key": "C",
+        "text": "They land at the same time"
+      },
+      {
+        "key": "D",
+        "text": "The feather floats and does not fall"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "With no air resistance, both fall with the same acceleration g, whatever their mass.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q16",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-03"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "A car drives round a roundabout at a constant speed of 30 km/h. Which statement is correct?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Its velocity is constant because its speed is constant"
+      },
+      {
+        "key": "B",
+        "text": "Its displacement is zero throughout"
+      },
+      {
+        "key": "C",
+        "text": "It has no acceleration"
+      },
+      {
+        "key": "D",
+        "text": "Its velocity is changing because its direction is changing"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Velocity includes direction. A change of direction means the velocity changes, so the motion is non-uniform.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q17",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-01"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "An athlete runs one complete lap of a 400 m track in 50 s and finishes at the starting point. What is her average velocity?",
+    "options": [
+      {
+        "key": "A",
+        "text": "0 m/s"
+      },
+      {
+        "key": "B",
+        "text": "8 m/s"
+      },
+      {
+        "key": "C",
+        "text": "20 000 m/s"
+      },
+      {
+        "key": "D",
+        "text": "0.125 m/s"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Her displacement is zero because she finishes where she started, so her average velocity is 0. Her average speed is 400 ÷ 50 = 8 m/s.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q18",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-06"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "A trolley moves at a constant 10 m/s for 4 s, then decelerates uniformly to rest in 2 s. What is the total distance travelled?",
+    "options": [
+      {
+        "key": "A",
+        "text": "40 m"
+      },
+      {
+        "key": "B",
+        "text": "60 m"
+      },
+      {
+        "key": "C",
+        "text": "50 m"
+      },
+      {
+        "key": "D",
+        "text": "20 m"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Constant-speed part: 10 × 4 = 40 m. Deceleration part: ½ × 2 × 10 = 10 m. Total = 50 m.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q19",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-12"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A steel ball bearing is dropped into a tall tube of thick oil. Which describes its motion after the first moment?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It keeps accelerating at 10 m/s² until it hits the bottom"
+      },
+      {
+        "key": "B",
+        "text": "It falls at a steady (terminal) velocity"
+      },
+      {
+        "key": "C",
+        "text": "It slows down and stops halfway"
+      },
+      {
+        "key": "D",
+        "text": "It speeds up and slows down repeatedly"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "The drag from oil is large, so the ball bearing reaches terminal velocity very quickly and then falls at constant speed.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-Q20",
+    "type": "mcq",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-07"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A car starts from rest and accelerates uniformly at 2 m/s² for 5 s. How far does it travel?",
+    "options": [
+      {
+        "key": "A",
+        "text": "25 m"
+      },
+      {
+        "key": "B",
+        "text": "10 m"
+      },
+      {
+        "key": "C",
+        "text": "50 m"
+      },
+      {
+        "key": "D",
+        "text": "20 m"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "s = ut + ½at² = 0 + ½ × 2 × 5² = 25 m.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-S01",
+    "type": "structured",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-05",
+      "PHYS-1.2-06",
+      "PHYS-1.2-07"
+    ],
+    "assessmentObjective": "AO1/AO2",
+    "paperStyle": "Paper 2 (theory)",
+    "totalMarks": 8,
+    "stem": "The table shows the speed of a minibus taxi during a short journey.\n\n| Time / s | 0 | 2 | 4 | 6 | 8 | 10 |\n|---|---|---|---|---|---|---|\n| Speed / m/s | 0 | 4 | 8 | 8 | 8 | 0 |\n\nThe taxi accelerates uniformly for the first 4 s, travels at constant speed from 4 s to 8 s, and decelerates uniformly from 8 s to 10 s.",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "Calculate the acceleration of the taxi during the first 4 s.",
+        "marks": 2,
+        "markScheme": "a = (8 − 0) ÷ 4 [1] = 2 m/s² [1]."
+      },
+      {
+        "label": "b",
+        "prompt": "Calculate the total distance travelled in the 10 s.",
+        "marks": 3,
+        "markScheme": "0–4 s: ½ × 4 × 8 = 16 m; 4–8 s: 4 × 8 = 32 m; 8–10 s: ½ × 2 × 8 = 8 m [2 for the areas, 1 for any two correct]; total = 56 m [1]."
+      },
+      {
+        "label": "c",
+        "prompt": "Calculate the average speed for the whole journey.",
+        "marks": 2,
+        "markScheme": "average speed = 56 ÷ 10 [1] = 5.6 m/s [1]. Allow ecf from (b)."
+      },
+      {
+        "label": "d",
+        "prompt": "Describe the motion of the taxi between 8 s and 10 s.",
+        "marks": 1,
+        "markScheme": "Uniform deceleration from 8 m/s to rest (at 4 m/s²) [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-S02",
+    "type": "structured",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-08",
+      "PHYS-1.2-09",
+      "PHYS-1.2-11"
+    ],
+    "assessmentObjective": "AO1/AO2",
+    "paperStyle": "Paper 2 (theory)",
+    "totalMarks": 5,
+    "stem": "A learner drops a stone from rest off a cliff. It takes 4.0 s to reach the water below. Take g = 10 m/s² and ignore air resistance unless told otherwise.",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "Calculate the speed of the stone just before it hits the water.",
+        "marks": 2,
+        "markScheme": "v = u + gt = 0 + 10 × 4 [1] = 40 m/s [1]."
+      },
+      {
+        "label": "b",
+        "prompt": "Calculate the height of the cliff.",
+        "marks": 2,
+        "markScheme": "s = ½gt² = ½ × 10 × 4² [1] = 80 m [1]. Accept area under the speed–time graph = ½ × 4 × 40."
+      },
+      {
+        "label": "c",
+        "prompt": "In reality, the stone hits the water at a lower speed. Explain why.",
+        "marks": 1,
+        "markScheme": "Air resistance acts upwards, opposing the motion, so the resultant force (and therefore the acceleration) is less than for free fall [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "PHYS-1.2-S03",
+    "type": "structured",
+    "subjectKey": "PHYS",
+    "topicKey": "PHYS-1.2",
+    "objectiveKeys": [
+      "PHYS-1.2-11",
+      "PHYS-1.2-13"
+    ],
+    "assessmentObjective": "AO1",
+    "paperStyle": "Paper 2 (theory)",
+    "totalMarks": 5,
+    "stem": "A skydiver jumps from an aeroplane, falls for some time, and then opens her parachute.",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "Define terminal velocity.",
+        "marks": 1,
+        "markScheme": "The constant (maximum) velocity reached when the air resistance on a falling object equals its weight [1]."
+      },
+      {
+        "label": "b",
+        "prompt": "Describe and explain how her velocity changes from the moment she jumps until she lands. Refer to the forces acting on her.",
+        "marks": 4,
+        "markScheme": "Any four of: at first weight > air resistance, so she accelerates [1]; air resistance increases as speed increases, so acceleration decreases [1]; air resistance = weight, so resultant force is zero and she reaches terminal velocity [1]; when the parachute opens, air resistance > weight, so she decelerates [1]; she reaches a new, lower terminal velocity when the forces balance again [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q01",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-01"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which statement defines diffusion?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Movement of water through a partially permeable membrane"
+      },
+      {
+        "key": "B",
+        "text": "Movement of particles against a concentration gradient using energy"
+      },
+      {
+        "key": "C",
+        "text": "Net movement of particles from a higher to a lower concentration"
+      },
+      {
+        "key": "D",
+        "text": "Movement of particles from a lower to a higher concentration"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Diffusion is net movement down a concentration gradient, from higher to lower concentration, by random movement.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q02",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-04"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Osmosis is the movement of",
+    "options": [
+      {
+        "key": "A",
+        "text": "solute molecules from a concentrated to a dilute solution"
+      },
+      {
+        "key": "B",
+        "text": "water molecules from a concentrated to a dilute solution"
+      },
+      {
+        "key": "C",
+        "text": "any molecules through a fully permeable membrane"
+      },
+      {
+        "key": "D",
+        "text": "water molecules through a partially permeable membrane from a dilute to a concentrated solution"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "In osmosis, water moves from higher water concentration (dilute solution) to lower water concentration (concentrated solution) through a partially permeable membrane.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q03",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-10"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which process needs energy from respiration?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Diffusion"
+      },
+      {
+        "key": "B",
+        "text": "Osmosis"
+      },
+      {
+        "key": "C",
+        "text": "Transpiration"
+      },
+      {
+        "key": "D",
+        "text": "Active transport"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Active transport moves substances against their concentration gradient, which needs energy from respiration.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q04",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-03"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which change would increase the rate of diffusion?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Raising the temperature"
+      },
+      {
+        "key": "B",
+        "text": "Lowering the temperature"
+      },
+      {
+        "key": "C",
+        "text": "Making the concentration gradient less steep"
+      },
+      {
+        "key": "D",
+        "text": "Increasing the distance particles must travel"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "At a higher temperature, particles have more kinetic energy and move faster, so diffusion is faster.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q05",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-07"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "A plant cell is placed in pure water. What happens to it?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It becomes turgid"
+      },
+      {
+        "key": "B",
+        "text": "It bursts"
+      },
+      {
+        "key": "C",
+        "text": "It becomes plasmolysed"
+      },
+      {
+        "key": "D",
+        "text": "It does not change"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Water enters by osmosis and the vacuole swells, pressing the cell against the wall. The wall stops it bursting.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q06",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-08"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "A red blood cell is placed in pure water. What happens to it?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It swells and bursts"
+      },
+      {
+        "key": "B",
+        "text": "It becomes turgid"
+      },
+      {
+        "key": "C",
+        "text": "It shrinks"
+      },
+      {
+        "key": "D",
+        "text": "It becomes plasmolysed"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Water enters by osmosis. Animal cells have no cell wall to resist the swelling, so the cell bursts.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q07",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-07"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A plant cell is placed in a concentrated salt solution. What would you see under the microscope?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The cell swells and the wall breaks"
+      },
+      {
+        "key": "B",
+        "text": "The vacuole becomes larger"
+      },
+      {
+        "key": "C",
+        "text": "The cell membrane pulls away from the cell wall"
+      },
+      {
+        "key": "D",
+        "text": "No change"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Water leaves by osmosis, so the vacuole shrinks and the membrane pulls away from the wall. This is plasmolysis.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q08",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-10"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "The concentration of nitrate ions is higher inside root hair cells than in the soil water. How do the root hairs take in more nitrate ions?",
+    "options": [
+      {
+        "key": "A",
+        "text": "By osmosis"
+      },
+      {
+        "key": "B",
+        "text": "By diffusion"
+      },
+      {
+        "key": "C",
+        "text": "By transpiration"
+      },
+      {
+        "key": "D",
+        "text": "By active transport"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Moving ions from lower concentration (soil) to higher concentration (cell) is against the gradient, so it needs active transport.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q09",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-07"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Why does a plant wilt on a hot, dry day?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Its cells gain too much water and burst"
+      },
+      {
+        "key": "B",
+        "text": "Its cells lose water, become flaccid and lose turgor"
+      },
+      {
+        "key": "C",
+        "text": "Its cell walls dissolve"
+      },
+      {
+        "key": "D",
+        "text": "It takes in too many mineral ions"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "When water is lost faster than it is taken up, cells become flaccid and can no longer support the leaves and stem.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q10",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-09"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "Potato strips were placed in sucrose solutions. % change in mass: 0.0 mol/dm³: +12%; 0.2 mol/dm³: +5%; 0.4 mol/dm³: −2%; 0.6 mol/dm³: −8%. What is the concentration of the potato cell sap closest to?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Between 0.0 and 0.2 mol/dm³"
+      },
+      {
+        "key": "B",
+        "text": "Between 0.2 and 0.4 mol/dm³"
+      },
+      {
+        "key": "C",
+        "text": "Between 0.4 and 0.6 mol/dm³"
+      },
+      {
+        "key": "D",
+        "text": "Above 0.6 mol/dm³"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "There is no change in mass where the solution matches the cell sap. The change goes from +5% to −2% between 0.2 and 0.4 mol/dm³.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q11",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-05"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "A partially permeable membrane",
+    "options": [
+      {
+        "key": "A",
+        "text": "lets all molecules pass through"
+      },
+      {
+        "key": "B",
+        "text": "lets no molecules pass through"
+      },
+      {
+        "key": "C",
+        "text": "lets small molecules such as water pass but not larger ones such as sucrose"
+      },
+      {
+        "key": "D",
+        "text": "lets only large molecules pass through"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Partially permeable membranes let small molecules like water through but not larger solute molecules.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q12",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-01"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Why does oxygen move from the air in the alveoli into the blood?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The blood actively pumps oxygen in"
+      },
+      {
+        "key": "B",
+        "text": "The oxygen concentration is higher in the blood than in the alveoli"
+      },
+      {
+        "key": "C",
+        "text": "The oxygen concentration is higher in the alveoli than in the blood"
+      },
+      {
+        "key": "D",
+        "text": "Water carries oxygen across by osmosis"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Oxygen diffuses down its concentration gradient, from the alveoli (higher) into the blood (lower).",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q13",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-03"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "Cotton wool soaked in ammonia is placed at one end of a glass tube and cotton wool soaked in hydrochloric acid at the other. A white ring forms nearer the acid end. What does this show?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Hydrochloric acid particles diffuse faster than ammonia particles"
+      },
+      {
+        "key": "B",
+        "text": "Ammonia particles are smaller and diffuse faster"
+      },
+      {
+        "key": "C",
+        "text": "Diffusion only happens in liquids"
+      },
+      {
+        "key": "D",
+        "text": "Both gases diffuse at the same rate"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "The ammonia travelled further in the same time, so it diffused faster. This is because ammonia molecules are lighter than hydrogen chloride molecules.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q14",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-11"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Passive transport is the movement of substances",
+    "options": [
+      {
+        "key": "A",
+        "text": "against a concentration gradient using energy"
+      },
+      {
+        "key": "B",
+        "text": "down a concentration gradient without using energy from respiration"
+      },
+      {
+        "key": "C",
+        "text": "only through the cell wall"
+      },
+      {
+        "key": "D",
+        "text": "only in animal cells"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "Passive processes such as diffusion and osmosis move substances down a gradient without using energy from respiration.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q15",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-06"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A Visking tubing bag containing sugar solution is placed in a beaker of pure water. After an hour the bag has swollen. Why?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Sugar left the bag by diffusion"
+      },
+      {
+        "key": "B",
+        "text": "Water left the bag by active transport"
+      },
+      {
+        "key": "C",
+        "text": "Sugar entered the bag from the water"
+      },
+      {
+        "key": "D",
+        "text": "Water entered the bag by osmosis"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "The water outside is more dilute, so water moves into the bag through the partially permeable tubing by osmosis.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q16",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-12"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "How is active transport different from diffusion?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Active transport moves substances against a concentration gradient using energy"
+      },
+      {
+        "key": "B",
+        "text": "Active transport only moves water"
+      },
+      {
+        "key": "C",
+        "text": "Active transport is faster at lower temperatures"
+      },
+      {
+        "key": "D",
+        "text": "Active transport does not need a membrane"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Active transport uses energy from respiration to move substances from low to high concentration. Diffusion is passive and moves substances down the gradient.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q17",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-12"
+    ],
+    "assessmentObjective": "AO2-handling-information",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "Root hair cells are treated with a poison that stops respiration. Which process would stop first?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Uptake of water by osmosis"
+      },
+      {
+        "key": "B",
+        "text": "Diffusion of oxygen into the cells"
+      },
+      {
+        "key": "C",
+        "text": "Uptake of mineral ions by active transport"
+      },
+      {
+        "key": "D",
+        "text": "Diffusion of carbon dioxide out of the cells"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Active transport needs energy from respiration. Osmosis and diffusion are passive, so they can continue.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q18",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-03"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "What happens to the rate of diffusion when the concentration gradient becomes steeper?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It increases"
+      },
+      {
+        "key": "B",
+        "text": "It decreases"
+      },
+      {
+        "key": "C",
+        "text": "It stays the same"
+      },
+      {
+        "key": "D",
+        "text": "Diffusion stops"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "A bigger difference in concentration means a faster net movement of particles.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q19",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-05"
+    ],
+    "assessmentObjective": "AO1-recall",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Osmosis is a special type of",
+    "options": [
+      {
+        "key": "A",
+        "text": "active transport"
+      },
+      {
+        "key": "B",
+        "text": "diffusion"
+      },
+      {
+        "key": "C",
+        "text": "respiration"
+      },
+      {
+        "key": "D",
+        "text": "transpiration"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "Osmosis is the diffusion of water molecules through a partially permeable membrane.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-Q20",
+    "type": "mcq",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-07"
+    ],
+    "assessmentObjective": "AO1-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Which describes a flaccid plant cell?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Cell is full of water and pressing firmly against the wall"
+      },
+      {
+        "key": "B",
+        "text": "Cell wall has burst"
+      },
+      {
+        "key": "C",
+        "text": "Cell has gained mineral ions by active transport"
+      },
+      {
+        "key": "D",
+        "text": "Cell has lost some water; vacuole smaller and cell soft, but membrane still touching the wall"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "A flaccid cell has lost water and turgor but is not yet plasmolysed, so the membrane still touches the wall.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-S01",
+    "type": "structured",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-07",
+      "BIO-1.3-09"
+    ],
+    "assessmentObjective": "AO2/AO3",
+    "paperStyle": "Paper 2 (theory)",
+    "totalMarks": 7,
+    "stem": "A learner placed potato strips of equal size in sucrose solutions for 30 minutes and recorded the results.\n\n| Sucrose concentration / mol/dm³ | 0.0 | 0.2 | 0.4 | 0.6 |\n|---|---|---|---|---|\n| Initial mass / g | 2.50 | 2.50 | 2.50 | 2.50 |\n| Final mass / g | 2.80 | 2.62 | 2.45 | 2.30 |",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "Calculate the percentage change in mass of the strip in 0.6 mol/dm³ sucrose.",
+        "marks": 2,
+        "markScheme": "(2.30 − 2.50) ÷ 2.50 × 100 [1] = −8% [1]."
+      },
+      {
+        "label": "b",
+        "prompt": "Explain why the strip in 0.0 mol/dm³ gained mass.",
+        "marks": 2,
+        "markScheme": "The water/solution was more dilute than the cell sap (higher water concentration outside) [1]; water entered the cells by osmosis through the partially permeable membrane [1]."
+      },
+      {
+        "label": "c",
+        "prompt": "Estimate the concentration of the potato cell sap. Give a reason.",
+        "marks": 2,
+        "markScheme": "About 0.35 mol/dm³ (accept any value between 0.3 and 0.4) [1]; this is where there would be no change in mass, so no net movement of water [1]."
+      },
+      {
+        "label": "d",
+        "prompt": "State one variable that should be kept constant.",
+        "marks": 1,
+        "markScheme": "Any one of: size/surface area of strips, time in solution, temperature, type/source of potato, method of blotting [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-S02",
+    "type": "structured",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-06",
+      "BIO-1.3-10"
+    ],
+    "assessmentObjective": "AO1",
+    "paperStyle": "Paper 2 (theory)",
+    "totalMarks": 4,
+    "stem": "Root hair cells absorb both water and mineral ions from the soil.",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "Explain how water enters a root hair cell.",
+        "marks": 2,
+        "markScheme": "By osmosis [1]; from the soil water (higher water concentration / more dilute) into the cell sap (lower water concentration / more concentrated) through the partially permeable membrane [1]."
+      },
+      {
+        "label": "b",
+        "prompt": "Explain why root hair cells contain many mitochondria.",
+        "marks": 2,
+        "markScheme": "Mineral ions are absorbed by active transport, against their concentration gradient [1]; this needs energy, which mitochondria release by respiration [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "BIO-1.3-S03",
+    "type": "structured",
+    "subjectKey": "BIO",
+    "topicKey": "BIO-1.3",
+    "objectiveKeys": [
+      "BIO-1.3-07",
+      "BIO-1.3-08"
+    ],
+    "assessmentObjective": "AO1",
+    "paperStyle": "Paper 2 (theory)",
+    "totalMarks": 4,
+    "stem": "A plant cell and a red blood cell are each placed in pure water.",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "Describe what happens to each cell.",
+        "marks": 2,
+        "markScheme": "Plant cell becomes turgid / swells but does not burst [1]; red blood cell swells and bursts [1]."
+      },
+      {
+        "label": "b",
+        "prompt": "Explain the difference in your answers to (a).",
+        "marks": 2,
+        "markScheme": "Water enters both cells by osmosis [1]; the plant cell wall is strong and resists further expansion, but the red blood cell has no cell wall [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q01",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-01"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which statement best describes development?",
+    "options": [
+      {
+        "key": "A",
+        "text": "An increase in the number of factories"
+      },
+      {
+        "key": "B",
+        "text": "A process of positive change that improves people's quality of life"
+      },
+      {
+        "key": "C",
+        "text": "An increase in a country's population"
+      },
+      {
+        "key": "D",
+        "text": "A rise in the price of exports"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "Development is broader than economic growth. It includes social, political and environmental improvements in people's lives.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q02",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-04"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Gross Domestic Product (GDP) measures the total value of goods and services produced",
+    "options": [
+      {
+        "key": "A",
+        "text": "within a country's borders in a year"
+      },
+      {
+        "key": "B",
+        "text": "by a country's citizens anywhere in the world in a year"
+      },
+      {
+        "key": "C",
+        "text": "by the government only in a year"
+      },
+      {
+        "key": "D",
+        "text": "for export only in a year"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "GDP counts production inside the country's borders. GNP/GNI counts production by a country's citizens and companies wherever they are.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q03",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-04"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "What is the main difference between GNP and GDP?",
+    "options": [
+      {
+        "key": "A",
+        "text": "GNP excludes services"
+      },
+      {
+        "key": "B",
+        "text": "GNP only measures agriculture"
+      },
+      {
+        "key": "C",
+        "text": "GNP includes net income earned from abroad"
+      },
+      {
+        "key": "D",
+        "text": "GNP is always smaller than GDP"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "GNP = GDP + net income from abroad. It can be bigger or smaller than GDP.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q04",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-04"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which organisation publishes the Human Development Index (HDI)?",
+    "options": [
+      {
+        "key": "A",
+        "text": "World Bank"
+      },
+      {
+        "key": "B",
+        "text": "United Nations Development Programme (UNDP)"
+      },
+      {
+        "key": "C",
+        "text": "SADC"
+      },
+      {
+        "key": "D",
+        "text": "International Monetary Fund"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "The UNDP publishes the HDI in its Human Development Report.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q05",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-04"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "The Human Development Index combines measures of",
+    "options": [
+      {
+        "key": "A",
+        "text": "population, exports and imports"
+      },
+      {
+        "key": "B",
+        "text": "life expectancy, education and income per person"
+      },
+      {
+        "key": "C",
+        "text": "rainfall, soil and temperature"
+      },
+      {
+        "key": "D",
+        "text": "literacy, religion and language"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "The HDI combines a long and healthy life, knowledge (education) and a decent standard of living (income per person).",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q06",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-04"
+    ],
+    "assessmentObjective": "AO2-analysis-evaluation",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "Why can GDP per capita give a misleading picture of development?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is an average that hides how unequally income is shared"
+      },
+      {
+        "key": "B",
+        "text": "It is always calculated wrongly"
+      },
+      {
+        "key": "C",
+        "text": "It only measures health"
+      },
+      {
+        "key": "D",
+        "text": "It counts the informal sector twice"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "A few very wealthy people can raise the average while most people remain poor. GDP per capita also ignores the informal sector and social conditions.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q07",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-05"
+    ],
+    "assessmentObjective": "AO2-analysis-evaluation",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Why are political aspects of development difficult to measure?",
+    "options": [
+      {
+        "key": "A",
+        "text": "They only change every 100 years"
+      },
+      {
+        "key": "B",
+        "text": "They are the same in every country"
+      },
+      {
+        "key": "C",
+        "text": "They can be counted exactly from election results"
+      },
+      {
+        "key": "D",
+        "text": "They are mostly qualitative and partly subjective"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Freedom, democracy and human rights are hard to put into numbers, and governments may hide information.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q08",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-02"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "During the Cold War, the term 'Second World' referred to",
+    "options": [
+      {
+        "key": "A",
+        "text": "developing countries in Africa"
+      },
+      {
+        "key": "B",
+        "text": "newly industrialised countries in Asia"
+      },
+      {
+        "key": "C",
+        "text": "the communist bloc led by the USSR"
+      },
+      {
+        "key": "D",
+        "text": "Western capitalist countries"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "First World = Western capitalist; Second World = communist bloc; Third World = developing countries.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q09",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-02"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Which group of countries are known as Newly Industrialised Countries (NICs)?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Malawi, Mozambique and Niger"
+      },
+      {
+        "key": "B",
+        "text": "Germany, France and the UK"
+      },
+      {
+        "key": "C",
+        "text": "South Korea, Singapore and Taiwan"
+      },
+      {
+        "key": "D",
+        "text": "Botswana, Namibia and Lesotho"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "The 'Asian Tigers' (South Korea, Singapore, Taiwan, Hong Kong) are the classic NICs. They industrialised rapidly from the 1960s.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q10",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-02"
+    ],
+    "assessmentObjective": "AO2-analysis-evaluation",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "Australia is in the southern hemisphere but is classified as part of the 'North'. Why?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Australia was a colony of Brazil"
+      },
+      {
+        "key": "B",
+        "text": "The term 'North' only refers to Europe"
+      },
+      {
+        "key": "C",
+        "text": "Australia has a cold climate"
+      },
+      {
+        "key": "D",
+        "text": "The Brandt Line is based on level of development, not geography"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "The North–South divide (Brandt Line) separates richer and poorer countries, so it bends around Australia and New Zealand.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q11",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-06"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which is a typical characteristic of a developing country?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Most workers in the tertiary sector"
+      },
+      {
+        "key": "B",
+        "text": "Very low infant mortality"
+      },
+      {
+        "key": "C",
+        "text": "High birth rate and a large share of workers in farming"
+      },
+      {
+        "key": "D",
+        "text": "High energy consumption per person"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Developing countries usually have high birth rates and many people in primary-sector work such as farming.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q12",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-07"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Which theory argues that poor countries are underdeveloped because rich 'core' countries exploit them?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Dependency theory"
+      },
+      {
+        "key": "B",
+        "text": "Modernisation theory"
+      },
+      {
+        "key": "C",
+        "text": "Sustainable development"
+      },
+      {
+        "key": "D",
+        "text": "Basic needs approach"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Dependency theory sees the periphery as supplying cheap raw materials and labour to benefit the core.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q13",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-07"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Rostow's 'stages of economic growth' is an example of",
+    "options": [
+      {
+        "key": "A",
+        "text": "dependency theory"
+      },
+      {
+        "key": "B",
+        "text": "sustainable development"
+      },
+      {
+        "key": "C",
+        "text": "alternative strategies"
+      },
+      {
+        "key": "D",
+        "text": "modernisation theory"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Rostow's five-stage model, from traditional society to high mass consumption, is the best-known modernisation theory.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q14",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-07"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Sustainable development is development that",
+    "options": [
+      {
+        "key": "A",
+        "text": "meets present needs without compromising future generations' ability to meet theirs"
+      },
+      {
+        "key": "B",
+        "text": "only benefits the present generation"
+      },
+      {
+        "key": "C",
+        "text": "is funded by foreign aid"
+      },
+      {
+        "key": "D",
+        "text": "stops all use of natural resources"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "This is the Brundtland Report (1987) definition.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-Q15",
+    "type": "mcq",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-03"
+    ],
+    "assessmentObjective": "AO2-analysis-evaluation",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Which reason helps explain why a landlocked country may develop more slowly?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It has no rainfall"
+      },
+      {
+        "key": "B",
+        "text": "Transport costs for imports and exports are higher"
+      },
+      {
+        "key": "C",
+        "text": "It cannot have a government"
+      },
+      {
+        "key": "D",
+        "text": "It cannot grow crops"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "Without a coastline, goods must pass through neighbouring countries' ports. This adds cost and dependence.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-S01",
+    "type": "structured",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-04"
+    ],
+    "assessmentObjective": "AO1",
+    "paperStyle": "Paper 1 Section A",
+    "totalMarks": 4,
+    "stem": "Development can be measured using economic indicators.",
+    "parts": [
+      {
+        "label": null,
+        "prompt": "Explain the difference between Gross Domestic Product (GDP) and Gross National Product (GNP).",
+        "marks": 4,
+        "markScheme": "GDP is the total value of goods and services produced within a country's borders [1] in a year [1]. GNP is GDP plus net income from abroad [1], i.e. the output of a country's citizens and companies wherever they are located [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-S02",
+    "type": "structured",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-05"
+    ],
+    "assessmentObjective": "AO2",
+    "paperStyle": "Paper 1 Section A",
+    "totalMarks": 4,
+    "stem": "Some aspects of development are easier to measure than others.",
+    "parts": [
+      {
+        "label": null,
+        "prompt": "Give two reasons why the political aspects of development are difficult to measure.",
+        "marks": 4,
+        "markScheme": "Two reasons, each identified [1] and explained [1], e.g.: they are qualitative / hard to put into numbers [1], e.g. freedom of speech cannot be counted [1]; judgements are subjective [1], since people disagree on what counts as democracy [1]; governments may hide or distort information [1], so data is unreliable [1]; elections taking place does not show they were free and fair [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-S03",
+    "type": "structured",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-07"
+    ],
+    "assessmentObjective": "AO1/AO2",
+    "paperStyle": "Paper 1 Section A",
+    "totalMarks": 4,
+    "stem": "Theories of development offer different explanations of poverty.",
+    "parts": [
+      {
+        "label": null,
+        "prompt": "Outline two differences between modernisation theory and dependency theory.",
+        "marks": 4,
+        "markScheme": "Two differences, 2 marks each: modernisation sees poverty caused by internal factors / traditional ways [1], while dependency blames external exploitation by rich core countries [1]; modernisation recommends following the Western path through industrialisation and investment [1], while dependency recommends reducing ties with the core, e.g. import substitution or regional co-operation [1]; modernisation sees trade/contact with rich countries as helpful [1], while dependency sees it as harmful [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DEV-1.1-S04",
+    "type": "structured",
+    "subjectKey": "DEV",
+    "topicKey": "DEV-1.1",
+    "objectiveKeys": [
+      "DEV-1.1-04",
+      "DEV-1.1-06"
+    ],
+    "assessmentObjective": "AO2",
+    "paperStyle": "Paper 1 Section B (data-based)",
+    "totalMarks": 10,
+    "stem": "The table shows development data for four countries, W, X, Y and Z. (The figures are invented for practice.)\n\n| Country | GNI per capita (US$) | Life expectancy (years) | Adult literacy (%) | Infant mortality (per 1000 live births) |\n|---|---|---|---|---|\n| W | 42 000 | 81 | 99 | 4 |\n| X | 7 000 | 69 | 88 | 30 |\n| Y | 900 | 58 | 55 | 70 |\n| Z | 14 000 | 63 | 85 | 45 |",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "Which country is the most developed? Use two pieces of evidence from the table.",
+        "marks": 3,
+        "markScheme": "Country W [1]; any two pieces of evidence with data, e.g. highest GNI per capita (US$42 000) [1], highest life expectancy (81) [1], lowest infant mortality (4 per 1000) [1], highest literacy (99%) [1]. Max 3."
+      },
+      {
+        "label": "b",
+        "prompt": "Country Z has a higher GNI per capita than country X but a lower life expectancy. Suggest two reasons why GNI per capita alone may not show the true level of development in Z.",
+        "marks": 4,
+        "markScheme": "Two reasons, each with explanation, e.g.: income may be unequally distributed, so most people are poor [1] and cannot afford health care [1]; wealth may come from one resource (e.g. mining) that employs few people [1] and is not spent on social services [1]; high disease burden (e.g. HIV/AIDS) [1] lowers life expectancy despite income [1]; government spending priorities may not favour health/education [1] [1]. Max 4."
+      },
+      {
+        "label": "c",
+        "prompt": "Suggest one other indicator not in the table that could be used to compare these countries. Explain why it is useful.",
+        "marks": 3,
+        "markScheme": "Valid indicator [1], e.g. access to clean water, doctors per 1000 people, HDI, energy use per person, % in primary sector; explanation of what it shows about quality of life or development [2]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q01",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-01"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "According to Matthew 22:37–39, what are the two greatest commandments?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Do not steal and do not kill"
+      },
+      {
+        "key": "B",
+        "text": "Keep the Sabbath and honour your parents"
+      },
+      {
+        "key": "C",
+        "text": "Pray daily and fast weekly"
+      },
+      {
+        "key": "D",
+        "text": "Love God with all your heart, and love your neighbour as yourself"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Jesus summarised the Law as love of God and love of neighbour.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q02",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-01"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which Bible passage describes love as patient, kind and not boastful?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Genesis 1"
+      },
+      {
+        "key": "B",
+        "text": "Psalm 23"
+      },
+      {
+        "key": "C",
+        "text": "1 Corinthians 13"
+      },
+      {
+        "key": "D",
+        "text": "Exodus 20"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "1 Corinthians 13:4–7 lists the qualities of love.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q03",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-01"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "The Greek word for unconditional, self-giving love is",
+    "options": [
+      {
+        "key": "A",
+        "text": "agape"
+      },
+      {
+        "key": "B",
+        "text": "eros"
+      },
+      {
+        "key": "C",
+        "text": "philia"
+      },
+      {
+        "key": "D",
+        "text": "storge"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Agape is the selfless love Christians believe God shows and expects them to show everyone.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q04",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-01"
+    ],
+    "assessmentObjective": "AO2-application",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "In the Parable of the Good Samaritan, who turns out to be the true 'neighbour'?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The priest"
+      },
+      {
+        "key": "B",
+        "text": "The Levite"
+      },
+      {
+        "key": "C",
+        "text": "The Samaritan who helped the injured man"
+      },
+      {
+        "key": "D",
+        "text": "The innkeeper"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "The Samaritan, an outsider to the Jews, showed mercy. Jesus taught that your neighbour is anyone in need.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q05",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-01"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Which teaching of Jesus is found in Matthew 5:43–44?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Love only those who love you"
+      },
+      {
+        "key": "B",
+        "text": "An eye for an eye"
+      },
+      {
+        "key": "C",
+        "text": "Give to Caesar what is Caesar's"
+      },
+      {
+        "key": "D",
+        "text": "Love your enemies and pray for those who persecute you"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "In the Sermon on the Mount, Jesus extended love even to enemies.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q06",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-02"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which action of Jesus best shows humble, serving love?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Turning over tables in the temple"
+      },
+      {
+        "key": "B",
+        "text": "Washing his disciples' feet"
+      },
+      {
+        "key": "C",
+        "text": "Walking on water"
+      },
+      {
+        "key": "D",
+        "text": "Calming the storm"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "Washing feet was a servant's job. By doing it, Jesus showed humble service (John 13).",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q07",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-02"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "On the cross Jesus said, 'Father, forgive them, for they do not know what they are doing.' What does this show?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Love expressed through healing"
+      },
+      {
+        "key": "B",
+        "text": "Love for his family only"
+      },
+      {
+        "key": "C",
+        "text": "Love expressed through forgiveness"
+      },
+      {
+        "key": "D",
+        "text": "Anger at injustice"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Forgiving those who were killing him shows love that does not seek revenge (Luke 23:34).",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q08",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-02"
+    ],
+    "assessmentObjective": "AO2-application",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Jesus touched and healed a man with leprosy (Mark 1:40–42). Why is this a powerful example of love?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Lepers were rich and powerful"
+      },
+      {
+        "key": "B",
+        "text": "Lepers were outcasts whom people avoided touching"
+      },
+      {
+        "key": "C",
+        "text": "It happened on the Sabbath"
+      },
+      {
+        "key": "D",
+        "text": "The man was one of his disciples"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "People with leprosy were excluded from society. Touching him showed compassion and acceptance.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q09",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-02"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "'Greater love has no one than this: to lay down one's life for one's friends' (John 15:13). Christians see this fulfilled in",
+    "options": [
+      {
+        "key": "A",
+        "text": "the feeding of the five thousand"
+      },
+      {
+        "key": "B",
+        "text": "Jesus' death on the cross"
+      },
+      {
+        "key": "C",
+        "text": "the wedding at Cana"
+      },
+      {
+        "key": "D",
+        "text": "the baptism of Jesus"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "Christians believe Jesus' sacrificial death is the greatest act of love.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q10",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-01"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Complete the verse from 1 John 4:8: 'Whoever does not love does not know God, because God is …'",
+    "options": [
+      {
+        "key": "A",
+        "text": "light"
+      },
+      {
+        "key": "B",
+        "text": "holy"
+      },
+      {
+        "key": "C",
+        "text": "love"
+      },
+      {
+        "key": "D",
+        "text": "spirit"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "'God is love' (1 John 4:8) is the foundation of Christian teaching on love.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q11",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-02"
+    ],
+    "assessmentObjective": "AO2-application",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "What does the Parable of the Prodigal (Lost) Son teach about love?",
+    "options": [
+      {
+        "key": "A",
+        "text": "God's love depends on good behaviour"
+      },
+      {
+        "key": "B",
+        "text": "Older children deserve more love"
+      },
+      {
+        "key": "C",
+        "text": "Wealth is a sign of God's love"
+      },
+      {
+        "key": "D",
+        "text": "God, like the father, lovingly forgives those who return and repent"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "The father runs to welcome his returning son, which shows God's forgiving love (Luke 15:11–32).",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q12",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-03"
+    ],
+    "assessmentObjective": "AO2-application",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which is an example of a church showing Christian love in Botswana today?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Charging high fees for prayers"
+      },
+      {
+        "key": "B",
+        "text": "Running home-based care for people living with HIV/AIDS"
+      },
+      {
+        "key": "C",
+        "text": "Refusing to help non-members"
+      },
+      {
+        "key": "D",
+        "text": "Encouraging revenge against offenders"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "Caring for the sick and vulnerable puts agape love into practice.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q13",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-03"
+    ],
+    "assessmentObjective": "AO3-analysis-evaluation",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Which value in Setswana culture overlaps most closely with Christian love of neighbour?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Botho"
+      },
+      {
+        "key": "B",
+        "text": "Kgotla"
+      },
+      {
+        "key": "C",
+        "text": "Mophato"
+      },
+      {
+        "key": "D",
+        "text": "Bogadi"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Botho (humanity, respect and kindness towards others) closely matches love of neighbour.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q14",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-01"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "In John 13:34–35, what did Jesus say would show the world that people are his disciples?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Their love for one another"
+      },
+      {
+        "key": "B",
+        "text": "Their miracles"
+      },
+      {
+        "key": "C",
+        "text": "Their wealth"
+      },
+      {
+        "key": "D",
+        "text": "Their knowledge of the Law"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "The 'new commandment': love one another as I have loved you; by this everyone will know you are my disciples.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-Q15",
+    "type": "mcq",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-03"
+    ],
+    "assessmentObjective": "AO3-analysis-evaluation",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "Which of these is a challenge to practising Christian love in modern society?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Materialism and selfishness"
+      },
+      {
+        "key": "B",
+        "text": "Volunteering at a feeding scheme"
+      },
+      {
+        "key": "C",
+        "text": "Forgiving a neighbour"
+      },
+      {
+        "key": "D",
+        "text": "Caring for orphans"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Materialism and selfishness put the self first, which goes against self-giving agape love.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-S01",
+    "type": "structured",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-01",
+      "RE-4.1-02",
+      "RE-4.1-03"
+    ],
+    "assessmentObjective": "AO1/AO2/AO3",
+    "paperStyle": "Paper 1 (structured, parts a–c)",
+    "totalMarks": 10,
+    "stem": "Love is at the centre of Christian teaching.",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "State three Christian teachings about love. Support each with a Bible reference.",
+        "marks": 3,
+        "markScheme": "1 mark each for a teaching with a correct supporting reference, e.g. love God and neighbour (Matthew 22:37–39); love one another as Jesus loved (John 13:34); love your enemies (Matthew 5:44); God is love (1 John 4:8); God so loved the world (John 3:16); love is patient and kind (1 Corinthians 13:4–7); your neighbour is anyone in need (Luke 10:25–37)."
+      },
+      {
+        "label": "b",
+        "prompt": "Explain two ways in which Jesus demonstrated love through his life.",
+        "marks": 4,
+        "markScheme": "2 marks per way: identify the action with an example [1] and explain how it shows love [1], e.g. healing a leper, accepting an outcast [1+1]; washing disciples' feet, humble service [1+1]; forgiving those who crucified him [1+1]; eating with Zacchaeus, accepting sinners [1+1]; dying on the cross, self-sacrifice [1+1]; feeding the 5000, compassion for the hungry [1+1]."
+      },
+      {
+        "label": "c",
+        "prompt": "Discuss how far Christian love is practised in Botswana today.",
+        "marks": 3,
+        "markScheme": "Level-based: 3 marks for a balanced discussion with examples on both sides and a conclusion, e.g. church home-based care and charity, botho, forgiveness vs gender-based violence, selfishness and materialism, neglect of the elderly. 2 marks: examples on one side only, or both sides with no conclusion. 1 mark: a simple relevant point."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "RE-4.1-S02",
+    "type": "structured",
+    "subjectKey": "RE",
+    "topicKey": "RE-4.1",
+    "objectiveKeys": [
+      "RE-4.1-01",
+      "RE-4.1-02",
+      "RE-4.1-03"
+    ],
+    "assessmentObjective": "AO1/AO2/AO3",
+    "paperStyle": "Paper 2 (essay, levels of response)",
+    "totalMarks": 25,
+    "stem": "'Christian love is the answer to the social problems facing Botswana today.' Discuss.",
+    "parts": [
+      {
+        "label": null,
+        "prompt": "Write an essay responding to this statement.",
+        "marks": 25,
+        "markScheme": "Levels of response. Level 5 (21–25): accurate, well-referenced teachings on love (e.g. Matthew 22, 1 Corinthians 13, Luke 10, John 13); clear application to named Botswana problems (e.g. HIV/AIDS, gender-based violence, poverty, corruption, family breakdown); balanced evaluation, including limits (some problems also need government action, laws, economic change; not everyone is Christian); reasoned conclusion. Level 4 (16–20): good knowledge and application, evaluation less developed. Level 3 (11–15): relevant knowledge with some application, mostly descriptive. Level 2 (6–10): limited, general knowledge with little application. Level 1 (1–5): a few relevant points. Teacher to confirm against the BEC level descriptors in section 4 of the syllabus."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q01",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-04"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "A wheelbarrow is an example of which class of lever?",
+    "options": [
+      {
+        "key": "A",
+        "text": "1st class"
+      },
+      {
+        "key": "B",
+        "text": "2nd class"
+      },
+      {
+        "key": "C",
+        "text": "3rd class"
+      },
+      {
+        "key": "D",
+        "text": "It is not a lever"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "The load (in the barrow) is between the fulcrum (the wheel) and the effort (the handles), so it is 2nd class.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q02",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-04"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "In a 3rd-class lever, which is in the middle?",
+    "options": [
+      {
+        "key": "A",
+        "text": "The effort"
+      },
+      {
+        "key": "B",
+        "text": "The load"
+      },
+      {
+        "key": "C",
+        "text": "The fulcrum"
+      },
+      {
+        "key": "D",
+        "text": "The gear"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "In 3rd-class levers (tweezers, fishing rod), the effort is between the fulcrum and the load.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q03",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-02"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Which type of motion is a sewing-machine needle moving up and down?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Rotary"
+      },
+      {
+        "key": "B",
+        "text": "Linear"
+      },
+      {
+        "key": "C",
+        "text": "Reciprocating"
+      },
+      {
+        "key": "D",
+        "text": "Oscillating"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Backwards-and-forwards motion in a straight line is reciprocating.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q04",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-08"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "Mechanical advantage is calculated as",
+    "options": [
+      {
+        "key": "A",
+        "text": "effort ÷ load"
+      },
+      {
+        "key": "B",
+        "text": "distance moved by effort ÷ distance moved by load"
+      },
+      {
+        "key": "C",
+        "text": "MA ÷ VR × 100"
+      },
+      {
+        "key": "D",
+        "text": "load ÷ effort"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "MA = load ÷ effort. The third option is the formula for velocity ratio.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q05",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-03"
+    ],
+    "assessmentObjective": "AO2-application",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A lever lifts a 300 N load placed 0.2 m from the fulcrum. The effort is applied 1.2 m from the fulcrum. What effort is needed?",
+    "options": [
+      {
+        "key": "A",
+        "text": "1800 N"
+      },
+      {
+        "key": "B",
+        "text": "72 N"
+      },
+      {
+        "key": "C",
+        "text": "50 N"
+      },
+      {
+        "key": "D",
+        "text": "250 N"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Effort × 1.2 = 300 × 0.2, so effort = 60 ÷ 1.2 = 50 N.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q06",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-08"
+    ],
+    "assessmentObjective": "AO2-application",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A machine has an MA of 3.2 and a VR of 4. What is its efficiency?",
+    "options": [
+      {
+        "key": "A",
+        "text": "128%"
+      },
+      {
+        "key": "B",
+        "text": "12.8%"
+      },
+      {
+        "key": "C",
+        "text": "0.8%"
+      },
+      {
+        "key": "D",
+        "text": "80%"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "Efficiency = MA ÷ VR × 100 = 3.2 ÷ 4 × 100 = 80%.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q07",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-10"
+    ],
+    "assessmentObjective": "AO2-application",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A 20-tooth driver gear turning at 300 rpm drives a 60-tooth gear. What is the speed of the driven gear?",
+    "options": [
+      {
+        "key": "A",
+        "text": "900 rpm"
+      },
+      {
+        "key": "B",
+        "text": "40 rpm"
+      },
+      {
+        "key": "C",
+        "text": "100 rpm"
+      },
+      {
+        "key": "D",
+        "text": "300 rpm"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Gear ratio = 60 ÷ 20 = 3:1, so output speed = 300 ÷ 3 = 100 rpm.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q08",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-05"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Why is an idler gear placed between a driver and a driven gear?",
+    "options": [
+      {
+        "key": "A",
+        "text": "To increase the gear ratio"
+      },
+      {
+        "key": "B",
+        "text": "To convert rotary motion to linear"
+      },
+      {
+        "key": "C",
+        "text": "To reduce the number of teeth"
+      },
+      {
+        "key": "D",
+        "text": "To make both gears turn in the same direction"
+      }
+    ],
+    "correctOption": "D",
+    "explanation": "An idler reverses the direction of rotation so that the driver and driven turn the same way. It does not change the ratio.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q09",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-05"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Which gears change the direction of rotation through 90°, as in a hand drill?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Spur gears"
+      },
+      {
+        "key": "B",
+        "text": "Bevel gears"
+      },
+      {
+        "key": "C",
+        "text": "Idler gears"
+      },
+      {
+        "key": "D",
+        "text": "Rack and pinion"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "Bevel gears have cone-shaped teeth that transmit rotation between shafts at right angles.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q10",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-05"
+    ],
+    "assessmentObjective": "AO2-application",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "A single-start worm turning at 800 rpm drives a 40-tooth worm wheel. What is the speed of the wheel?",
+    "options": [
+      {
+        "key": "A",
+        "text": "32 000 rpm"
+      },
+      {
+        "key": "B",
+        "text": "840 rpm"
+      },
+      {
+        "key": "C",
+        "text": "20 rpm"
+      },
+      {
+        "key": "D",
+        "text": "760 rpm"
+      }
+    ],
+    "correctOption": "C",
+    "explanation": "Ratio = 40:1 for a single-start worm, so 800 ÷ 40 = 20 rpm.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q11",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-12"
+    ],
+    "assessmentObjective": "AO2-application",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "A 50 mm driver pulley turning at 1200 rpm drives a 150 mm pulley. What is the speed of the driven pulley?",
+    "options": [
+      {
+        "key": "A",
+        "text": "400 rpm"
+      },
+      {
+        "key": "B",
+        "text": "3600 rpm"
+      },
+      {
+        "key": "C",
+        "text": "1200 rpm"
+      },
+      {
+        "key": "D",
+        "text": "150 rpm"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Output = 1200 × 50 ÷ 150 = 400 rpm. The larger driven pulley turns more slowly.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q12",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-11"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 1,
+    "marks": 1,
+    "stem": "A cam and follower converts",
+    "options": [
+      {
+        "key": "A",
+        "text": "linear motion into rotary motion"
+      },
+      {
+        "key": "B",
+        "text": "rotary motion into reciprocating motion"
+      },
+      {
+        "key": "C",
+        "text": "oscillating motion into linear motion"
+      },
+      {
+        "key": "D",
+        "text": "reciprocating motion into oscillating motion"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "The rotating cam pushes the follower up and down (reciprocating).",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q13",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-13"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "What is one advantage of a chain and sprocket over a belt and pulley?",
+    "options": [
+      {
+        "key": "A",
+        "text": "It is quieter"
+      },
+      {
+        "key": "B",
+        "text": "It does not slip"
+      },
+      {
+        "key": "C",
+        "text": "It never needs lubrication"
+      },
+      {
+        "key": "D",
+        "text": "It is cheaper"
+      }
+    ],
+    "correctOption": "B",
+    "explanation": "A chain gives a positive drive with no slip. It is noisier, more expensive and needs lubrication.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q14",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-09"
+    ],
+    "assessmentObjective": "AO1-knowledge-understanding",
+    "difficulty": 2,
+    "marks": 1,
+    "stem": "Why is the efficiency of a real machine always less than 100%?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Energy is wasted overcoming friction, as heat and sound"
+      },
+      {
+        "key": "B",
+        "text": "The load is too heavy"
+      },
+      {
+        "key": "C",
+        "text": "The velocity ratio is always 1"
+      },
+      {
+        "key": "D",
+        "text": "The effort is always greater than the load"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "Friction converts some input energy into heat and sound, so less useful work comes out.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-Q15",
+    "type": "mcq",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-14"
+    ],
+    "assessmentObjective": "AO3-problem-solving",
+    "difficulty": 3,
+    "marks": 1,
+    "stem": "A small motor must open a model gate slowly, and the gate must not move when the power is off. Which mechanism is most suitable?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Worm and wheel"
+      },
+      {
+        "key": "B",
+        "text": "Spur gears with an idler"
+      },
+      {
+        "key": "C",
+        "text": "Belt and pulley"
+      },
+      {
+        "key": "D",
+        "text": "Bell crank"
+      }
+    ],
+    "correctOption": "A",
+    "explanation": "A worm and wheel gives a large speed reduction and cannot be driven backwards, so the gate stays locked.",
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-S01",
+    "type": "structured",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-04"
+    ],
+    "assessmentObjective": "AO1",
+    "paperStyle": "Paper 1 Section A (short answer)",
+    "totalMarks": 3,
+    "stem": "Levers are classified by the positions of the fulcrum, load and effort.",
+    "parts": [
+      {
+        "label": null,
+        "prompt": "Name the class of lever for each of: (i) a pair of pliers, (ii) a bottle opener, (iii) a pair of tweezers.",
+        "marks": 3,
+        "markScheme": "(i) 1st class [1]; (ii) 2nd class [1]; (iii) 3rd class [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-S02",
+    "type": "structured",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-08"
+    ],
+    "assessmentObjective": "AO2",
+    "paperStyle": "Paper 1 Section A (short answer)",
+    "totalMarks": 4,
+    "stem": "A pulley system lifts a load of 400 N with an effort of 125 N. The effort moves 4 m while the load rises 1 m.",
+    "parts": [
+      {
+        "label": null,
+        "prompt": "Calculate (i) the mechanical advantage, (ii) the velocity ratio, (iii) the efficiency.",
+        "marks": 4,
+        "markScheme": "(i) MA = 400 ÷ 125 = 3.2 [1]; (ii) VR = 4 ÷ 1 = 4 [1]; (iii) efficiency = 3.2 ÷ 4 × 100 [1] = 80% [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-S03",
+    "type": "structured",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-13"
+    ],
+    "assessmentObjective": "AO1",
+    "paperStyle": "Paper 1 Section A (short answer)",
+    "totalMarks": 2,
+    "stem": "Bicycles use a chain and sprocket rather than a belt and pulley.",
+    "parts": [
+      {
+        "label": null,
+        "prompt": "Give two reasons why.",
+        "marks": 2,
+        "markScheme": "Any two: no slip / positive drive [1]; can transmit larger forces [1]; less affected by wet or muddy conditions [1]; chain can be changed or repaired easily [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  },
+  {
+    "key": "DT-5.3-S04",
+    "type": "structured",
+    "subjectKey": "DT",
+    "topicKey": "DT-5.3",
+    "objectiveKeys": [
+      "DT-5.3-01",
+      "DT-5.3-02",
+      "DT-5.3-05",
+      "DT-5.3-10",
+      "DT-5.3-14"
+    ],
+    "assessmentObjective": "AO2/AO3",
+    "paperStyle": "Paper 1 Section C (design, mechanisms option)",
+    "totalMarks": 20,
+    "stem": "A small business in Maun wants a motorised display stand that slowly rotates a craft basket so customers can see all sides. The electric motor turns at 1200 rpm. The display turntable must rotate at about 10 rpm, quietly and safely.",
+    "parts": [
+      {
+        "label": "a",
+        "prompt": "State the input motion and the output motion needed.",
+        "marks": 2,
+        "markScheme": "Input: rotary (high speed) [1]; output: rotary (slow) [1]."
+      },
+      {
+        "label": "b",
+        "prompt": "Calculate the overall speed reduction ratio needed.",
+        "marks": 2,
+        "markScheme": "1200 ÷ 10 [1] = 120:1 [1]."
+      },
+      {
+        "label": "c",
+        "prompt": "A designer suggests a single-start worm on the motor shaft driving a worm wheel, followed by a pair of spur gears. The worm wheel has 40 teeth. What gear ratio must the spur-gear stage give? Suggest suitable tooth numbers for the driver and driven spur gears.",
+        "marks": 4,
+        "markScheme": "Worm stage = 40:1 [1]; remaining ratio = 120 ÷ 40 = 3:1 [1]; suitable pair, e.g. 20-tooth driver and 60-tooth driven (or 15 and 45) [1]; driven larger than driver [1]."
+      },
+      {
+        "label": "d",
+        "prompt": "Give two reasons why a worm and wheel is suitable for this product.",
+        "marks": 4,
+        "markScheme": "Two reasons, each explained: large speed reduction in a compact space [2]; quiet, smooth running [2]; cannot be back-driven, so the turntable will not turn by hand and strain the motor [2]; gives a right-angle drive, so the motor can lie flat under the base [2]."
+      },
+      {
+        "label": "e",
+        "prompt": "Describe, with notes, how the turntable could be supported so that it turns smoothly and safely. Include one safety feature.",
+        "marks": 5,
+        "markScheme": "Up to 5 for a clear description, e.g. central shaft in a bearing or bush [1]; lazy-Susan ball race or thrust bearing to carry the load [1]; lubrication or low-friction material such as nylon [1]; gears enclosed in a guard or housing [1]; low voltage / insulated wiring / fuse or switch [1]. Award sketches with notes if used."
+      },
+      {
+        "label": "f",
+        "prompt": "Suggest one other mechanism that could replace the spur-gear stage, and give one disadvantage of it.",
+        "marks": 3,
+        "markScheme": "Belt and pulley (or chain and sprocket) [1] with correct diameter/teeth ratio idea [1]; disadvantage, e.g. belt can slip, which affects speed; chain is noisy and needs lubrication [1]."
+      }
+    ],
+    "status": "draft",
+    "reviewedBy": null,
+    "source": "Study Dome original draft"
+  }
+]

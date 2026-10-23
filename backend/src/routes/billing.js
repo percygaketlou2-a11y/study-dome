@@ -7,6 +7,13 @@ const router = express.Router();
 
 const PREMIUM_PRICE_BWP = 60;
 
+// The manual upgrade/downgrade endpoints below exist so the premium unlock
+// can be tested without a real payment. They must never be reachable in
+// production - otherwise anyone can grant themselves Premium for free.
+function devModeEnabled() {
+  return process.env.NODE_ENV !== 'production';
+}
+
 function backendUrl() {
   return (process.env.BACKEND_URL ?? 'http://localhost:4000').replace(/\/$/, '');
 }
@@ -16,9 +23,15 @@ function frontendUrl(path) {
   return `${base}${path}`;
 }
 
-// GET /api/billing/config - lets the frontend know whether real payment is wired up
+// GET /api/billing/config - lets the frontend know whether real payment is wired up,
+// and whether the manual test-unlock buttons are allowed to render at all.
 router.get('/config', requireAuth, (req, res) => {
-  res.json({ dpoConfigured: isDpoConfigured(), price: PREMIUM_PRICE_BWP, currency: 'BWP' });
+  res.json({
+    dpoConfigured: isDpoConfigured(),
+    devMode: devModeEnabled(),
+    price: PREMIUM_PRICE_BWP,
+    currency: 'BWP',
+  });
 });
 
 // GET /api/billing/status - the current user's plan
@@ -33,12 +46,18 @@ router.get('/status', requireAuth, async (req, res) => {
 // check only ever reads `user.plan`, so this and the DPO flow below both
 // just converge on the same field.
 router.post('/upgrade', requireAuth, async (req, res) => {
+  if (!devModeEnabled()) {
+    return res.status(403).json({ error: 'Manual plan changes are disabled in production' });
+  }
   const user = await prisma.user.update({ where: { id: req.userId }, data: { plan: 'premium' } });
   res.json({ plan: user.plan });
 });
 
 // POST /api/billing/downgrade - manually returns the user to the free plan.
 router.post('/downgrade', requireAuth, async (req, res) => {
+  if (!devModeEnabled()) {
+    return res.status(403).json({ error: 'Manual plan changes are disabled in production' });
+  }
   const user = await prisma.user.update({ where: { id: req.userId }, data: { plan: 'free' } });
   res.json({ plan: user.plan });
 });

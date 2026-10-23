@@ -62,7 +62,7 @@ export function AdminPayments() {
                 <tr key={t.id} className="border-b border-slate-100 transition last:border-0 hover:bg-slate-50">
                   <td className="px-4 py-3">
                     <div className="text-slate-900">{t.userName}</div>
-                    <div className="text-xs text-slate-400">{t.userEmail}</div>
+                    <div className="text-xs text-slate-500">{t.userEmail}</div>
                   </td>
                   <td className="px-4 py-3 text-slate-500">{t.provider}</td>
                   <td className="px-4 py-3 font-medium text-slate-900">

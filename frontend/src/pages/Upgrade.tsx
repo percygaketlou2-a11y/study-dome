@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { api, getErrorMessage } from '../api/client'
 import { Layout } from '../components/Layout'
 import { useAuthStore } from '../store/authStore'
 
 interface BillingConfig {
   dpoConfigured: boolean
+  devMode: boolean
   price: number
   currency: string
 }
@@ -95,13 +96,15 @@ export function Upgrade() {
               <p className="mt-4 inline-block rounded-full bg-indigo-600 px-3 py-1 text-xs font-medium text-white">
                 Current plan
               </p>
-              <button
-                onClick={() => downgradeMutation.mutate()}
-                disabled={downgradeMutation.isPending}
-                className="btn-secondary mt-4 block w-fit text-slate-500"
-              >
-                {downgradeMutation.isPending ? 'Resetting...' : 'Reset to Free (testing only)'}
-              </button>
+              {config?.devMode && (
+                <button
+                  onClick={() => downgradeMutation.mutate()}
+                  disabled={downgradeMutation.isPending}
+                  className="btn-secondary mt-4 block w-fit text-slate-500"
+                >
+                  {downgradeMutation.isPending ? 'Resetting...' : 'Reset to Free (testing only)'}
+                </button>
+              )}
             </>
           ) : config?.dpoConfigured ? (
             <>
@@ -115,18 +118,22 @@ export function Upgrade() {
               >
                 {dpoMutation.isPending ? 'Starting checkout...' : `Pay P${price} with DPO`}
               </button>
-              <button
-                onClick={() => upgradeMutation.mutate()}
-                disabled={upgradeMutation.isPending}
-                className="mt-2 block text-xs text-slate-400 hover:text-slate-600 disabled:opacity-50"
-              >
-                Use test unlock instead (dev only)
-              </button>
+              {config.devMode && (
+                <button
+                  onClick={() => upgradeMutation.mutate()}
+                  disabled={upgradeMutation.isPending}
+                  className="mt-2 block text-xs text-slate-500 hover:text-slate-600 disabled:opacity-50"
+                >
+                  Use test unlock instead (dev only)
+                </button>
+              )}
             </>
-          ) : (
+          ) : config?.devMode ? (
             <button onClick={() => upgradeMutation.mutate()} disabled={upgradeMutation.isPending} className="btn-primary mt-4">
               {upgradeMutation.isPending ? 'Unlocking...' : `Pay P${price} once, unlock everything`}
             </button>
+          ) : (
+            <p className="mt-4 text-sm text-slate-500">Premium unlock isn't available yet — please check back soon.</p>
           )}
           {(upgradeMutation.isError || downgradeMutation.isError || dpoMutation.isError) && (
             <p className="mt-2 text-sm text-red-600">
@@ -136,10 +143,17 @@ export function Upgrade() {
         </div>
       </div>
 
-      <p className="mt-6 text-xs text-slate-400">
+      <p className="mt-6 text-xs text-slate-500">
         {config?.dpoConfigured
-          ? 'Payments are processed by DPO Pay. "Reset to Free" and the test unlock are left in for development and are not part of the real checkout.'
-          : 'No payment provider is connected yet — this button switches your plan directly so the unlock can be tested before real payments are wired in.'}
+          ? 'Payments are processed by DPO Pay.'
+          : config?.devMode
+            ? 'No payment provider is connected yet — this button switches your plan directly so the unlock can be tested before real payments are wired in.'
+            : 'No payment provider is connected yet.'}
+        {' '}See our{' '}
+        <Link to="/refund-policy" className="font-medium text-indigo-600 hover:underline">
+          Refund Policy
+        </Link>
+        .
       </p>
     </Layout>
   )

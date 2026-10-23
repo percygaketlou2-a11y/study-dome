@@ -1,0 +1,281 @@
+[
+  {
+    "key": "CHEM",
+    "code": "0570",
+    "name": "Chemistry",
+    "level": "BGCSE",
+    "syllabusYear": 2020,
+    "assessment": "Paper 1: 40 multiple-choice items, 4 options (30%). Paper 2: short-answer & structured theory, 70 marks (50%). Paper 3 practical or Paper 4 Alternative to Practical, 30 marks (20%).",
+    "assessmentObjectives": [
+      "AO1-recall",
+      "AO1-understanding",
+      "AO2-handling-information",
+      "AO3-experimental"
+    ],
+    "units": [
+      {
+        "code": "1",
+        "name": "Matter"
+      },
+      {
+        "code": "2",
+        "name": "Chemical Reactions"
+      },
+      {
+        "code": "3",
+        "name": "Stoichiometry"
+      },
+      {
+        "code": "4",
+        "name": "Metals and Non-metals"
+      },
+      {
+        "code": "5",
+        "name": "Chemistry in the Environment"
+      },
+      {
+        "code": "6",
+        "name": "Carbon Chemistry"
+      }
+    ]
+  },
+  {
+    "key": "PHYS",
+    "code": "0571",
+    "name": "Physics",
+    "level": "BGCSE",
+    "syllabusYear": 2020,
+    "assessment": "Paper 1: 40 multiple-choice items, 4 options (30%). Paper 2: short-answer & structured theory, 70 marks (50%). Paper 3 practical or Paper 4 Alternative to Practical, 30 marks (20%).",
+    "assessmentObjectives": [
+      "AO1-recall",
+      "AO1-understanding",
+      "AO2-handling-information",
+      "AO3-experimental"
+    ],
+    "units": [
+      {
+        "code": "1",
+        "name": "General Physics"
+      },
+      {
+        "code": "2",
+        "name": "Thermal Physics"
+      },
+      {
+        "code": "3",
+        "name": "Properties of Waves, including Light and Sound"
+      },
+      {
+        "code": "4",
+        "name": "Electricity and Magnetism"
+      },
+      {
+        "code": "5",
+        "name": "Atomic Physics"
+      }
+    ]
+  },
+  {
+    "key": "BIO",
+    "code": "0573",
+    "name": "Biology",
+    "level": "BGCSE",
+    "syllabusYear": 2020,
+    "assessment": "Paper 1: 40 multiple-choice items, 4 options (30%). Paper 2: short-answer & structured theory, 70 marks (50%). Paper 3 practical or Paper 4 Alternative to Practical, 40 marks (20%).",
+    "assessmentObjectives": [
+      "AO1-recall",
+      "AO1-understanding",
+      "AO2-handling-information",
+      "AO3-experimental"
+    ],
+    "units": [
+      {
+        "code": "1",
+        "name": "Cell Processes and Maintenance"
+      },
+      {
+        "code": "2",
+        "name": "Transport and Circulation"
+      },
+      {
+        "code": "3",
+        "name": "Nutrition"
+      },
+      {
+        "code": "4",
+        "name": "Respiration"
+      },
+      {
+        "code": "5",
+        "name": "Excretion"
+      },
+      {
+        "code": "6",
+        "name": "Co-ordination and Response"
+      },
+      {
+        "code": "7",
+        "name": "Homeostasis"
+      },
+      {
+        "code": "8",
+        "name": "Support, Movement and Locomotion"
+      },
+      {
+        "code": "9",
+        "name": "The Use and Abuse of Drugs"
+      },
+      {
+        "code": "10",
+        "name": "Living Things"
+      },
+      {
+        "code": "11",
+        "name": "Ecology"
+      },
+      {
+        "code": "12",
+        "name": "Reproduction"
+      },
+      {
+        "code": "13",
+        "name": "Inheritance"
+      },
+      {
+        "code": "14",
+        "name": "Biotechnology"
+      }
+    ]
+  },
+  {
+    "key": "DEV",
+    "code": "0586",
+    "name": "Development Studies",
+    "level": "BGCSE",
+    "syllabusYear": 2019,
+    "assessment": "Paper 1: 1h30, 40 marks – Section A five 4-mark short-answer concept questions; Section B two 10-mark data-based questions (40%). Paper 2: 1h30, answer 3 of 5 structured 20-mark questions (35%). Paper 3: coursework report, 50 marks (25%). No multiple-choice paper.",
+    "assessmentObjectives": [
+      "AO1-knowledge-understanding",
+      "AO2-analysis-evaluation",
+      "AO3-investigation",
+      "AO4-application-problem-solving"
+    ],
+    "units": [
+      {
+        "code": "1",
+        "name": "Measuring and Investigating Development"
+      },
+      {
+        "code": "2",
+        "name": "Production, Consumption and Investment"
+      },
+      {
+        "code": "3",
+        "name": "Rural Development"
+      },
+      {
+        "code": "4",
+        "name": "Industrialisation and Urbanisation"
+      },
+      {
+        "code": "5",
+        "name": "Women in Development"
+      },
+      {
+        "code": "6",
+        "name": "Population, Health and Education"
+      },
+      {
+        "code": "7",
+        "name": "Politics and Development"
+      },
+      {
+        "code": "8",
+        "name": "Regional Co-operation, International Trade and Foreign Aid"
+      }
+    ]
+  },
+  {
+    "key": "RE",
+    "code": "0588",
+    "name": "Religious Education",
+    "level": "BGCSE",
+    "syllabusYear": 2012,
+    "assessment": "Paper 1: 1h30, 50 marks (33%) – five compulsory structured questions, parts (a), (b), (c), 10 marks each. Paper 2: 2h30, 100 marks (67%) – answer 4 of 6 structured/unstructured essays, 25 marks each, levels-of-response marking. No multiple-choice paper. The syllabus does not number its objectives; codes here are Study Dome codes (module.topic).",
+    "assessmentObjectives": [
+      "AO1-knowledge-understanding",
+      "AO2-application",
+      "AO3-analysis-evaluation"
+    ],
+    "units": [
+      {
+        "code": "1",
+        "name": "Introduction to Religion"
+      },
+      {
+        "code": "2",
+        "name": "African Traditional Religion in Botswana"
+      },
+      {
+        "code": "3",
+        "name": "Impact of Christianity on Botswana’s History and Development"
+      },
+      {
+        "code": "4",
+        "name": "Christian Values and Teachings in Today’s World"
+      },
+      {
+        "code": "5",
+        "name": "Human Relationships in African Traditional Religion and Christianity"
+      },
+      {
+        "code": "6",
+        "name": "World Religions in Botswana",
+        "note": "Learners select and study any two of: Buddhism, Hinduism, Islam, Baha’i Faith."
+      },
+      {
+        "code": "7",
+        "name": "Religion and Global Issues"
+      }
+    ]
+  },
+  {
+    "key": "DT",
+    "code": "0595",
+    "name": "Design and Technology",
+    "level": "BGCSE",
+    "syllabusYear": 2019,
+    "assessment": "Paper 1: 2h30, 100 marks (50%) – Section A 10–15 short-answer questions (40); Section B two structured questions (40); Section C choose 1 of 3 design questions on electronics, pneumatics, mechanisms, structures (20). Paper 2: Major Project coursework, 100 marks (50%). No multiple-choice paper.",
+    "assessmentObjectives": [
+      "AO1-knowledge-understanding",
+      "AO2-application",
+      "AO3-problem-solving"
+    ],
+    "units": [
+      {
+        "code": "1",
+        "name": "Health and Safety"
+      },
+      {
+        "code": "2",
+        "name": "Materials"
+      },
+      {
+        "code": "3",
+        "name": "Communication"
+      },
+      {
+        "code": "4",
+        "name": "Design"
+      },
+      {
+        "code": "5",
+        "name": "Technology"
+      },
+      {
+        "code": "6",
+        "name": "Tools and Processes"
+      }
+    ]
+  }
+]

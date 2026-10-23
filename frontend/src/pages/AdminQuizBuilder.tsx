@@ -181,7 +181,7 @@ export function AdminQuizBuilder() {
                 }`}
               >
                 <span>{q.title}</span>
-                <span className="text-xs text-slate-400">
+                <span className="text-xs text-slate-500">
                   {q.curriculum} · {q.subject}
                 </span>
               </button>

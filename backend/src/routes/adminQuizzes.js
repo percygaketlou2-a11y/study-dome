@@ -141,6 +141,16 @@ router.put('/quizzes/:id', async (req, res) => {
     return res.status(404).json({ error: 'Quiz not found' });
   }
 
+  // Replacing questions would reset their review status (back to the "approved"
+  // default) and drop their syllabus links, silently publishing unreviewed
+  // content. Imported questions are edited one at a time in Content Review.
+  const managedCount = await prisma.question.count({ where: { quizId: req.params.id, key: { not: null } } });
+  if (managedCount > 0) {
+    return res.status(409).json({
+      error: 'This quiz comes from the content pack and is managed in Content Review. Edit its questions there so their review status is kept.',
+    });
+  }
+
   const questionsCreate = buildQuestionsCreate(questions);
   const totalMarks = questionsCreate.reduce((sum, q) => sum + q.marks, 0);
 

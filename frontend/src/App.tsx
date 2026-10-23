@@ -19,6 +19,13 @@ import { ForgotPassword } from './pages/ForgotPassword'
 import { ResetPassword } from './pages/ResetPassword'
 import { VerifyEmail } from './pages/VerifyEmail'
 import { Account } from './pages/Account'
+import { ContactUs } from './pages/ContactUs'
+import { AdminContactMessages } from './pages/AdminContactMessages'
+import { AdminContentReview } from './pages/AdminContentReview'
+import { PrivacyPolicy } from './pages/legal/PrivacyPolicy'
+import { TermsAndConditions } from './pages/legal/TermsAndConditions'
+import { CookiePolicy } from './pages/legal/CookiePolicy'
+import { RefundPolicy } from './pages/legal/RefundPolicy'
 import { ProtectedRoute, RequireCurriculum, RequireAdmin } from './components/ProtectedRoute'
 
 function App() {
@@ -29,6 +36,11 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/verify-email" element={<VerifyEmail />} />
+      <Route path="/contact" element={<ContactUs />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms" element={<TermsAndConditions />} />
+      <Route path="/cookie-policy" element={<CookiePolicy />} />
+      <Route path="/refund-policy" element={<RefundPolicy />} />
       <Route
         path="/onboarding"
         element={
@@ -131,6 +143,26 @@ function App() {
           <ProtectedRoute>
             <RequireAdmin>
               <AdminTutorials />
+            </RequireAdmin>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/content"
+        element={
+          <ProtectedRoute>
+            <RequireAdmin>
+              <AdminContentReview />
+            </RequireAdmin>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/contact-messages"
+        element={
+          <ProtectedRoute>
+            <RequireAdmin>
+              <AdminContactMessages />
             </RequireAdmin>
           </ProtectedRoute>
         }

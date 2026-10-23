@@ -60,7 +60,7 @@ function StreakCard({ streak, activeDays, studiedToday }: { streak: number; acti
           {studiedToday ? (
             <span className="font-medium text-emerald-600">Today's goal done ✓</span>
           ) : (
-            <span className="text-slate-400">Today's goal: study once</span>
+            <span className="text-slate-500">Today's goal: study once</span>
           )}
         </div>
       </div>
@@ -79,7 +79,7 @@ function SubjectCard({ s }: { s: Subject }) {
           <div className="h-1.5 overflow-hidden rounded-full bg-slate-100">
             <div className="h-full rounded-full bg-indigo-500 transition-all" style={{ width: `${progress}%` }} />
           </div>
-          <div className="mt-1 text-xs text-slate-400">
+          <div className="mt-1 text-xs text-slate-500">
             {s.quizzesCompleted}/{s.quizzesTotal} quizzes done
           </div>
         </div>

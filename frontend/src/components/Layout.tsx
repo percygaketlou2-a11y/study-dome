@@ -3,11 +3,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
 
 const ADMIN_LINKS = [
+  { to: '/admin/content', label: 'Content Review' },
   { to: '/admin/quizzes', label: 'Quizzes' },
   { to: '/admin/curricula', label: 'Curricula' },
   { to: '/admin/notes', label: 'Notes' },
   { to: '/admin/videos', label: 'Videos' },
   { to: '/admin/tutorials', label: 'Tutorials' },
+  { to: '/admin/contact-messages', label: 'Messages' },
   { to: '/admin/access', label: 'Access' },
   { to: '/admin/users', label: 'Users' },
   { to: '/admin/payments', label: 'Payments' },
@@ -30,6 +32,7 @@ export function Layout({ children }: { children: ReactNode }) {
   const location = useLocation()
   const [adminMenuOpen, setAdminMenuOpen] = useState(false)
   const adminMenuRef = useRef<HTMLDivElement>(null)
+  const adminMenuButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     if (!adminMenuOpen) return
@@ -38,8 +41,18 @@ export function Layout({ children }: { children: ReactNode }) {
         setAdminMenuOpen(false)
       }
     }
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setAdminMenuOpen(false)
+        adminMenuButtonRef.current?.focus()
+      }
+    }
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
   }, [adminMenuOpen])
 
   const isAdminSection = location.pathname.startsWith('/admin')
@@ -48,6 +61,12 @@ export function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-[#f7f8fb]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-30 focus:rounded-lg focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
+      >
+        Skip to main content
+      </a>
       <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 sm:px-6">
           <div className="flex items-center gap-3 sm:gap-6">
@@ -63,14 +82,19 @@ export function Layout({ children }: { children: ReactNode }) {
             {user?.isAdmin && (
               <div className="relative" ref={adminMenuRef}>
                 <button
+                  ref={adminMenuButtonRef}
                   onClick={() => setAdminMenuOpen((v) => !v)}
+                  aria-haspopup="true"
+                  aria-expanded={adminMenuOpen}
                   className={`flex items-center gap-1 ${navLinkClass(isAdminSection)}`}
                 >
                   Admin
-                  <span className={`text-xs transition-transform ${adminMenuOpen ? 'rotate-180' : ''}`}>▾</span>
+                  <span aria-hidden="true" className={`text-xs transition-transform ${adminMenuOpen ? 'rotate-180' : ''}`}>
+                    ▾
+                  </span>
                 </button>
                 {adminMenuOpen && (
-                  <div className="absolute left-0 top-full z-10 mt-2 w-44 overflow-hidden rounded-lg border border-slate-200 bg-white py-1 shadow-lg">
+                  <div role="menu" className="absolute left-0 top-full z-10 mt-2 w-44 overflow-hidden rounded-lg border border-slate-200 bg-white py-1 shadow-lg">
                     {ADMIN_LINKS.map((link) => (
                       <Link
                         key={link.to}
@@ -118,7 +142,31 @@ export function Layout({ children }: { children: ReactNode }) {
           )}
         </div>
       </header>
-      <main className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8">{children}</main>
+      <main id="main-content" className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
+        {children}
+      </main>
+      <footer className="border-t border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-xs text-slate-500 sm:px-6">
+          <span>&copy; {new Date().getFullYear()} Study Dome</span>
+          <nav className="flex flex-wrap gap-x-4 gap-y-1" aria-label="Legal">
+            <Link to="/privacy-policy" className="hover:text-indigo-600">
+              Privacy Policy
+            </Link>
+            <Link to="/terms" className="hover:text-indigo-600">
+              Terms & Conditions
+            </Link>
+            <Link to="/cookie-policy" className="hover:text-indigo-600">
+              Cookie Policy
+            </Link>
+            <Link to="/refund-policy" className="hover:text-indigo-600">
+              Refund Policy
+            </Link>
+            <Link to="/contact" className="hover:text-indigo-600">
+              Contact Us
+            </Link>
+          </nav>
+        </div>
+      </footer>
     </div>
   )
 }

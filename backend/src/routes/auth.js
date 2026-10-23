@@ -1,23 +1,20 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const prisma = require('../db');
-const { requireAuth } = require('../middleware/auth');
+const { requireAuth, signToken } = require('../middleware/auth');
 const { generateToken, hashToken } = require('../utils/tokens');
+const { hashPassword, verifyPassword } = require('../utils/passwords');
+const { isString, normalizeEmail, isValidEmail, passwordProblem, cleanText } = require('../utils/validate');
 const { isEmailConfigured, sendVerificationEmail, sendPasswordResetEmail } = require('../utils/mailer');
 
 const router = express.Router();
 
 const VERIFY_TOKEN_TTL_MS = 24 * 60 * 60 * 1000; // 24h
 const RESET_TOKEN_TTL_MS = 15 * 60 * 1000; // 15min
-
-function signToken(userId) {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
-}
+const MAX_NAME_LENGTH = 100;
 
 function isAdminEmail(email) {
-  const adminEmail = process.env.ADMIN_EMAIL;
-  return Boolean(adminEmail) && email.toLowerCase() === adminEmail.toLowerCase();
+  const adminEmail = normalizeEmail(process.env.ADMIN_EMAIL);
+  return Boolean(adminEmail) && email === adminEmail;
 }
 
 function publicUser(user) {
@@ -33,13 +30,19 @@ function publicUser(user) {
 }
 
 router.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
+  const { password, acceptedTerms } = req.body;
+  const name = cleanText(req.body.name, MAX_NAME_LENGTH);
+  const email = normalizeEmail(req.body.email);
 
-  if (!name || !email || !password) {
-    return res.status(400).json({ error: 'name, email and password are required' });
+  if (!name || !isValidEmail(email) || !isString(password)) {
+    return res.status(400).json({ error: 'A name, a valid email and a password are required' });
   }
-  if (password.length < 6) {
-    return res.status(400).json({ error: 'Password must be at least 6 characters' });
+  const problem = passwordProblem(password);
+  if (problem) {
+    return res.status(400).json({ error: problem });
+  }
+  if (acceptedTerms !== true) {
+    return res.status(400).json({ error: 'You must accept the Terms & Conditions and Privacy Policy to register' });
   }
 
   const existing = await prisma.user.findUnique({ where: { email } });
@@ -47,7 +50,7 @@ router.post('/register', async (req, res) => {
     return res.status(409).json({ error: 'An account with this email already exists' });
   }
 
-  const passwordHash = await bcrypt.hash(password, 10);
+  const passwordHash = await hashPassword(password);
   const { raw, hash } = generateToken();
   const user = await prisma.user.create({
     data: {
@@ -57,6 +60,7 @@ router.post('/register', async (req, res) => {
       isAdmin: isAdminEmail(email),
       verifyTokenHash: hash,
       verifyTokenExpiresAt: new Date(Date.now() + VERIFY_TOKEN_TTL_MS),
+      termsAcceptedAt: new Date(),
     },
   });
 
@@ -74,19 +78,19 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const email = normalizeEmail(req.body.email);
+  const { password } = req.body;
 
-  if (!email || !password) {
+  if (!email || !isString(password)) {
     return res.status(400).json({ error: 'email and password are required' });
   }
 
   let user = await prisma.user.findUnique({ where: { email } });
-  if (!user) {
-    return res.status(401).json({ error: 'Invalid email or password' });
-  }
 
-  const valid = await bcrypt.compare(password, user.passwordHash);
-  if (!valid) {
+  // Always do the same amount of hashing work, whether or not the account
+  // exists, so response time doesn't reveal which emails are registered.
+  const valid = await verifyPassword(password, user?.passwordHash);
+  if (!user || !valid) {
     return res.status(401).json({ error: 'Invalid email or password' });
   }
 
@@ -126,7 +130,7 @@ router.post('/resend-verification', requireAuth, async (req, res) => {
 // POST /api/auth/verify-email - consume a verification token
 router.post('/verify-email', async (req, res) => {
   const { token } = req.body;
-  if (!token) {
+  if (!isString(token) || !token) {
     return res.status(400).json({ error: 'token is required' });
   }
 
@@ -145,7 +149,7 @@ router.post('/verify-email', async (req, res) => {
 
 // POST /api/auth/forgot-password - issue a password reset link
 router.post('/forgot-password', async (req, res) => {
-  const { email } = req.body;
+  const email = normalizeEmail(req.body.email);
   if (!email) {
     return res.status(400).json({ error: 'email is required' });
   }
@@ -176,11 +180,12 @@ router.post('/forgot-password', async (req, res) => {
 // POST /api/auth/reset-password - consume a reset token and set a new password
 router.post('/reset-password', async (req, res) => {
   const { token, newPassword } = req.body;
-  if (!token || !newPassword) {
+  if (!isString(token) || !token || !isString(newPassword)) {
     return res.status(400).json({ error: 'token and newPassword are required' });
   }
-  if (newPassword.length < 6) {
-    return res.status(400).json({ error: 'Password must be at least 6 characters' });
+  const problem = passwordProblem(newPassword);
+  if (problem) {
+    return res.status(400).json({ error: problem });
   }
 
   const user = await prisma.user.findFirst({ where: { resetTokenHash: hashToken(token) } });
@@ -188,14 +193,19 @@ router.post('/reset-password', async (req, res) => {
     return res.status(400).json({ error: 'This reset link is invalid or has expired' });
   }
 
-  const passwordHash = await bcrypt.hash(newPassword, 10);
+  // passwordChangedAt invalidates every session issued before now, which is the
+  // point of resetting a password after a suspected compromise.
   const updated = await prisma.user.update({
     where: { id: user.id },
-    data: { passwordHash, resetTokenHash: null, resetTokenExpiresAt: null },
+    data: {
+      passwordHash: await hashPassword(newPassword),
+      passwordChangedAt: new Date(),
+      resetTokenHash: null,
+      resetTokenExpiresAt: null,
+    },
   });
 
-  const authToken = signToken(updated.id);
-  res.json({ token: authToken, user: publicUser(updated) });
+  res.json({ token: signToken(updated.id), user: publicUser(updated) });
 });
 
 module.exports = router;

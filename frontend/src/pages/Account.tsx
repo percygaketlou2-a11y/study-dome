@@ -8,6 +8,7 @@ import { useAuthStore } from '../store/authStore'
 export function Account() {
   const user = useAuthStore((s) => s.user)
   const updateUser = useAuthStore((s) => s.updateUser)
+  const login = useAuthStore((s) => s.login)
 
   const [name, setName] = useState(user?.name ?? '')
   const [newEmail, setNewEmail] = useState('')
@@ -35,7 +36,10 @@ export function Account() {
   const passwordMutation = useMutation({
     mutationFn: async () =>
       (await api.patch('/user/password', { currentPassword, newPassword })).data,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      // Changing a password signs out every older session; the server hands this
+      // device a fresh token so the person who changed it stays signed in.
+      if (user && data.token) login(data.token, user)
       setCurrentPassword('')
       setNewPassword('')
     },
@@ -81,7 +85,15 @@ export function Account() {
             }}
             className="mt-3 flex gap-2"
           >
-            <input value={name} onChange={(e) => setName(e.target.value)} className="field-input flex-1" />
+            <label htmlFor="account-name" className="sr-only">
+              Name
+            </label>
+            <input
+              id="account-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="field-input flex-1"
+            />
             <button type="submit" disabled={nameMutation.isPending} className="btn-primary">
               Save
             </button>
@@ -102,7 +114,11 @@ export function Account() {
             }}
             className="mt-3 space-y-2"
           >
+            <label htmlFor="account-new-email" className="sr-only">
+              New email
+            </label>
             <input
+              id="account-new-email"
               type="email"
               required
               placeholder="New email"
@@ -110,7 +126,11 @@ export function Account() {
               onChange={(e) => setNewEmail(e.target.value)}
               className="field-input"
             />
+            <label htmlFor="account-email-password" className="sr-only">
+              Current password
+            </label>
             <input
+              id="account-email-password"
               type="password"
               required
               placeholder="Current password"
@@ -141,7 +161,11 @@ export function Account() {
             }}
             className="mt-3 space-y-2"
           >
+            <label htmlFor="account-current-password" className="sr-only">
+              Current password
+            </label>
             <input
+              id="account-current-password"
               type="password"
               required
               placeholder="Current password"
@@ -149,10 +173,14 @@ export function Account() {
               onChange={(e) => setCurrentPassword(e.target.value)}
               className="field-input"
             />
+            <label htmlFor="account-new-password" className="sr-only">
+              New password
+            </label>
             <input
+              id="account-new-password"
               type="password"
               required
-              minLength={6}
+              minLength={8}
               placeholder="New password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}

@@ -7,11 +7,21 @@ const router = express.Router();
 
 router.use(requireAuth, attachPlan);
 
+// Only approved questions are ever shown to or graded for students. Admin-built
+// and seeded questions default to approved; imported content-pack drafts stay
+// hidden until a reviewer approves them in the admin Content Review screen.
+const APPROVED = { reviewStatus: 'approved' };
+const OPTIONS_IN_ORDER = { orderBy: [{ order: 'asc' }, { id: 'asc' }] };
+
+function sumMarks(questions) {
+  return questions.reduce((sum, q) => sum + q.marks, 0);
+}
+
 // GET /api/quizzes/:subjectId - list quizzes for a subject
 router.get('/:subjectId', async (req, res) => {
   const quizzes = await prisma.quiz.findMany({
-    where: { subjectId: req.params.subjectId },
-    include: { topic: true, _count: { select: { questions: true } } },
+    where: { subjectId: req.params.subjectId, questions: { some: APPROVED } },
+    include: { topic: true, questions: { where: APPROVED, select: { marks: true } } },
   });
 
   res.json(
@@ -20,8 +30,8 @@ router.get('/:subjectId', async (req, res) => {
       title: q.title,
       topic: q.topic?.title ?? null,
       timeLimitMinutes: q.timeLimitMinutes,
-      totalMarks: q.totalMarks,
-      questionCount: q._count.questions,
+      totalMarks: sumMarks(q.questions),
+      questionCount: q.questions.length,
       isPremium: q.isPremium,
       locked: q.isPremium && req.userPlan !== 'premium',
     }))
@@ -32,10 +42,12 @@ router.get('/:subjectId', async (req, res) => {
 router.get('/take/:quizId', async (req, res) => {
   const quiz = await prisma.quiz.findUnique({
     where: { id: req.params.quizId },
-    include: { questions: { orderBy: { order: 'asc' }, include: { options: true } } },
+    include: {
+      questions: { where: APPROVED, orderBy: { order: 'asc' }, include: { options: OPTIONS_IN_ORDER } },
+    },
   });
 
-  if (!quiz) {
+  if (!quiz || quiz.questions.length === 0) {
     return res.status(404).json({ error: 'Quiz not found' });
   }
   if (quiz.isPremium && req.userPlan !== 'premium') {
@@ -46,7 +58,7 @@ router.get('/take/:quizId', async (req, res) => {
     id: quiz.id,
     title: quiz.title,
     timeLimitMinutes: quiz.timeLimitMinutes,
-    totalMarks: quiz.totalMarks,
+    totalMarks: sumMarks(quiz.questions),
     questions: quiz.questions.map((q) => ({
       id: q.id,
       questionText: q.questionText,
@@ -66,16 +78,18 @@ router.get('/take/:quizId', async (req, res) => {
 router.post('/submit', async (req, res) => {
   const { quizId, answers } = req.body;
 
-  if (!quizId || !answers) {
+  if (typeof quizId !== 'string' || !quizId || !answers || typeof answers !== 'object' || Array.isArray(answers)) {
     return res.status(400).json({ error: 'quizId and answers are required' });
   }
 
   const quiz = await prisma.quiz.findUnique({
     where: { id: quizId },
-    include: { questions: { orderBy: { order: 'asc' }, include: { options: true } } },
+    include: {
+      questions: { where: APPROVED, orderBy: { order: 'asc' }, include: { options: OPTIONS_IN_ORDER } },
+    },
   });
 
-  if (!quiz) {
+  if (!quiz || quiz.questions.length === 0) {
     return res.status(404).json({ error: 'Quiz not found' });
   }
   if (quiz.isPremium && req.userPlan !== 'premium') {
@@ -109,7 +123,7 @@ router.post('/submit', async (req, res) => {
   });
 
   const marksAwarded = feedback.reduce((sum, f, i) => sum + (f.isCorrect ? quiz.questions[i].marks : 0), 0);
-  const totalMarks = quiz.totalMarks;
+  const totalMarks = sumMarks(quiz.questions);
   const score = totalMarks > 0 ? Math.round((marksAwarded / totalMarks) * 100) : 0;
 
   const result = await prisma.quizResult.create({

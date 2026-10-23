@@ -27,12 +27,22 @@ model User {
   verifyTokenExpiresAt  DateTime?
   resetTokenHash        String?
   resetTokenExpiresAt   DateTime?
+  passwordChangedAt     DateTime? // sessions issued before this moment are rejected
   selectedCurriculumId String?
   selectedCurriculum   Curriculum?     @relation(fields: [selectedCurriculumId], references: [id])
+  termsAcceptedAt      DateTime?       // set at registration when the user accepts Terms & Privacy Policy - an audit trail of consent
   quizResults          QuizResult[]
   dailyActivity        DailyActivity[]
   paymentTransactions  PaymentTransaction[]
   createdAt            DateTime        @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
 }
 
 model PaymentTransaction {
@@ -83,11 +93,16 @@ model Subject {
   name         String
   category     String?     // "STEM" | "Humanities" | "Languages" | "Commercial" | ...
   notes        String?     // admin-authored study notes; read-only for students
+  syllabusYear         Int?     // year of the examining body's syllabus the content is written against
+  assessment           String?  // paper structure, as printed in the syllabus
+  assessmentObjectives String?  // JSON array of assessment-objective codes
   topics       Topic[]
   quizzes      Quiz[]
   pastPapers   PastPaper[]
   videos       Video[]
   tutorials    Tutorial[]
+  topicNotes   TopicNote[]
+  structuredQuestions StructuredQuestion[]
 
   @@unique([curriculumId, name])
 }
@@ -98,7 +113,80 @@ model Topic {
   subject       Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   title         String
   sequenceOrder Int      @default(0)
+  key           String?  @unique // stable content-pack key, e.g. "CHEM-3.2"
+  code          String?  // syllabus topic code, e.g. "3.2"
+  unitCode      String?
+  unitName      String?
   quizzes       Quiz[]
+  objectives    Objective[]
+  notes         TopicNote[]
+  structuredQuestions StructuredQuestion[]
+}
+
+// A specific learning objective from the examining body's syllabus.
+model Objective {
+  id           String  @id @default(cuid())
+  key          String  @unique // e.g. "CHEM-3.2-01"
+  topicId      String
+  topic        Topic   @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  syllabusCode String? // code as printed in the syllabus, e.g. "3.2.1.1"
+  text         String
+  order        Int     @default(0)
+  notes        TopicNote[]          @relation("NoteObjectives")
+  questions    Question[]           @relation("QuestionObjectives")
+  structuredQuestions StructuredQuestion[] @relation("StructuredObjectives")
+}
+
+// A section of study notes for one topic. Written in a small Markdown subset.
+// Students only see notes whose reviewStatus is "approved".
+model TopicNote {
+  id           String   @id @default(cuid())
+  key          String   @unique
+  subjectId    String
+  subject      Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  topicId      String
+  topic        Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  heading      String
+  bodyMarkdown String
+  order        Int      @default(0)
+  reviewStatus String   @default("not_reviewed") // "not_reviewed" | "approved" | "approve_with_edits" | "rejected"
+  corrections  String?
+  reviewerName String?
+  reviewedAt   DateTime?
+  objectives   Objective[] @relation("NoteObjectives")
+}
+
+// A multi-part, exam-style question with a mark scheme per part. Not
+// auto-graded: students answer, then reveal the mark scheme to self-mark.
+model StructuredQuestion {
+  id         String   @id @default(cuid())
+  key        String   @unique
+  subjectId  String
+  subject    Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  topicId    String
+  topic      Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  paperStyle String?
+  assessmentObjective String?
+  totalMarks Int
+  stem       String
+  source     String?
+  parts      StructuredPart[]
+  objectives Objective[] @relation("StructuredObjectives")
+}
+
+model StructuredPart {
+  id           String   @id @default(cuid())
+  questionId   String
+  question     StructuredQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  label        String?  // part letter, e.g. "a"; absent on single-part questions
+  prompt       String
+  marks        Int
+  markScheme   String
+  order        Int      @default(0)
+  reviewStatus String   @default("not_reviewed")
+  corrections  String?
+  reviewerName String?
+  reviewedAt   DateTime?
 }
 
 model Quiz {
@@ -125,6 +213,19 @@ model Question {
   marks        Int      @default(1)
   order        Int      @default(0)
   options      Option[]
+  // Content-pack / review metadata. Existing and admin-authored questions
+  // default to "approved"; imported drafts start as "not_reviewed" and stay
+  // hidden from students until approved.
+  key          String?  @unique
+  reviewStatus String   @default("approved") // "not_reviewed" | "approved" | "approve_with_edits" | "rejected"
+  suggestedCorrectOption String? // reviewer's "correct answer if different", as a letter A-D
+  corrections  String?
+  reviewerName String?
+  reviewedAt   DateTime?
+  difficulty   Int?
+  assessmentObjective String?
+  source       String?
+  objectives   Objective[] @relation("QuestionObjectives")
 }
 
 model Option {
@@ -133,6 +234,7 @@ model Option {
   question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
   optionText String
   isCorrect  Boolean  @default(false)
+  order      Int      @default(0)
 }
 
 model QuizResult {
@@ -189,4 +291,5 @@ model TutorialStep {
   order      Int      @default(0)
   text       String
   imageUrl   String?
+  imageAlt   String?  // admin-written description of the image, for screen-reader alt text
 }

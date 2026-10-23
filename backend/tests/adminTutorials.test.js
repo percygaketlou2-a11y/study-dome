@@ -29,14 +29,24 @@ describe('admin tutorials', () => {
     expect(step1Res.status).toBe(201);
     expect(step1Res.body.imageUrl).toBeNull();
 
-    const step2Res = await request(app)
+    const noAltRes = await request(app)
       .post(`/api/admin/tutorials/${tutorialId}/steps`)
       .set('Authorization', `Bearer ${adminToken}`)
       .field('text', 'Substitute into the other equation')
       .field('order', '2')
       .attach('image', TINY_PNG, 'diagram.png');
+    expect(noAltRes.status).toBe(400);
+
+    const step2Res = await request(app)
+      .post(`/api/admin/tutorials/${tutorialId}/steps`)
+      .set('Authorization', `Bearer ${adminToken}`)
+      .field('text', 'Substitute into the other equation')
+      .field('order', '2')
+      .field('imageAlt', 'Diagram showing the substitution step worked out on a grid')
+      .attach('image', TINY_PNG, 'diagram.png');
     expect(step2Res.status).toBe(201);
     expect(step2Res.body.imageUrl).toMatch(/^\/uploads\/tutorial-images\//);
+    expect(step2Res.body.imageAlt).toMatch(/substitution/);
 
     const fullRes = await request(app)
       .get(`/api/admin/tutorials/${tutorialId}`)
