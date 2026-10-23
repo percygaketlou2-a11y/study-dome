@@ -1,9 +1,16 @@
+const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const multer = require('multer');
 
-const UPLOAD_DIR = path.join(__dirname, '..', '..', 'uploads', 'past-papers');
-const TUTORIAL_IMAGE_DIR = path.join(__dirname, '..', '..', 'uploads', 'tutorial-images');
+// Where uploaded papers and images are kept. On a host whose disk is wiped on
+// every deploy, point UPLOADS_DIR at a persistent volume or the files are lost.
+const UPLOADS_ROOT = process.env.UPLOADS_DIR ? path.resolve(process.env.UPLOADS_DIR) : path.join(__dirname, '..', '..', 'uploads');
+const UPLOAD_DIR = path.join(UPLOADS_ROOT, 'past-papers');
+const TUTORIAL_IMAGE_DIR = path.join(UPLOADS_ROOT, 'tutorial-images');
+
+// A newly attached volume starts empty, and multer won't create folders itself.
+for (const dir of [UPLOAD_DIR, TUTORIAL_IMAGE_DIR]) fs.mkdirSync(dir, { recursive: true });
 
 // Raised for a rejected upload. The API error handler recognises this class and
 // returns its message to the client; it never matches on message text, so an
@@ -53,4 +60,4 @@ const uploadTutorialImage = multer({
   limits: { fileSize: 5 * 1024 * 1024, files: 1 }, // 5MB
 }).single('image');
 
-module.exports = { uploadPastPaperFiles, UPLOAD_DIR, uploadTutorialImage, TUTORIAL_IMAGE_DIR, UploadError };
+module.exports = { uploadPastPaperFiles, UPLOADS_ROOT, UPLOAD_DIR, uploadTutorialImage, TUTORIAL_IMAGE_DIR, UploadError };

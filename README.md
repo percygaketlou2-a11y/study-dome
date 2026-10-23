@@ -89,10 +89,10 @@ Checklist before going live:
 2. Set a strong `JWT_SECRET` (32+ random characters). The server refuses to start in production without one.
 3. Set `FRONTEND_URL` (and `CORS_ORIGINS` if you have more than one frontend) to your real https address.
 4. Set `TRUST_PROXY=1` if the API sits behind a host's reverse proxy, or rate limiting will treat every visitor as the same IP.
-5. Configure email (`EMAIL_USER`/`EMAIL_PASS`) so the admin email can be verified and password-reset links are emailed instead of returned in the API response.
+5. Configure email (`EMAIL_USER`/`EMAIL_PASS`). It is required in production: password resets and email verification go through it, and the server refuses to start without it. In production a reset or verification link is never put in an API response.
 6. Run `npm run normalize:emails` once on any database that has accounts from before email normalization.
 7. Use Postgres, with a database user that only has access to this app's database.
-8. Add security headers to the frontend host. `frontend/public/_headers` covers Netlify and Cloudflare Pages. A Content-Security-Policy depends on your backend domain, so it is not shipped; this is a starting point:
+8. Security headers for the website. When the API server delivers the website (the default in production, see "Going live") it sends this Content-Security-Policy and the other headers itself, and `backend/tests/deploy.test.js` checks the two stay identical. Only if you host the frontend separately do you need to add them there (`frontend/public/_headers` covers Netlify and Cloudflare Pages):
 
 ```
 default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com;
@@ -109,40 +109,81 @@ Known trade-offs:
 - Uploaded past-paper PDFs are served by URL without a login check. Filenames are random and only released to students allowed to see them, but anyone who is given a link can open it.
 - `npm audit` still reports a few issues in dev-only tooling (`nodemon`, `jest`). They never run in production; fixing them needs major-version upgrades of those tools.
 
-## Before deploying to production
+## Going live
 
-A few things are set up for local development and need attention before this goes live:
+Study Dome deploys as **one Node service plus one PostgreSQL database**. The same service delivers the website and the API, so there is a single web address, no CORS to configure and no separate frontend host. It works on any host that can run Node (Render, Railway, Fly.io, a VPS, ...).
 
-1. **Switch the database to Postgres.** In `backend/prisma/schema.prisma`, change the datasource `provider` from `"sqlite"` to `"postgresql"`, point `DATABASE_URL` at a real Postgres instance, then run `npx prisma db push` (or set up proper migrations with `npx prisma migrate dev`) against it. SQLite works locally but most hosting platforms don't persist local disk files across deploys/restarts.
+What you need from the host:
+- **Node 22.12 or newer.**
+- **A PostgreSQL database** (version 13+), and its connection string.
+- **A persistent disk** mounted somewhere (for example `/data`), for uploaded past papers and tutorial images. Without one, uploads vanish on every redeploy.
+- **HTTPS** on your domain. Hosts do this for you; it is not something this app does itself.
 
-2. **Persistent file storage for uploads.** Past-paper PDFs are currently saved to `backend/uploads/past-papers/` on local disk (see `backend/src/utils/upload.js`). This needs either a persistent volume on whatever host you use, or migrating to object storage (S3-compatible) before real files are uploaded — otherwise uploads vanish on redeploy.
+### Steps
 
-3. **Set a real `JWT_SECRET`.** The `.env.example` has a placeholder; generate a real random secret for production and never commit it.
+1. Put the code on the host (usually by connecting the GitHub repo).
+2. Set the environment variables from `.env.production.example` (see the table below).
+3. **Build command:** `npm run build`
+   **Start command:** `npm start`
+4. Open your address and **register with the `ADMIN_EMAIL` address first**: that account becomes the owner/admin. Everything else is invited from Admin -> Users.
 
-4. **Restrict CORS.** `backend/src/app.js` currently allows all origins (`cors()` with no options). Once the frontend's production URL is known, lock this down to that origin.
+On every start, `npm start` (see `backend/scripts/startProduction.js`) checks the configuration and **refuses to start if it is unsafe**, creates or updates the database tables (it will stop rather than delete data), makes sure the curricula and subjects exist, loads the BGCSE content pack (hidden from students until a reviewer approves each item), then starts the server. All of this is safe to repeat.
 
-5. **Payment (DPO Pay) is wired up but needs your real credentials.** See "Connecting email and payment" below. Until `DPO_COMPANY_TOKEN`/`DPO_SERVICE_TYPE` are set, `/upgrade` falls back to a manual toggle (`POST /api/billing/upgrade`) that grants Premium with no money changing hands — fine for testing, not for real users. The DPO integration (`backend/src/utils/dpo.js`) is built against DPO's documented API but has not been exercised against a live DPO account — test carefully in DPO's sandbox (`DPO_SANDBOX=true`) before going live.
+| Variable | Required | What it is |
+| --- | --- | --- |
+| `NODE_ENV` | yes | `production` |
+| `DATABASE_URL` | yes | PostgreSQL connection string, `postgresql://user:password@host:5432/dbname` |
+| `JWT_SECRET` | yes | 32+ random characters. Changing it signs everyone out. |
+| `FRONTEND_URL` | yes | Your public address, e.g. `https://studydome.example`. Used for emailed links and payments. |
+| `BACKEND_URL` | yes | Same address as `FRONTEND_URL` (the API is on the same address). |
+| `ADMIN_EMAIL` | yes | The owner account's email. Use an inbox you control. |
+| `UPLOADS_DIR` | yes | Folder on the persistent disk, e.g. `/data/uploads` |
+| `TRUST_PROXY` | yes | `1` on almost every host, so rate limiting sees real visitor IPs |
+| `EMAIL_USER`, `EMAIL_PASS`, `EMAIL_FROM` | yes | Sends verification and password-reset emails (see "Email" below) |
+| `DPO_COMPANY_TOKEN`, `DPO_SERVICE_TYPE`, `DPO_SANDBOX` | for payments | See below |
 
-6. **Email (Gmail) is wired up but needs your real credentials.** See "Connecting email and payment" below. Until `EMAIL_USER`/`EMAIL_PASS` are set, password reset and email verification fall back to returning the link directly in the API response/UI instead of emailing it (see `backend/src/routes/auth.js`).
+`PORT` is read from the environment, which hosts set automatically.
 
-7. **Build the frontend for production** with `npm run build` in `frontend/` (outputs to `frontend/dist/`) — either serve it from a static host (Vercel/Netlify) pointed at the deployed backend's URL, or serve the built files from the Express backend itself.
+### Checks after it is live
 
-8. **Connecting email and payment.** Both integrations exist in the code and fall back gracefully when unconfigured — filling in the env vars below is what switches them on.
+- `https://your-address/api/health` shows `{"ok":true}`.
+- Registering with `ADMIN_EMAIL` gives you the Admin menu. With email configured, verify that address.
+- Upload a test past paper from Admin, redeploy, and confirm it is still there (this proves the disk is persistent).
+- Run `npm audit` occasionally and keep `JWT_SECRET` and the database password out of the repo.
 
-   **Email (Gmail):**
-   1. On the Google account you want to send from, turn on 2-Step Verification: `myaccount.google.com/security`
-   2. Create an App Password: `myaccount.google.com/apppasswords` (choose "Mail")
-   3. Set `EMAIL_USER` (the Gmail address) and `EMAIL_PASS` (the 16-character app password, not the normal account password) in `.env`
-   4. Set `FRONTEND_URL` to wherever the frontend is actually reachable, so links in emails resolve correctly
+### Notes
 
-   Once both are set, `/api/auth/register`, `/api/auth/forgot-password`, and `/api/auth/resend-verification` send real emails instead of returning the link in the response. Gmail's free sending limit is ~500/day, fine for early usage — move to a dedicated transactional provider (Resend, SendGrid) if that becomes a bottleneck.
+- **Back up the database** with your host's backup feature. Content-review progress and student accounts live only there.
+- **Upgrading from a SQLite development database is not automatic.** The production database starts fresh; development accounts and sample data do not carry over.
+- The schema for PostgreSQL is generated from `backend/prisma/schema.prisma` (`npm run prepare:postgres`), so there is still one source of truth. `npm run test:postgres` in `backend/` runs the full test suite against a PostgreSQL database (`TEST_POSTGRES_URL=...`, empty database, it is wiped).
+- To serve the frontend from a separate static host instead, set `SERVE_FRONTEND=false`, give that host a rule that forwards `/api/*` and `/uploads/*` to this service, and use the Content-Security-Policy above.
+- Payments use DPO Pay and have not been exercised against a live DPO account. Test in DPO's sandbox (`DPO_SANDBOX=true`) before taking real money. Until DPO is configured, `/upgrade` uses a manual unlock that is disabled when `NODE_ENV=production`.
 
-   **Payment (DPO Pay):**
-   1. Register a merchant account at [dpogroup.com](https://www.dpogroup.com) (requires business/ID verification)
-   2. From the DPO merchant portal, get your `CompanyToken` and the `ServiceType` configured for this product/currency (BWP)
-   3. Set `DPO_COMPANY_TOKEN` and `DPO_SERVICE_TYPE` in `.env`, keep `DPO_SANDBOX=true` while testing
-   4. Set `BACKEND_URL` to wherever the backend is actually reachable — DPO redirects the customer's browser to `${BACKEND_URL}/api/billing/dpo/callback` after checkout
+### Connecting email and payment
 
-   Once both are set, `/upgrade` shows a real "Pay P60 with DPO" button that redirects to DPO's hosted checkout; `backend/src/utils/dpo.js` and `backend/src/routes/billing.js` (`/dpo/initiate`, `/dpo/callback`) handle the rest. **This has not been tested against a live DPO account** (none was available while building it) — run it against DPO's sandbox and confirm a full pay → redirect → verify → unlock cycle before trusting it with real payments. If field names or response shapes don't match what DPO actually sends, `backend/src/utils/dpo.js` is the one file to check against DPO's current API reference.
+Both integrations fall back gracefully when unconfigured; filling in the variables above switches them on.
 
-9. **`/uploads` needs the same routing as `/api` in production.** Locally, Vite's dev proxy forwards both `/api/*` and `/uploads/*` to the backend (see `frontend/vite.config.ts`) so uploaded past-paper PDFs render correctly. If the frontend and backend are deployed as separate services, whatever serves the frontend (or a reverse proxy in front of both) needs an equivalent rule for `/uploads/*` — otherwise uploaded files will 404 (or worse, silently serve the frontend's own HTML shell instead of the PDF, which is what happens with Vite's dev-only SPA fallback).
+
+**Email:**
+
+Email is how forgotten passwords are reset and how staff accounts prove they own their address, so production needs it. Use a dedicated Gmail account for Study Dome rather than a personal one.
+1. On that Google account, turn on 2-Step Verification: `myaccount.google.com/security`
+2. Create an App Password: `myaccount.google.com/apppasswords`. Google shows 16 letters; that is `EMAIL_PASS`. (The normal account password will not work.)
+3. Set `EMAIL_USER` (the Gmail address), `EMAIL_PASS` and `EMAIL_FROM` (e.g. `Study Dome <studydome@gmail.com>`) as environment variables on the host.
+4. Check it from the host's shell, or locally with the same variables: `cd backend && npm run test:email -- you@example.com`. It says whether the login works and sends a real test message.
+5. On every start the server log also says either `[mail] Email is set up` or why the mail server refused it.
+
+Good to know:
+- If the mail provider has a problem, signup and password reset still work; the person is told the email could not be sent and can request another from Account settings. Nothing returns a server error.
+- Gmail allows roughly 500 emails a day. For more, or for a sender address on your own domain, set `EMAIL_HOST` (and `EMAIL_PORT`, default 587) to any SMTP service (Brevo, Mailgun, Resend, ...) and use its SMTP username and password as `EMAIL_USER` / `EMAIL_PASS`.
+- Set `FRONTEND_URL` to the real address, because the links in emails are built from it.
+- `ALLOW_NO_EMAIL=true` lets the server start without email for a short private test. Reset and verification links are then written to the server log, not sent, so anyone who can read the log could take over an account. Remove it before real users arrive.
+- Whoever registers `ADMIN_EMAIL` first becomes the owner, but with email on they must also verify that inbox before admin features work, so a stranger cannot hold the admin account. Register it yourself straight after deploying. If someone else got there first, "Forgot password" on that address recovers it.
+
+**Payment (DPO Pay):**
+1. Register a merchant account at [dpogroup.com](https://www.dpogroup.com) (requires business/ID verification)
+2. From the DPO merchant portal, get your `CompanyToken` and the `ServiceType` configured for this product/currency (BWP)
+3. Set `DPO_COMPANY_TOKEN` and `DPO_SERVICE_TYPE` in `.env`, keep `DPO_SANDBOX=true` while testing
+4. Set `BACKEND_URL` to wherever the backend is actually reachable — DPO redirects the customer's browser to `${BACKEND_URL}/api/billing/dpo/callback` after checkout
+
+Once both are set, `/upgrade` shows a real "Pay P60 with DPO" button that redirects to DPO's hosted checkout; `backend/src/utils/dpo.js` and `backend/src/routes/billing.js` (`/dpo/initiate`, `/dpo/callback`) handle the rest. **This has not been tested against a live DPO account** (none was available while building it) — run it against DPO's sandbox and confirm a full pay → redirect → verify → unlock cycle before trusting it with real payments. If field names or response shapes don't match what DPO actually sends, `backend/src/utils/dpo.js` is the one file to check against DPO's current API reference.

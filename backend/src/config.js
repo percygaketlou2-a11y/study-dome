@@ -45,14 +45,25 @@ function validateEnv(env = process.env) {
 
   if (production) {
     if (!env.DATABASE_URL) errors.push('DATABASE_URL is not set.');
-    else if (env.DATABASE_URL.startsWith('file:')) warnings.push('DATABASE_URL points at a SQLite file; use Postgres in production.');
+    else if (!/^postgres(ql)?:\/\//.test(env.DATABASE_URL)) {
+      errors.push('DATABASE_URL must be a PostgreSQL connection string (postgresql://...) in production; SQLite is for development only.');
+    }
+
+    if (!env.UPLOADS_DIR) {
+      warnings.push('UPLOADS_DIR is not set, so uploaded papers and images are saved on the server\'s own disk and are lost if the host wipes it on redeploy. Mount a persistent disk and point UPLOADS_DIR at it.');
+    }
 
     if (!env.FRONTEND_URL) errors.push('FRONTEND_URL is not set (needed for emailed links, payment redirects and CORS).');
     else if (!env.FRONTEND_URL.startsWith('https://')) warnings.push('FRONTEND_URL is not https.');
 
     if (!env.ADMIN_EMAIL) warnings.push('ADMIN_EMAIL is not set, so no account can become an admin.');
     if (!(env.EMAIL_USER && env.EMAIL_PASS)) {
-      warnings.push('Email is not configured, so the admin account\'s email cannot be verified and password-reset links are returned in API responses instead of emailed.');
+      // Without email there is no safe way to reset a forgotten password or confirm who owns an address.
+      if (env.ALLOW_NO_EMAIL === 'true') {
+        warnings.push('Email is not configured (ALLOW_NO_EMAIL is on): reset and verification links are written to the server log, and anyone who can read that log can use them.');
+      } else {
+        errors.push('EMAIL_USER and EMAIL_PASS are not set. Real email is required in production: it is how password resets and email verification work (see "Email" in README.md). Set ALLOW_NO_EMAIL=true only for a short private test.');
+      }
     }
     if (!env.TRUST_PROXY) warnings.push('TRUST_PROXY is not set. Behind a reverse proxy or host, set it (usually 1) or rate limiting will treat every user as one IP.');
     if (env.DPO_SANDBOX === 'true') warnings.push('DPO_SANDBOX is "true" - payments are going to the sandbox.');
@@ -71,4 +82,30 @@ function trustProxySetting(env = process.env) {
   return Number.isInteger(hops) && hops >= 0 ? hops : value;
 }
 
-module.exports = { validateEnv, allowedOrigins, trustProxySetting };
+// The website is delivered by this same server, so everything is same-origin.
+// This is the policy documented in the README, tested in a real browser
+// (tests/deploy.test.js checks the two never drift apart).
+const FRONTEND_CSP = [
+  "default-src 'self'",
+  "script-src 'self'",
+  "style-src 'self' https://fonts.googleapis.com",
+  "style-src-attr 'unsafe-inline'",
+  'font-src https://fonts.gstatic.com',
+  "img-src 'self' data:",
+  "frame-src 'self' https://www.youtube.com https://www.google.com https://player.vimeo.com",
+  "connect-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+].join('; ');
+
+// SERVE_FRONTEND=true/false forces it. Otherwise the built frontend is served
+// automatically in production, when it exists.
+function shouldServeFrontend(env, builtFrontendExists) {
+  if (env.SERVE_FRONTEND === 'true') return builtFrontendExists;
+  if (env.SERVE_FRONTEND === 'false') return false;
+  return env.NODE_ENV === 'production' && builtFrontendExists;
+}
+
+module.exports = { validateEnv, allowedOrigins, trustProxySetting, shouldServeFrontend, FRONTEND_CSP };

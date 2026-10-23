@@ -1,0 +1,13 @@
+{
+  "name": "study-dome",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Study Dome - exam preparation platform. One Node service serves the API and the website.",
+  "scripts": {
+    "build": "npm --prefix backend ci && npm --prefix frontend ci --include=dev && npm --prefix frontend run build && npm --prefix backend run prepare:postgres && npm --prefix backend exec -- prisma generate --schema prisma/schema.postgres.prisma",
+    "start": "npm --prefix backend start"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

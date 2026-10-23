@@ -5,11 +5,12 @@ require('./utils/asyncErrors');
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
-const { allowedOrigins, trustProxySetting } = require('./config');
-const { UploadError } = require('./utils/upload');
+const { allowedOrigins, trustProxySetting, shouldServeFrontend, FRONTEND_CSP } = require('./config');
+const { UploadError, UPLOADS_ROOT } = require('./utils/upload');
 const limits = require('./middleware/rateLimit');
 
 const authRoutes = require('./routes/auth');
@@ -60,11 +61,13 @@ app.use(
     crossOriginResourcePolicy: { policy: 'cross-origin' },
     frameguard: false, // frame-ancestors above replaces it and allows the frontend origin
   }),
-  express.static(path.join(__dirname, '..', 'uploads'), { dotfiles: 'deny', index: false })
+  express.static(UPLOADS_ROOT, { dotfiles: 'deny', index: false })
 );
 
-// Everything else is JSON, so the browser is told not to run or frame any of it.
+// API responses are JSON, so the browser is told not to run or frame any of it.
+// (Scoped to /api so it doesn't apply to the website's own pages, below.)
 app.use(
+  '/api',
   helmet({
     contentSecurityPolicy: { useDefaults: false, directives: { defaultSrc: ["'none'"], frameAncestors: ["'none'"] } },
   })
@@ -126,6 +129,49 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminContactRoutes);
 app.use('/api/admin', adminInvitationsRoutes);
 app.use('/api/billing', billingRoutes);
+
+// The website itself. When the built frontend is present (production), this same
+// server delivers it, so the site and its API share one address: no CORS, no
+// proxy to configure, and the same-origin Content-Security-Policy below fits exactly.
+// Skipped in development, where Vite serves the frontend.
+const frontendDist = process.env.FRONTEND_DIST
+  ? path.resolve(process.env.FRONTEND_DIST)
+  : path.join(__dirname, '..', '..', 'frontend', 'dist');
+
+if (shouldServeFrontend(process.env, fs.existsSync(path.join(frontendDist, 'index.html')))) {
+  const pageHeaders = [
+    helmet({
+      contentSecurityPolicy: false, // set explicitly below
+      crossOriginResourcePolicy: false,
+      frameguard: { action: 'deny' },
+      referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+    }),
+    (req, res, next) => {
+      res.set('Content-Security-Policy', FRONTEND_CSP);
+      res.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
+      next();
+    },
+  ];
+
+  // Built files have content-hashed names, so they can be cached for good;
+  // the HTML page must always be re-checked so a new deploy is picked up.
+  app.use(
+    pageHeaders,
+    express.static(frontendDist, {
+      index: false,
+      setHeaders(res, filePath) {
+        const hashed = filePath.includes(`${path.sep}assets${path.sep}`);
+        res.set('Cache-Control', hashed ? 'public, max-age=31536000, immutable' : 'no-cache');
+      },
+    })
+  );
+
+  // Any other page address is a route inside the single-page app.
+  app.get(/^\/(?!api(\/|$)|uploads(\/|$)).*/, pageHeaders, (req, res) => {
+    res.set('Cache-Control', 'no-cache');
+    res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+}
 
 // Anything unmatched - including refused dotfiles under /uploads - gets a plain JSON 404
 // rather than Express's default page, which names the framework.

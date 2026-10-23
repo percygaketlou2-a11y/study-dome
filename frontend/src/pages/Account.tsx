@@ -16,6 +16,7 @@ export function Account() {
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [devVerifyLink, setDevVerifyLink] = useState<string | null>(null)
+  const [emailSent, setEmailSent] = useState(false)
 
   const nameMutation = useMutation({
     mutationFn: async () => (await api.patch('/user/profile', { name })).data,
@@ -27,7 +28,8 @@ export function Account() {
       (await api.patch('/user/email', { newEmail, password: emailPassword })).data,
     onSuccess: (data) => {
       updateUser({ email: data.email, emailVerified: false })
-      setDevVerifyLink(data.devVerifyLink)
+      setDevVerifyLink(data.devVerifyLink ?? null)
+      setEmailSent(Boolean(data.emailSent))
       setNewEmail('')
       setEmailPassword('')
     },
@@ -47,7 +49,10 @@ export function Account() {
 
   const resendMutation = useMutation({
     mutationFn: async () => (await api.post('/auth/resend-verification')).data,
-    onSuccess: (data) => setDevVerifyLink(data.devVerifyLink ?? null),
+    onSuccess: (data) => {
+      setDevVerifyLink(data.devVerifyLink ?? null)
+      setEmailSent(Boolean(data.emailSent))
+    },
   })
 
   return (
@@ -64,6 +69,14 @@ export function Account() {
           >
             {resendMutation.isPending ? 'Sending...' : 'Get verification link'}
           </button>
+          {emailSent && (
+            <p className="mt-2 text-sm text-emerald-700">
+              We've emailed you a verification link. Check your inbox, and your spam folder too.
+            </p>
+          )}
+          {resendMutation.isError && (
+            <p className="mt-2 text-sm text-red-600">{getErrorMessage(resendMutation.error)}</p>
+          )}
           {devVerifyLink && (
             <p className="mt-2 text-xs text-amber-700">
               No email provider is set up yet:{' '}

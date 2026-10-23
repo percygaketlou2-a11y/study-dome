@@ -377,6 +377,7 @@ describe('production configuration checks', () => {
     NODE_ENV: 'production',
     JWT_SECRET: 'x'.repeat(8) + 'Kq9vLw2PzRm4TnYb7HcJd5FsGa3UeXo1',
     DATABASE_URL: 'postgresql://user:pass@db.example/studydome',
+    UPLOADS_DIR: '/data/uploads',
     FRONTEND_URL: 'https://studydome.example',
     ADMIN_EMAIL: 'owner@example.com',
     EMAIL_USER: 'sender@example.com',
@@ -400,9 +401,10 @@ describe('production configuration checks', () => {
     expect(dev.warnings.length).toBeGreaterThan(0);
   });
 
-  test('production flags a missing FRONTEND_URL, SQLite, and unset proxy trust', () => {
+  test('production flags a missing FRONTEND_URL, SQLite, an unset uploads folder and unset proxy trust', () => {
     expect(validateEnv({ ...production, FRONTEND_URL: undefined }).errors.join()).toMatch(/FRONTEND_URL/);
-    expect(validateEnv({ ...production, DATABASE_URL: 'file:./dev.db' }).warnings.join()).toMatch(/SQLite/);
+    expect(validateEnv({ ...production, DATABASE_URL: 'file:./dev.db' }).errors.join()).toMatch(/PostgreSQL/);
+    expect(validateEnv({ ...production, UPLOADS_DIR: undefined }).warnings.join()).toMatch(/UPLOADS_DIR/);
     expect(validateEnv({ ...production, TRUST_PROXY: undefined }).warnings.join()).toMatch(/TRUST_PROXY/);
   });
 });

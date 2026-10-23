@@ -5,13 +5,17 @@
   "type": "commonjs",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
+    "start": "node scripts/startProduction.js",
     "prisma:migrate": "prisma migrate dev",
     "prisma:generate": "prisma generate",
     "seed": "node prisma/seed.js",
     "import:content": "node prisma/importContent.js",
     "normalize:emails": "node prisma/normalizeEmails.js",
-    "test": "jest"
+    "test": "jest",
+    "start:api": "node src/index.js",
+    "prepare:postgres": "node scripts/preparePostgres.js",
+    "test:postgres": "node scripts/testPostgres.js",
+    "test:email": "node scripts/testEmail.js"
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
@@ -24,17 +28,20 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.2.0",
     "nodemailer": "^10.2.0",
-    "xml2js": "^0.6.2"
+    "xml2js": "^0.6.2",
+    "prisma": "^5.20.0"
   },
   "devDependencies": {
     "jest": "^30.4.2",
     "nodemon": "^3.1.4",
-    "prisma": "^5.20.0",
     "supertest": "^7.2.2"
   },
   "allowScripts": {
     "@prisma/client@5.22.0": true,
     "@prisma/engines@5.22.0": true,
     "prisma@5.22.0": true
+  },
+  "engines": {
+    "node": ">=20.19.0"
   }
 }

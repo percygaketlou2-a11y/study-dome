@@ -12,7 +12,11 @@ module.exports = async () => {
     if (fs.existsSync(p)) fs.unlinkSync(p);
   }
 
-  execSync('npx prisma db push --skip-generate', {
+  // test:postgres points PRISMA_SCHEMA at the generated PostgreSQL schema.
+  const schemaArg = process.env.PRISMA_SCHEMA ? ` --schema ${process.env.PRISMA_SCHEMA}` : '';
+  const onPostgres = Boolean(process.env.PRISMA_SCHEMA);
+  // A reused Postgres database may hold rows from a previous run: start from empty.
+  execSync(`npx prisma db push --skip-generate${schemaArg}${onPostgres ? ' --force-reset --accept-data-loss' : ''}`, {
     cwd: path.join(__dirname, '..'),
     env: process.env,
     stdio: 'inherit',

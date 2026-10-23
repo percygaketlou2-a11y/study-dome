@@ -352,8 +352,17 @@ async function seedFullSubject(subject, kind) {
   });
 }
 
+// `node prisma/seed.js --structure-only` creates the curricula, levels and subjects
+// and nothing else. That is what a live site needs; the full seed also adds sample
+// quizzes and placeholder past papers (links to example.com) for development.
+const STRUCTURE_ONLY = process.argv.includes('--structure-only');
+
 async function main() {
-  console.log('Seeding curricula, levels, subjects, topics, quizzes and past papers...');
+  console.log(
+    STRUCTURE_ONLY
+      ? 'Seeding curricula, levels and subjects (structure only)...'
+      : 'Seeding curricula, levels, subjects, topics, quizzes and past papers...'
+  );
 
   for (const c of CURRICULA) {
     const curriculum = await prisma.curriculum.upsert({
@@ -383,7 +392,7 @@ async function main() {
           },
         });
 
-        if (s.content) {
+        if (s.content && !STRUCTURE_ONLY) {
           await seedFullSubject(subject, s.content);
         }
       }

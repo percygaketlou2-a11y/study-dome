@@ -5,6 +5,7 @@ const { computeCurrentStreak } = require('../utils/streak');
 const { generateToken } = require('../utils/tokens');
 const { hashPassword, verifyPassword } = require('../utils/passwords');
 const { isString, normalizeEmail, isValidEmail, passwordProblem, cleanText } = require('../utils/validate');
+const { isEmailConfigured, attemptSend, linkWithoutEmail, sendVerificationEmail } = require('../utils/mailer');
 
 const router = express.Router();
 
@@ -172,7 +173,14 @@ router.patch('/email', async (req, res) => {
     },
   });
 
-  res.json({ email: updated.email, devVerifyLink: `/verify-email?token=${raw}` });
+  // The link must reach the new address by email. Returning it here would let anyone
+  // "verify" an address they don't own (including ADMIN_EMAIL, which grants admin).
+  if (isEmailConfigured()) {
+    const emailSent = await attemptSend('verification', () => sendVerificationEmail(updated.email, raw));
+    return res.json({ email: updated.email, emailSent });
+  }
+
+  res.json({ email: updated.email, devVerifyLink: linkWithoutEmail('Verification', updated.email, `/verify-email?token=${raw}`) });
 });
 
 // PATCH /api/user/password - change password, requires current password

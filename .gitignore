@@ -5,12 +5,16 @@ node_modules/
 .env
 .env.test
 .env.local
+.env.production
 
 # SQLite databases (dev/test only - production should use Postgres)
 backend/prisma/*.db
 backend/prisma/*.db-journal
 backend/*.db
 backend/*.db-journal
+
+# Generated at build/start time from schema.prisma (scripts/preparePostgres.js)
+backend/prisma/schema.postgres.prisma
 
 # Uploaded files (dev-local storage; production needs persistent/object storage)
 backend/uploads/past-papers/*

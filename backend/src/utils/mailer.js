@@ -4,15 +4,48 @@ function isEmailConfigured() {
   return Boolean(process.env.EMAIL_USER && process.env.EMAIL_PASS);
 }
 
+// Gmail by default. Set EMAIL_HOST (and EMAIL_PORT) to use any other SMTP service
+// instead, e.g. Brevo, Resend or Mailgun, which allow far more emails per day.
+// The timeouts stop a stuck mail server from hanging a signup request.
+function transportOptions(env = process.env) {
+  const auth = { user: env.EMAIL_USER, pass: env.EMAIL_PASS };
+  const timeouts = { connectionTimeout: 10000, greetingTimeout: 10000, socketTimeout: 20000 };
+  if (!env.EMAIL_HOST) return { service: 'gmail', auth, ...timeouts };
+  const port = Number(env.EMAIL_PORT) || 587;
+  return { host: env.EMAIL_HOST, port, secure: port === 465, auth, ...timeouts };
+}
+
 let transporter = null;
 function getTransporter() {
-  if (!transporter) {
-    transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
-    });
-  }
+  if (!transporter) transporter = nodemailer.createTransport(transportOptions());
   return transporter;
+}
+
+// Runs an email send without letting a mail-provider problem (wrong password,
+// daily limit, outage) turn the request into a server error. Returns whether it was sent.
+async function attemptSend(label, send) {
+  try {
+    await send();
+    return true;
+  } catch (err) {
+    console.error(`[mail] Could not send the ${label} email: ${err.message}`);
+    return false;
+  }
+}
+
+// What to do with a verification/reset link when email isn't configured.
+// Development hands it back in the API response so the flow can be tried without
+// email. Production NEVER puts it in a response - anyone could then reset another
+// person's password, the admin's included - so it only goes to the server log.
+function linkWithoutEmail(kind, email, path) {
+  if (process.env.NODE_ENV !== 'production') return path;
+  console.log(`[mail] Email is not configured. ${kind} link for ${email}: ${frontendLink(path)}`);
+  return undefined;
+}
+
+// Connects to the mail server and logs in, without sending anything.
+async function checkEmailLogin() {
+  await getTransporter().verify();
 }
 
 // Absolute link the user actually clicks - FRONTEND_URL must be set for
@@ -90,6 +123,11 @@ async function sendInviteEmail({ to, role, token, invitedByName }) {
 
 module.exports = {
   isEmailConfigured,
+  transportOptions,
+  attemptSend,
+  linkWithoutEmail,
+  checkEmailLogin,
+  sendMail,
   frontendLink,
   sendVerificationEmail,
   sendPasswordResetEmail,

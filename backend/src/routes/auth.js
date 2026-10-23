@@ -5,7 +5,7 @@ const { generateToken, hashToken } = require('../utils/tokens');
 const { hashPassword, verifyPassword } = require('../utils/passwords');
 const { isString, normalizeEmail, isValidEmail, passwordProblem, cleanText } = require('../utils/validate');
 const { isStaff, isOwnerEmail } = require('../utils/roles');
-const { isEmailConfigured, sendVerificationEmail, sendPasswordResetEmail } = require('../utils/mailer');
+const { isEmailConfigured, attemptSend, linkWithoutEmail, sendVerificationEmail, sendPasswordResetEmail } = require('../utils/mailer');
 
 const router = express.Router();
 
@@ -30,15 +30,15 @@ function publicUser(user) {
 async function respondWithNewAccount(res, user, rawVerifyToken) {
   const token = signToken(user.id);
 
+  // The account exists either way; if the email can't go out the person can
+  // ask for another from Account settings, so this is not an error.
   if (isEmailConfigured()) {
-    await sendVerificationEmail(user.email, rawVerifyToken);
-    return res.status(201).json({ token, user: publicUser(user), emailSent: true });
+    const emailSent = await attemptSend('verification', () => sendVerificationEmail(user.email, rawVerifyToken));
+    return res.status(201).json({ token, user: publicUser(user), emailSent });
   }
 
-  // No email provider is configured, so the verification link is handed
-  // back directly instead of being emailed. Never return tokens to the
-  // client once real email sending is active (see the branch above).
-  res.status(201).json({ token, user: publicUser(user), devVerifyLink: `/verify-email?token=${rawVerifyToken}` });
+  const devVerifyLink = linkWithoutEmail('Verification', user.email, `/verify-email?token=${rawVerifyToken}`);
+  res.status(201).json({ token, user: publicUser(user), devVerifyLink });
 }
 
 // Public signup. This ALWAYS creates a student - the one exception is the
@@ -218,11 +218,14 @@ router.post('/resend-verification', requireAuth, async (req, res) => {
   });
 
   if (isEmailConfigured()) {
-    await sendVerificationEmail(user.email, raw);
+    const emailSent = await attemptSend('verification', () => sendVerificationEmail(user.email, raw));
+    if (!emailSent) {
+      return res.status(502).json({ error: "We couldn't send the email just now. Please try again in a few minutes." });
+    }
     return res.json({ emailSent: true });
   }
 
-  res.json({ devVerifyLink: `/verify-email?token=${raw}` });
+  res.json({ devVerifyLink: linkWithoutEmail('Verification', user.email, `/verify-email?token=${raw}`) });
 });
 
 // POST /api/auth/verify-email - consume a verification token
@@ -268,11 +271,12 @@ router.post('/forgot-password', async (req, res) => {
   });
 
   if (isEmailConfigured()) {
-    await sendPasswordResetEmail(user.email, raw);
+    // A failure is not reported: it would reveal that this address has an account.
+    await attemptSend('password reset', () => sendPasswordResetEmail(user.email, raw));
     return res.json({ message });
   }
 
-  res.json({ message, devResetLink: `/reset-password?token=${raw}` });
+  res.json({ message, devResetLink: linkWithoutEmail('Password reset', user.email, `/reset-password?token=${raw}`) });
 });
 
 // POST /api/auth/reset-password - consume a reset token and set a new password
@@ -298,6 +302,8 @@ router.post('/reset-password', async (req, res) => {
     data: {
       passwordHash: await hashPassword(newPassword),
       passwordChangedAt: new Date(),
+      // Only the owner of the inbox could use the link, which proves the address is theirs.
+      emailVerified: true,
       resetTokenHash: null,
       resetTokenExpiresAt: null,
     },
