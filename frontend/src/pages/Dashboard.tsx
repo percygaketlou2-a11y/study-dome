@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { api } from '../api/client'
 import { Layout } from '../components/Layout'
 import { useAuthStore } from '../store/authStore'
@@ -27,6 +28,7 @@ interface RecentQuiz {
 interface DashboardData {
   user: { id: string; name: string; emailVerified: boolean }
   curriculum: { id: string; name: string } | null
+  availableCurricula?: { id: string; name: string }[]
   subjects: Subject[]
   continueSubject: { id: string; name: string } | null
   recentQuizzes: RecentQuiz[]
@@ -90,10 +92,14 @@ function SubjectCard({ s }: { s: Subject }) {
 
 export function Dashboard() {
   const authUser = useAuthStore((s) => s.user)
+  // Admins can look at any curriculum; for students the server ignores this.
+  const [curriculumId, setCurriculumId] = useState<string | null>(null)
 
   const { data, isLoading } = useQuery({
-    queryKey: ['dashboard'],
-    queryFn: async () => (await api.get<DashboardData>('/user/dashboard')).data,
+    queryKey: ['dashboard', curriculumId],
+    queryFn: async () =>
+      (await api.get<DashboardData>('/user/dashboard', { params: curriculumId ? { curriculumId } : undefined })).data,
+    placeholderData: keepPreviousData,
   })
 
   return (
@@ -109,6 +115,27 @@ export function Dashboard() {
         </div>
         {data && <StreakCard streak={data.currentStreak} activeDays={data.totalActiveDays} studiedToday={data.studiedToday} />}
       </div>
+
+      {data?.availableCurricula && (
+        <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 rounded-lg border border-indigo-100 bg-indigo-50 px-4 py-2.5 text-sm">
+          <label htmlFor="curriculum-switcher" className="font-medium text-indigo-900">
+            Viewing curriculum
+          </label>
+          <select
+            id="curriculum-switcher"
+            value={data.curriculum?.id ?? ''}
+            onChange={(e) => setCurriculumId(e.target.value)}
+            className="field-input w-auto py-1"
+          >
+            {data.availableCurricula.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+          <span className="text-xs text-indigo-900">Admin view: you can open every curriculum.</span>
+        </div>
+      )}
 
       {data && !data.user.emailVerified && (
         <Link

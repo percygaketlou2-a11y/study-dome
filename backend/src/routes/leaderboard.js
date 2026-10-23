@@ -7,10 +7,11 @@ const router = express.Router();
 
 router.use(requireAuth);
 
-// GET /api/leaderboard - every user, ranked by total active days (ties broken
-// by current streak), visible to any logged-in user.
+// GET /api/leaderboard - every student, ranked by total active days (ties broken
+// by current streak), visible to any logged-in user. Staff accounts are left out.
 router.get('/', async (req, res) => {
   const users = await prisma.user.findMany({
+    where: { role: 'student' },
     include: {
       selectedCurriculum: true,
       dailyActivity: { select: { date: true } },

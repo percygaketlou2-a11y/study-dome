@@ -3,7 +3,7 @@ const app = require('../src/app');
 const { registerUser, getAdminToken } = require('./helpers');
 
 describe('admin user management', () => {
-  test('admin can list users and toggle plan/admin on someone else', async () => {
+  test('admin can list users and change plan and role on someone else', async () => {
     const adminToken = await getAdminToken(request, app);
     const { user } = await registerUser(request, app);
 
@@ -14,13 +14,13 @@ describe('admin user management', () => {
     const patch = await request(app)
       .patch(`/api/admin/users/${user.id}`)
       .set('Authorization', `Bearer ${adminToken}`)
-      .send({ plan: 'premium', isAdmin: true });
+      .send({ plan: 'premium', role: 'reviewer' });
     expect(patch.status).toBe(200);
     expect(patch.body.plan).toBe('premium');
-    expect(patch.body.isAdmin).toBe(true);
+    expect(patch.body.role).toBe('reviewer');
   });
 
-  test('admin cannot remove their own admin access', async () => {
+  test('an admin cannot change their own role', async () => {
     const adminToken = await getAdminToken(request, app);
     const me = await request(app).get('/api/admin/users').set('Authorization', `Bearer ${adminToken}`);
     const self = me.body.find((u) => u.email === process.env.ADMIN_EMAIL);
@@ -28,7 +28,7 @@ describe('admin user management', () => {
     const res = await request(app)
       .patch(`/api/admin/users/${self.id}`)
       .set('Authorization', `Bearer ${adminToken}`)
-      .send({ isAdmin: false });
+      .send({ role: 'student' });
     expect(res.status).toBe(400);
   });
 

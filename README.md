@@ -40,11 +40,20 @@ cd backend
 npm test
 ```
 
-## Admin access
+## Roles, invitations and staff sign-in
 
-Whichever account registers with the email set as `ADMIN_EMAIL` (in `.env`) is automatically granted admin rights — no separate admin flow. The admin can then:
-- Write study notes per subject (`/admin/notes`)
-- Upload past-paper PDFs and toggle which quizzes/papers require Premium (`/admin/access`)
+There are three kinds of account:
+
+| Role | How it is created | What it can do |
+|---|---|---|
+| **Student** | Public signup at `/signup` (always a student) | The student site, for their own curriculum |
+| **Reviewer** (teacher) | Invitation from an admin | Content Review only (`/admin/content`): check, edit and approve notes and questions |
+| **Admin** | Invitation from an admin, or the owner (below) | Everything, and can browse every curriculum from the dashboard |
+
+- **The owner.** The account that registers with the `ADMIN_EMAIL` address (in `.env`) becomes the first admin. It is always an admin and can't be demoted or deleted, so the platform can't be locked out. Register it first when you deploy.
+- **Inviting staff.** Admin → Users → *Invite staff*. Enter an email and a role; you get a single-use link (also emailed once email is configured). The link only creates the account for that email, expires after 7 days, and can be revoked. If the admin who issued an invitation is demoted or deleted, their unused invitations stop working. To make an existing student a reviewer or admin, change their role in the same Users list.
+- **Staff sign-in.** Teachers and admins sign in at `/admin/login`. Students can't use that form. Staff can also use the normal login.
+- **Roles are stored in the database** and checked on every request, so a role change takes effect immediately.
 
 ## Content packs and teacher review
 
@@ -60,7 +69,7 @@ npm run import:content -- <dir>   # imports another pack directory
 - The import is idempotent: items that already exist are skipped, so re-running it never overwrites review progress or edits. Run it once against the production database after deploying.
 - Everything imports as **not reviewed and hidden from students**. Open **Admin -> Content Review** (`/admin/content`) to check each item, record corrections, edit it, and set it to **Approved** to publish it. A structured question goes live only when every one of its parts is approved.
 - Quizzes that come from a content pack are edited in Content Review, not the Quiz Builder (the builder replaces all of a quiz's questions, which would reset their review status).
-- Reviewers need an admin account to use the review screen.
+- Teachers who review content are invited as **Reviewers**, which gives them this screen and nothing else.
 
 ## Security
 
@@ -68,7 +77,8 @@ What the backend enforces:
 - **Authentication on every route** except an explicit public list (register, login, verify/reset email, the contact form, the payment callback, health). `backend/tests/security.test.js` walks every registered route to prove it, and proves every `/api/admin/*` route refuses a normal student.
 - **Sessions are checked against the database on each request**, so deleting an account, demoting an admin or changing a password takes effect immediately. Changing or resetting a password signs out every older session. Tokens are HS256-only and last 7 days.
 - **Passwords** are bcrypt (cost 12), 8 to 72 characters. Login does the same hashing work whether or not the email exists.
-- **Emails are stored lowercase**, so a case variant of `ADMIN_EMAIL` can't become a second admin account. Once email sending is configured, an admin must also have a verified email.
+- **Emails are stored lowercase**, so a case variant of `ADMIN_EMAIL` can't become a second admin account. Once email sending is configured, staff (admins and reviewers) must also have a verified email.
+- **Staff accounts can't be created by public signup**, only by invitation (single-use, tied to one email, expiring), apart from the owner.
 - **Rate limiting** on login (failures only, per IP and per account), registration, password reset and the contact form, plus a high general limit. Whole schools share one public IP, so the limits are generous and don't count successful logins.
 - **Security headers** (helmet): strict CSP and `nosniff` on the API, `Cache-Control: no-store` on API responses, and CORS limited to your frontend origin.
 - **Errors**: clients only ever receive generic messages, never stack traces or database errors. A malformed request can't crash the server.

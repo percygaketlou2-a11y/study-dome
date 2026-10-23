@@ -1,10 +1,11 @@
 const express = require('express');
 const prisma = require('../db');
-const { requireAuth, requireAdmin } = require('../middleware/auth');
+const { requireAuth, requireStaff } = require('../middleware/auth');
 
 const router = express.Router();
 
-router.use(requireAuth, requireAdmin);
+// Reviewers (teachers) and admins - the only admin-area routes reviewers may use.
+router.use(requireAuth, requireStaff);
 
 const REVIEW_STATUSES = ['not_reviewed', 'approved', 'approve_with_edits', 'rejected'];
 const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -47,7 +48,7 @@ function addToTally(map, subjectId, status) {
 
 // GET /api/admin/content/overview - review progress per subject (the
 // "Start Here" progress table of the review workbook).
-router.get('/content/overview', async (req, res) => {
+router.get('/overview', async (req, res) => {
   const [subjects, notes, questions, parts, topics] = await Promise.all([
     prisma.subject.findMany({
       where: { topics: { some: { key: { not: null } } } },
@@ -118,7 +119,7 @@ function serializeNote(n) {
 
 const NOTE_INCLUDE = { topic: true, objectives: { select: { syllabusCode: true } } };
 
-router.get('/content/notes', async (req, res) => {
+router.get('/notes', async (req, res) => {
   const subjectId = requireSubjectId(req, res);
   if (!subjectId) return;
 
@@ -130,7 +131,7 @@ router.get('/content/notes', async (req, res) => {
   res.json(notes.map(serializeNote));
 });
 
-router.patch('/content/notes/:id', async (req, res) => {
+router.patch('/notes/:id', async (req, res) => {
   const existing = await prisma.topicNote.findUnique({ where: { id: req.params.id } });
   if (!existing) {
     return res.status(404).json({ error: 'Note not found' });
@@ -181,7 +182,7 @@ function serializeMcq(q) {
   };
 }
 
-router.get('/content/mcqs', async (req, res) => {
+router.get('/mcqs', async (req, res) => {
   const subjectId = requireSubjectId(req, res);
   if (!subjectId) return;
 
@@ -193,7 +194,7 @@ router.get('/content/mcqs', async (req, res) => {
   res.json(questions.map(serializeMcq));
 });
 
-router.patch('/content/mcqs/:id', async (req, res) => {
+router.patch('/mcqs/:id', async (req, res) => {
   const existing = await prisma.question.findFirst({
     where: { id: req.params.id, key: { not: null } },
     include: { options: OPTIONS_IN_ORDER },
@@ -279,7 +280,7 @@ function serializeStructured(q) {
   };
 }
 
-router.get('/content/structured', async (req, res) => {
+router.get('/structured', async (req, res) => {
   const subjectId = requireSubjectId(req, res);
   if (!subjectId) return;
 
@@ -291,7 +292,7 @@ router.get('/content/structured', async (req, res) => {
   res.json(questions.map(serializeStructured));
 });
 
-router.patch('/content/structured/:id', async (req, res) => {
+router.patch('/structured/:id', async (req, res) => {
   const existing = await prisma.structuredQuestion.findUnique({ where: { id: req.params.id } });
   if (!existing) {
     return res.status(404).json({ error: 'Question not found' });
@@ -307,7 +308,7 @@ router.patch('/content/structured/:id', async (req, res) => {
   res.json(serializeStructured(question));
 });
 
-router.patch('/content/structured-parts/:id', async (req, res) => {
+router.patch('/structured-parts/:id', async (req, res) => {
   const existing = await prisma.structuredPart.findUnique({ where: { id: req.params.id } });
   if (!existing) {
     return res.status(404).json({ error: 'Part not found' });
@@ -349,7 +350,7 @@ router.patch('/content/structured-parts/:id', async (req, res) => {
 
 // GET /api/admin/content/topic-map?subjectId= - the syllabus (units, topics,
 // specific objectives) with a flag for which objectives already have content.
-router.get('/content/topic-map', async (req, res) => {
+router.get('/topic-map', async (req, res) => {
   const subjectId = requireSubjectId(req, res);
   if (!subjectId) return;
 

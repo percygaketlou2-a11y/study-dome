@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { api, getErrorMessage } from '../api/client'
 import { useAuthStore } from '../store/authStore'
 import { AuthLayout } from '../components/AuthLayout'
+import { homePathFor } from '../lib/roles'
 
 export function ResetPassword() {
   const [searchParams] = useSearchParams()
@@ -26,7 +27,7 @@ export function ResetPassword() {
     try {
       const { data } = await api.post('/auth/reset-password', { token, newPassword })
       login(data.token, data.user)
-      navigate(data.user.selectedCurriculumId ? '/' : '/onboarding')
+      navigate(homePathFor(data.user))
     } catch (err) {
       setError(getErrorMessage(err))
     } finally {

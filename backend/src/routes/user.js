@@ -34,27 +34,39 @@ router.patch('/curriculum', async (req, res) => {
 // "continue learning" suggestion, and quiz history. One roundtrip so the
 // dashboard can render its primary CTA with no follow-up request.
 router.get('/dashboard', async (req, res) => {
-  const user = await prisma.user.findUnique({
-    where: { id: req.userId },
-    include: {
-      selectedCurriculum: {
+  const user = await prisma.user.findUnique({ where: { id: req.userId } });
+
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+
+  // Students see the curriculum they chose. Admins can look at any curriculum
+  // (?curriculumId=), so they can check every part of the platform as a student
+  // would see it; they start on their own pick, or the first one.
+  let curriculumId = user.selectedCurriculumId;
+  let availableCurricula;
+  if (user.role === 'admin') {
+    availableCurricula = await prisma.curriculum.findMany({ select: { id: true, name: true }, orderBy: { name: 'asc' } });
+    const requested = typeof req.query.curriculumId === 'string' ? req.query.curriculumId : null;
+    curriculumId = availableCurricula.find((c) => c.id === requested)?.id ?? curriculumId ?? availableCurricula[0]?.id ?? null;
+  }
+
+  const curriculum = curriculumId
+    ? await prisma.curriculum.findUnique({
+        where: { id: curriculumId },
         include: {
           subjects: {
+            orderBy: { name: 'asc' },
             include: {
               // Quizzes with no approved questions are invisible to students, so they must not count toward progress.
               _count: { select: { quizzes: { where: { questions: { some: { reviewStatus: 'approved' } } } } } },
             },
           },
         },
-      },
-    },
-  });
+      })
+    : null;
 
-  if (!user) {
-    return res.status(404).json({ error: 'User not found' });
-  }
-
-  const subjects = user.selectedCurriculum ? user.selectedCurriculum.subjects : [];
+  const subjects = curriculum ? curriculum.subjects : [];
 
   const results = await prisma.quizResult.findMany({
     where: { userId: req.userId },
@@ -95,13 +107,12 @@ router.get('/dashboard', async (req, res) => {
   const today = new Date().toISOString().slice(0, 10);
 
   res.json({
-    user: { id: user.id, name: user.name, email: user.email, emailVerified: user.emailVerified },
+    user: { id: user.id, name: user.name, email: user.email, emailVerified: user.emailVerified, role: user.role },
     currentStreak: computeCurrentStreak(activity.map((a) => a.date)),
     totalActiveDays: activity.length,
     studiedToday: activity.some((a) => a.date === today),
-    curriculum: user.selectedCurriculum
-      ? { id: user.selectedCurriculum.id, name: user.selectedCurriculum.name }
-      : null,
+    curriculum: curriculum ? { id: curriculum.id, name: curriculum.name } : null,
+    availableCurricula, // admins only: every curriculum they can switch between
     subjects: subjectsWithProgress,
     continueSubject: continueSubject ? { id: continueSubject.id, name: continueSubject.name } : null,
     recentQuizzes: results.slice(0, 5).map((r) => ({

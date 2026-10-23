@@ -20,7 +20,7 @@ model User {
   name                 String
   email                String          @unique
   passwordHash         String
-  isAdmin              Boolean         @default(false)
+  role                 String          @default("student") // "student" | "reviewer" | "admin"
   plan                 String          @default("free") // "free" | "premium" - manually toggled for now; swap in a real payment provider by changing what writes this field
   emailVerified         Boolean         @default(false)
   verifyTokenHash       String?
@@ -34,7 +34,26 @@ model User {
   quizResults          QuizResult[]
   dailyActivity        DailyActivity[]
   paymentTransactions  PaymentTransaction[]
+  invitationsSent      Invitation[]    @relation("InvitationsSent")
   createdAt            DateTime        @default(now())
+}
+
+// A single-use link that lets one specific person create a staff account.
+// Staff (admin/reviewer) accounts are created ONLY this way, or by the owner
+// bootstrapping via ADMIN_EMAIL - never through public signup.
+model Invitation {
+  id          String    @id @default(cuid())
+  email       String    // the address the invite was issued to (normalised)
+  role        String    // "admin" | "reviewer"
+  tokenHash   String    @unique // only the hash is stored; the link holds the real token
+  invitedById String?
+  invitedBy   User?     @relation("InvitationsSent", fields: [invitedById], references: [id], onDelete: SetNull)
+  expiresAt   DateTime
+  acceptedAt  DateTime?
+  revokedAt   DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([email])
 }
 
 model ContactMessage {

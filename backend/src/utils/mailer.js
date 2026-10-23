@@ -71,4 +71,28 @@ async function sendContactNotification({ name, email, message }) {
   });
 }
 
-module.exports = { isEmailConfigured, sendVerificationEmail, sendPasswordResetEmail, sendContactNotification };
+const ROLE_DESCRIPTION = {
+  reviewer: 'a content reviewer, to check and approve study material before students see it',
+  admin: 'an administrator',
+};
+
+async function sendInviteEmail({ to, role, token, invitedByName }) {
+  const link = frontendLink(`/accept-invite?token=${token}`);
+  await sendMail({
+    to,
+    subject: 'You have been invited to Study Dome',
+    html: `<p>${escapeHtml(invitedByName)} has invited you to join Study Dome as ${ROLE_DESCRIPTION[role] ?? 'a staff member'}.</p>
+<p><a href="${link}">Accept the invitation and set up your account</a></p>
+<p>If the link doesn't work, copy this into your browser:<br>${link}</p>
+<p>The link works once and expires in 7 days. If you weren't expecting this, you can ignore this email.</p>`,
+  });
+}
+
+module.exports = {
+  isEmailConfigured,
+  frontendLink,
+  sendVerificationEmail,
+  sendPasswordResetEmail,
+  sendContactNotification,
+  sendInviteEmail,
+};

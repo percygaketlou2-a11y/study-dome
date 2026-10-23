@@ -22,17 +22,21 @@ import { Account } from './pages/Account'
 import { ContactUs } from './pages/ContactUs'
 import { AdminContactMessages } from './pages/AdminContactMessages'
 import { AdminContentReview } from './pages/AdminContentReview'
+import { AdminLogin } from './pages/AdminLogin'
+import { AcceptInvite } from './pages/AcceptInvite'
 import { PrivacyPolicy } from './pages/legal/PrivacyPolicy'
 import { TermsAndConditions } from './pages/legal/TermsAndConditions'
 import { CookiePolicy } from './pages/legal/CookiePolicy'
 import { RefundPolicy } from './pages/legal/RefundPolicy'
-import { ProtectedRoute, RequireCurriculum, RequireAdmin } from './components/ProtectedRoute'
+import { ProtectedRoute, RequireCurriculum, RequireAdmin, RequireStaff } from './components/ProtectedRoute'
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/accept-invite" element={<AcceptInvite />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/verify-email" element={<VerifyEmail />} />
@@ -151,9 +155,9 @@ function App() {
         path="/admin/content"
         element={
           <ProtectedRoute>
-            <RequireAdmin>
+            <RequireStaff>
               <AdminContentReview />
-            </RequireAdmin>
+            </RequireStaff>
           </ProtectedRoute>
         }
       />

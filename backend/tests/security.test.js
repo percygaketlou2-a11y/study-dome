@@ -36,6 +36,9 @@ const PUBLIC_ROUTES = new Set([
   'GET /api/health',
   'POST /api/auth/register',
   'POST /api/auth/login',
+  'POST /api/auth/staff-login',
+  'POST /api/auth/invite-info', // the invitation token in the body is the credential
+  'POST /api/auth/accept-invite',
   'POST /api/auth/verify-email',
   'POST /api/auth/forgot-password',
   'POST /api/auth/reset-password',
@@ -75,6 +78,29 @@ describe('authentication and authorization are enforced on every route', () => {
       const res = await request(app)[route.method.toLowerCase()](concretePath(route.path)).set(bearer(token));
       if (res.status !== 403) failures.push(`${route.method} ${route.path} -> ${res.status}`);
     }
+    expect(failures).toEqual([]);
+  });
+});
+
+describe('reviewer role is limited to Content Review', () => {
+  test('a reviewer is refused on every /api/admin route except /api/admin/content/*, and admitted to those', async () => {
+    const { token, user } = await registerUser(request, app);
+    await prisma.user.update({ where: { id: user.id }, data: { role: 'reviewer' } });
+
+    const adminRoutes = listRoutes(app._router.stack).filter((r) => r.path.startsWith('/api/admin/'));
+    const failures = [];
+    let admitted = 0;
+    for (const route of adminRoutes) {
+      const res = await request(app)[route.method.toLowerCase()](concretePath(route.path)).set(bearer(token));
+      const isContent = route.path.startsWith('/api/admin/content/');
+      if (isContent) {
+        admitted += 1;
+        if (res.status === 401 || res.status === 403) failures.push(`${route.method} ${route.path} should admit a reviewer -> ${res.status}`);
+      } else if (res.status !== 403) {
+        failures.push(`${route.method} ${route.path} should refuse a reviewer -> ${res.status}`);
+      }
+    }
+    expect(admitted).toBeGreaterThan(5);
     expect(failures).toEqual([]);
   });
 });

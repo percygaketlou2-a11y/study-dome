@@ -32,6 +32,7 @@ const structuredRoutes = require('./routes/structured');
 const adminContentRoutes = require('./routes/adminContent');
 const contactRoutes = require('./routes/contact');
 const adminContactRoutes = require('./routes/adminContact');
+const adminInvitationsRoutes = require('./routes/adminInvitations');
 const billingRoutes = require('./routes/billing');
 
 const app = express();
@@ -90,10 +91,19 @@ app.get('/api/health', (req, res) => res.json({ ok: true }));
 // Rate limits (see middleware/rateLimit.js). Mounted before the routers.
 app.use('/api', limits.apiLimiter);
 app.use('/api/auth/login', limits.loginIpLimiter, limits.loginAccountLimiter);
+app.use('/api/auth/staff-login', limits.loginIpLimiter, limits.loginAccountLimiter);
+app.use('/api/auth/invite-info', limits.inviteLimiter);
+app.use('/api/auth/accept-invite', limits.inviteLimiter);
 app.use('/api/auth/register', limits.registerLimiter);
 app.use('/api/auth/forgot-password', limits.passwordResetLimiter);
 app.use('/api/auth/reset-password', limits.passwordResetLimiter);
 app.use('/api/contact', limits.contactLimiter);
+
+// Content Review is the one admin area reviewers (teachers) may use. It MUST be mounted
+// before the admin-only routers below: each of those applies requireAdmin to every path
+// under /api/admin, so anything mounted after them is unreachable for a reviewer.
+// (tests/security.test.js checks this for every admin route.)
+app.use('/api/admin/content', adminContentRoutes);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
@@ -112,9 +122,9 @@ app.use('/api/videos', videosRoutes);
 app.use('/api/admin', adminTutorialsRoutes);
 app.use('/api/tutorials', tutorialsRoutes);
 app.use('/api/structured', structuredRoutes);
-app.use('/api/admin', adminContentRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminContactRoutes);
+app.use('/api/admin', adminInvitationsRoutes);
 app.use('/api/billing', billingRoutes);
 
 // Anything unmatched - including refused dotfiles under /uploads - gets a plain JSON 404

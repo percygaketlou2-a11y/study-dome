@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const prisma = require('../db');
 const { isEmailConfigured } = require('../utils/mailer');
+const { isStaff } = require('../utils/roles');
 
 // Pinned so a token can never choose its own algorithm (e.g. "none").
 const JWT_ALGORITHM = 'HS256';
@@ -15,7 +16,7 @@ function signToken(userId) {
 //  - a deleted account's token stops working immediately,
 //  - a token issued before the last password change/reset is rejected (changing
 //    a password signs out anyone who had stolen the old session), and
-//  - admin/plan changes take effect straight away rather than waiting for the
+//  - role/plan changes take effect straight away rather than waiting for the
 //    token to expire.
 async function requireAuth(req, res, next) {
   const header = req.headers.authorization || '';
@@ -37,7 +38,7 @@ async function requireAuth(req, res, next) {
 
   const user = await prisma.user.findUnique({
     where: { id: payload.userId },
-    select: { id: true, isAdmin: true, plan: true, emailVerified: true, passwordChangedAt: true },
+    select: { id: true, role: true, plan: true, emailVerified: true, passwordChangedAt: true },
   });
   if (!user) {
     return res.status(401).json({ error: 'Invalid or expired token' });
@@ -51,20 +52,37 @@ async function requireAuth(req, res, next) {
   next();
 }
 
-// Must run after requireAuth.
+// Shared by the two staff guards below.
 //
-// Once email sending is configured, an admin must also have a verified email.
-// Admin rights are granted to whoever registers ADMIN_EMAIL, so without this a
-// stranger who registered (or switched to) that address first would be an admin
-// without ever proving they own the inbox.
+// Once email sending is configured, staff must also have a verified email.
+// Without that, whoever registered (or switched to) a privileged address first
+// would hold staff rights without ever proving they own the inbox.
+function staffEmailProblem(user) {
+  if (isEmailConfigured() && !user.emailVerified) {
+    return 'Verify your email address to use staff tools';
+  }
+  return null;
+}
+
+// Must run after requireAuth. Admins only.
 function requireAdmin(req, res, next) {
   const user = req.authUser;
-  if (!user?.isAdmin) {
+  if (user?.role !== 'admin') {
     return res.status(403).json({ error: 'Admin access required' });
   }
-  if (isEmailConfigured() && !user.emailVerified) {
-    return res.status(403).json({ error: 'Verify your email address to use admin tools' });
+  const problem = staffEmailProblem(user);
+  if (problem) return res.status(403).json({ error: problem });
+  next();
+}
+
+// Must run after requireAuth. Admins and reviewers (e.g. Content Review).
+function requireStaff(req, res, next) {
+  const user = req.authUser;
+  if (!user || !isStaff(user.role)) {
+    return res.status(403).json({ error: 'Staff access required' });
   }
+  const problem = staffEmailProblem(user);
+  if (problem) return res.status(403).json({ error: problem });
   next();
 }
 
@@ -75,4 +93,4 @@ function attachPlan(req, res, next) {
   next();
 }
 
-module.exports = { requireAuth, requireAdmin, attachPlan, signToken };
+module.exports = { requireAuth, requireAdmin, requireStaff, attachPlan, signToken };

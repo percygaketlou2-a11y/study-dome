@@ -6,7 +6,7 @@ export interface AuthUser {
   name: string
   email: string
   selectedCurriculumId: string | null
-  isAdmin: boolean
+  role: 'student' | 'reviewer' | 'admin'
   plan: 'free' | 'premium'
   emailVerified: boolean
 }

@@ -32,7 +32,9 @@ export function Signup() {
   return (
     <AuthLayout>
       <h1 className="mb-1 text-2xl font-bold tracking-tight text-slate-900">Create your account</h1>
-      <p className="mb-6 text-sm text-slate-500">Start preparing for your exams today.</p>
+      <p className="mb-6 text-sm text-slate-500">
+        Start preparing for your exams today. Teachers join by invitation from an administrator.
+      </p>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="signup-name" className="field-label">

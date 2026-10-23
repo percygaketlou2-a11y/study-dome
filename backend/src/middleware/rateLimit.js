@@ -47,6 +47,9 @@ module.exports = {
   }),
 
   registerLimiter: build({ windowMs: 60 * MINUTE, limit: 60 }),
+
+  // Looking up or accepting an invitation (tokens are 256-bit, so this is a guard, not the defence).
+  inviteLimiter: build({ windowMs: 15 * MINUTE, limit: 20 }),
   passwordResetLimiter: build({ windowMs: 15 * MINUTE, limit: 10 }),
   contactLimiter: build({ windowMs: 60 * MINUTE, limit: 5 }),
 };

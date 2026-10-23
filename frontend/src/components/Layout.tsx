@@ -15,6 +15,9 @@ const ADMIN_LINKS = [
   { to: '/admin/payments', label: 'Payments' },
 ]
 
+// Reviewers (teachers) get Content Review and nothing else from the admin area.
+const REVIEWER_LINK = { to: '/admin/content', label: 'Content Review' }
+
 export function DomeMark() {
   return (
     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-600">
@@ -74,12 +77,17 @@ export function Layout({ children }: { children: ReactNode }) {
               <DomeMark />
               <span className="text-lg font-bold tracking-tight text-slate-900">Study Dome</span>
             </Link>
-            {user && (
+            {user && user.role !== 'reviewer' && (
               <Link to="/leaderboard" className={navLinkClass(location.pathname === '/leaderboard')}>
                 Leaderboard
               </Link>
             )}
-            {user?.isAdmin && (
+            {user?.role === 'reviewer' && (
+              <Link to={REVIEWER_LINK.to} className={navLinkClass(isAdminSection)}>
+                {REVIEWER_LINK.label}
+              </Link>
+            )}
+            {user?.role === 'admin' && (
               <div className="relative" ref={adminMenuRef}>
                 <button
                   ref={adminMenuButtonRef}
@@ -116,23 +124,27 @@ export function Layout({ children }: { children: ReactNode }) {
           </div>
           {user && (
             <div className="flex items-center gap-2 text-sm text-slate-600 sm:gap-3">
-              <Link
-                to="/upgrade"
-                className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${
-                  user.plan === 'premium'
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
-              >
-                {user.plan === 'premium' ? 'Premium' : 'Free plan'}
-              </Link>
+              {user.role === 'reviewer' ? (
+                <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700">Reviewer</span>
+              ) : (
+                <Link
+                  to="/upgrade"
+                  className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${
+                    user.plan === 'premium'
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {user.plan === 'premium' ? 'Premium' : 'Free plan'}
+                </Link>
+              )}
               <Link to="/account" className="font-medium text-slate-700 hover:text-indigo-600">
                 {user.name}
               </Link>
               <button
                 onClick={() => {
                   logout()
-                  navigate('/login')
+                  navigate(user.role === 'student' ? '/login' : '/admin/login')
                 }}
                 className="btn-secondary px-3 py-1.5"
               >

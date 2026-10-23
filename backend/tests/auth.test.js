@@ -13,7 +13,7 @@ describe('auth', () => {
     expect(res.body.token).toBeTruthy();
     expect(res.body.user.email).toBe(email);
     expect(res.body.user.plan).toBe('free');
-    expect(res.body.user.isAdmin).toBe(false);
+    expect(res.body.user.role).toBe('student');
     expect(res.body.user.emailVerified).toBe(false);
     expect(res.body.devVerifyLink).toMatch(/token=/);
   });
@@ -37,12 +37,12 @@ describe('auth', () => {
       const login = await request(app)
         .post('/api/auth/login')
         .send({ email: process.env.ADMIN_EMAIL, password: 'password123' });
-      expect(login.body.user.isAdmin).toBe(true);
+      expect(login.body.user.role).toBe('admin');
       return;
     }
 
     expect(res.status).toBe(201);
-    expect(res.body.user.isAdmin).toBe(true);
+    expect(res.body.user.role).toBe('admin');
   });
 
   test('register rejects a duplicate email', async () => {

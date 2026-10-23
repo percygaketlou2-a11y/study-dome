@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { api, getErrorMessage } from '../api/client'
 import { useAuthStore } from '../store/authStore'
 import { AuthLayout } from '../components/AuthLayout'
+import { homePathFor } from '../lib/roles'
 
 export function Login() {
   const [email, setEmail] = useState('')
@@ -19,7 +20,7 @@ export function Login() {
     try {
       const { data } = await api.post('/auth/login', { email, password })
       login(data.token, data.user)
-      navigate(data.user.selectedCurriculumId ? '/' : '/onboarding')
+      navigate(homePathFor(data.user))
     } catch (err) {
       setError(getErrorMessage(err))
     } finally {
@@ -72,6 +73,12 @@ export function Login() {
         No account?{' '}
         <Link to="/signup" className="font-medium text-indigo-600 hover:underline">
           Sign up
+        </Link>
+      </p>
+      <p className="mt-2 text-center text-xs text-slate-500">
+        Teacher or administrator?{' '}
+        <Link to="/admin/login" className="font-medium text-indigo-600 hover:underline">
+          Staff sign in
         </Link>
       </p>
     </AuthLayout>
